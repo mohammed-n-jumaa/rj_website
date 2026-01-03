@@ -1,0 +1,335 @@
+@import '../../styles/variables.scss';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.2rem 0;
+  transition: all $transition-normal;
+  
+  // قبل السكرول - شفاف
+  &:not(.scrolled) {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  // بعد السكرول - كبسولة بيضاء
+  &.scrolled {
+    padding: 0.8rem 0;
+    background: transparent;
+    border-bottom: none;
+    
+    .header-container {
+      max-width: 1000px;
+      background: $background-color;
+      border-radius: $radius-xl;
+      padding: 0.9rem 2.5rem;
+      box-shadow: $shadow-md;
+          gap: 8px;
+      @media (max-width: $breakpoint-tablet) {
+        padding: 0.7rem 1.5rem;
+        max-width: 95%;
+      }
+    }
+    
+    .logo-text,
+    .nav-link {
+      color: $text-dark;
+    }
+    
+    .logo-icon {
+      color: $primary-color;
+    }
+    
+    .menu-toggle span {
+      background: $secondary-color;
+    }
+    
+    // ألوان أزرار تسجيل الدخول بعد السكرول
+    .login-button {
+      color: $text-dark;
+      border-color: rgba($text-dark, 0.2);
+      
+      &:hover {
+        border-color: $primary-color;
+        color: $primary-color;
+        background: rgba($primary-color, 0.05);
+      }
+      
+      .login-icon {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all $transition-normal;
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 0 1.5rem;
+    gap: 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
+}
+
+// ===================================
+// Logo
+// ===================================
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  cursor: pointer;
+  flex-shrink: 0; // منع الانكماش
+  
+  @media (max-width: $breakpoint-tablet) {
+    gap: 0.5rem;
+  }
+  
+  .logo-icon {
+    font-size: 1.8rem;
+    color: $text-white;
+    transition: all $transition-normal;
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .logo-text {
+    font-size: 1.4rem;
+    font-weight: 900px;
+    color: $text-white;
+    letter-spacing: 0.5px;
+    transition: all $transition-normal;
+    white-space: nowrap; // منع كسر السطر
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 1.1rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
+  }
+}
+
+// ===================================
+// Navigation
+// ===================================
+.nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  
+  @media (max-width: $breakpoint-tablet) {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: $background-color;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    transition: right $transition-normal;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    
+    &.open {
+      right: 0;
+    }
+  }
+}
+
+.nav-link {
+  position: relative;
+  color: $text-white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all $transition-fast;
+  white-space: nowrap; // منع كسر السطر
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: $primary-color;
+    transition: width $transition-normal;
+  }
+  
+  &:hover {
+    color: $primary-color;
+    
+    &::after {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    color: $text-dark;
+    font-size: 1.1rem;
+  }
+}
+
+// ===================================
+// Header Actions Container
+// ===================================
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0; // منع الانكماش
+  
+  @media (max-width: $breakpoint-tablet) {
+    gap: 0.8rem;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+  }
+}
+
+// ===================================
+// Login Button
+// ===================================
+.login-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: transparent;
+  color: $text-white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: $radius-lg;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-normal;
+  font-family: 'Tajawal', sans-serif;
+  white-space: nowrap;
+  
+  .login-icon {
+    font-size: 1rem;
+    color: $text-white;
+    transition: all $transition-normal;
+  }
+  
+  &:hover {
+    border-color: $primary-color;
+    color: $primary-color;
+    background: rgba(255, 255, 255, 0.1);
+    
+    .login-icon {
+      color: $primary-color;
+    }
+  }
+  
+  // إخفاء زر تسجيل الدخول في القائمة المتحركة على الشاشات الكبيرة
+  &.mobile-only {
+    display: none;
+    
+    @media (max-width: $breakpoint-tablet) {
+      display: flex;
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+    }
+  }
+  
+  // إخفاء زر تسجيل الدخول على التابلت والموبايل ✅
+  &.desktop-only {
+    @media (max-width: 1024px) {
+      display: none; // مخفي على التابلت والموبايل
+    }
+  }
+}
+
+// ===================================
+// CTA Button
+// ===================================
+.cta-button {
+  padding: 0.9rem 2rem;
+  background: $gradient-primary;
+  color: $text-white;
+  border: none;
+  border-radius: $radius-xl;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-normal;
+  box-shadow: $shadow-pink;
+  font-family: 'Tajawal', sans-serif;
+  white-space: nowrap; // منع كسر السطر
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(233, 30, 99, 0.35);
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+}
+
+// ===================================
+// Mobile Menu Toggle
+// ===================================
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1001;
+  flex-shrink: 0;
+  
+  @media (max-width: $breakpoint-tablet) {
+    display: flex;
+  }
+  
+  span {
+    width: 25px;
+    height: 3px;
+    background: $text-white;
+    border-radius: 3px;
+    transition: all $transition-normal;
+  }
+  
+  &.open {
+    span:nth-child(1) {
+      transform: rotate(45deg) translateY(8px);
+      background: $secondary-color;
+    }
+    
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-8px);
+      background: $secondary-color;
+    }
+  }
+}.header a {
+  text-decoration: none !important;
+}

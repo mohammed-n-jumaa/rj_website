@@ -1,0 +1,316 @@
+@import '../../styles/variables.scss';
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: 1rem; // إزالة أي padding
+}
+
+// ===================================
+// Video Background - يغطي كامل الشاشة بالكامل
+// ===================================
+.hero-video-container {
+  position: fixed; // fixed بدلاً من absolute لتغطية أفضل
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  
+  .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 56.25vw; // نسبة 16:9
+    min-height: 100vh;
+    min-width: 177.77vh; // نسبة 16:9
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: none;
+    
+    @media (max-width: $breakpoint-tablet) {
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $gradient-overlay;
+    z-index: 1;
+  }
+}
+
+// ===================================
+// Content - مع مساحة للهيدر
+// ===================================
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 100px; // مساحة للهيدر
+  width: 100%;
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 0 1.5rem;
+    padding-top: 90px;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    padding-top: 80px;
+  }
+}
+
+.hero-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+// ===================================
+// Badge
+// ===================================
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: $radius-xl;
+  color: $text-white;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: $primary-color;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+}
+
+// ===================================
+// Title
+// ===================================
+.hero-title {
+  font-size: 4rem;
+  font-weight: 900;
+  color: $text-white;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+  
+  @media (max-width: $breakpoint-desktop) {
+    font-size: 3.2rem;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 2.5rem;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 2rem;
+  }
+  
+  .highlight {
+    color: $primary-color;
+    display: block;
+    margin-top: 0.5rem;
+  }
+}
+
+// ===================================
+// Description
+// ===================================
+.hero-description {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  font-weight: 400;
+  
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 1.1rem;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+// ===================================
+// Buttons
+// ===================================
+.hero-buttons {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+  
+  @media (max-width: $breakpoint-mobile) {
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  
+  .btn {
+    padding: 1.1rem 2.5rem;
+    font-size: 1.05rem;
+    
+    @media (max-width: $breakpoint-mobile) {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+// ===================================
+// Stats
+// ===================================
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: $radius-lg;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 7rem; // مساحة أكبر للأيقونة
+  
+  @media (max-width: $breakpoint-tablet) {
+    gap: 2rem;
+    padding: 1.5rem 2rem;
+    max-width: 500px;
+    margin-bottom: 6rem;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .stat-item {
+    text-align: center;
+    
+    h3 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: $text-white;
+      margin-bottom: 0.3rem;
+      
+      @media (max-width: $breakpoint-tablet) {
+        font-size: 2rem;
+      }
+      
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 1.8rem;
+      }
+    }
+    
+    p {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  
+  .stat-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    
+    @media (max-width: $breakpoint-mobile) {
+      width: 60%;
+      height: 1px;
+    }
+  }
+}
+
+// ===================================
+// Scroll Indicator
+// ===================================
+.scroll-indicator {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+  
+  .mouse {
+    width: 28px;
+    height: 45px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    position: relative;
+    
+    .wheel {
+      width: 4px;
+      height: 10px;
+      background: $text-white;
+      border-radius: 2px;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scroll 1.5s infinite;
+    }
+  }
+}
+
+// ===================================
+// Animations
+// ===================================
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    top: 8px;
+    opacity: 1;
+  }
+  100% {
+    top: 26px;
+    opacity: 0;
+  }
+}

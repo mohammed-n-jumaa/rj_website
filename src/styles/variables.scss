@@ -1,0 +1,58 @@
+// ===================================
+// نظام الألوان - نظيف ورسمي ومريح
+// ===================================
+
+// Main Colors
+$primary-color: #E91E63;      // وردي غامق - رسمي ومميز
+$secondary-color: #1C1C1C;    // أسود فحمي - أنيق
+$background-color: #FFFFFF;   // أبيض نقي - مريح للعين
+$accent-color: #F2F2F2;       // رمادي فاتح - ناعم
+
+// Text Colors
+$text-dark: #1C1C1C;          // نص داكن
+$text-light: #757575;         // نص فاتح
+$text-white: #FFFFFF;         // نص أبيض
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+$gradient-overlay: linear-gradient(135deg, rgba(28, 28, 28, 0.6) 0%, rgba(233, 30, 99, 0.4) 100%);
+
+// ===================================
+// Spacing
+// ===================================
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 2rem;
+$spacing-lg: 3rem;
+$spacing-xl: 4rem;
+
+// ===================================
+// Border Radius
+// ===================================
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 50px;
+
+// ===================================
+// Transitions
+// ===================================
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// ===================================
+// Shadows
+// ===================================
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+$shadow-pink: 0 4px 20px rgba(233, 30, 99, 0.25);
+
+// ===================================
+// Breakpoints - Responsive
+// ===================================
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1440px;

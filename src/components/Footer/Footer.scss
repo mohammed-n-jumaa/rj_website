@@ -1,0 +1,254 @@
+@import '../../styles/variables.scss';
+
+// ===================================
+// Footer
+// ===================================
+.footer {
+  background: linear-gradient(135deg, #3a1f3d 0%, #2d1b2e 50%, #1f1520 100%);
+  color: $text-white;
+  padding: 4rem 0 2rem;
+  position: relative;
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 3rem 0 1.5rem;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 0 1.5rem;
+  }
+}
+
+// ===================================
+// Main Footer Content
+// ===================================
+.footer-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-bottom: 2rem;
+  }
+}
+
+// ===================================
+// Brand Section
+// ===================================
+.footer-brand {
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    
+    .logo-icon {
+      font-size: 2rem;
+      color: $primary-color;
+    }
+    
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: $text-white;
+      letter-spacing: 0.5px;
+    }
+  }
+  
+  .brand-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 400px;
+    margin: 0;
+    
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+// ===================================
+// Footer Links
+// ===================================
+.footer-links {
+  .footer-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $text-white;
+    margin-bottom: 1.5rem;
+    
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: 0.8rem;
+      
+      a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: all $transition-fast;
+        display: inline-block;
+        
+        &:hover {
+          color: $primary-color;
+          transform: translateX(-5px);
+        }
+        
+        @media (max-width: $breakpoint-mobile) {
+          font-size: 0.95rem;
+        }
+      }
+    }
+  }
+}
+
+// ===================================
+// Social Section
+// ===================================
+.footer-social {
+  .footer-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $text-white;
+    margin-bottom: 1.5rem;
+    
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .social-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(6, 1fr);
+      max-width: 400px;
+    }
+    
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .social-link {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-white;
+    font-size: 1.3rem;
+    transition: all $transition-normal;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    
+    &:hover {
+      color: $text-white;
+      border-color: transparent;
+    }
+    
+    @media (max-width: $breakpoint-mobile) {
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// ===================================
+// Footer Bottom
+// ===================================
+.footer-bottom {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 1.5rem;
+  }
+}
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+  @media (max-width: $breakpoint-tablet) {
+    justify-content: center;
+  }
+  
+  .legal-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  
+  .separator {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+  }
+}
+
+.footer-copyright {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  
+  @media (max-width: $breakpoint-tablet) {
+    justify-content: center;
+  }
+  
+  .heart-icon {
+    color: $primary-color;
+    font-size: 1rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  10%, 30% {
+    transform: scale(1.1);
+  }
+  20%, 40% {
+    transform: scale(1);
+  }
+}

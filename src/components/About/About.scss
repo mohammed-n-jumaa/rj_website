@@ -1,0 +1,585 @@
+@import '../../styles/variables.scss';
+
+// ===================================
+// About Section - Fixed Overflow
+// ===================================
+.about {
+  position: relative;
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  overflow: visible;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  
+  @media (max-width: $breakpoint-desktop) {
+    padding: 4rem 0;
+    min-height: auto;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 3rem 0;
+    overflow: hidden;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    padding: 2.5rem 0;
+  }
+}
+
+.about-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+  
+  @media (max-width: $breakpoint-desktop) {
+    padding: 0 1.5rem;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 0 1.25rem;
+    max-width: 100%;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0 1rem;
+  }
+}
+
+// ===================================
+// Content Layout - Fixed Structure
+// ===================================
+.about-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 4rem;
+  align-items: start;
+  
+  @media (max-width: $breakpoint-desktop) {
+    grid-template-columns: 350px 1fr;
+    gap: 3.5rem;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    gap: 2.5rem;
+  }
+}
+
+// ===================================
+// Trainer Profile - Fixed Layout
+// ===================================
+.trainer-profile {
+  position: sticky;
+  top: 100px;
+  width: 100%;
+  max-width: 400px;
+  
+  @media (max-width: $breakpoint-desktop) {
+    max-width: 350px;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    position: static;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    order: 2; // Move profile below content on tablet
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    max-width: 100%;
+  }
+}
+
+.profile-image-wrapper {
+  position: relative;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 20px 60px rgba(233, 30, 99, 0.2);
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/4;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(233, 30, 99, 0.1) 100%);
+    z-index: 1;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform $transition-slow;
+    
+    @media (max-width: $breakpoint-tablet) {
+      height: auto;
+      max-height: 500px;
+    }
+  }
+  
+  &:hover .profile-image {
+    transform: scale(1.05);
+  }
+}
+
+.profile-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 0.8rem 1.2rem;
+  border-radius: $radius-lg;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  
+  @media (max-width: $breakpoint-tablet) {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    padding: 0.7rem 1rem;
+  }
+  
+  svg {
+    color: $primary-color;
+    font-size: 1.3rem;
+  }
+  
+  span {
+    color: $secondary-color;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+}
+
+.profile-info {
+  text-align: center;
+  padding: 0;
+  width: 100%;
+  
+  .trainer-name {
+    font-size: 2rem;
+    font-weight: 900;
+    color: $secondary-color;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+    
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 1.8rem;
+    }
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 1.7rem;
+    }
+    
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 1.6rem;
+    }
+  }
+  
+  .trainer-philosophy {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(28, 28, 28, 0.7);
+    font-style: italic;
+    margin: 0;
+    padding: 0 0.5rem;
+    
+    &::before {
+      content: '"';
+      color: $primary-color;
+      opacity: 0.3;
+      font-size: 1.5rem;
+      margin-right: 0.2rem;
+    }
+    
+    &::after {
+      content: '"';
+      color: $primary-color;
+      opacity: 0.3;
+      font-size: 1.5rem;
+      margin-left: 0.2rem;
+    }
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+// ===================================
+// About Details - Fixed Overflow
+// ===================================
+.about-details {
+  padding-top: 0;
+  width: 100%;
+  overflow: visible;
+  
+  @media (max-width: $breakpoint-tablet) {
+    order: 1; // Move content above profile on tablet
+    text-align: center;
+  }
+}
+
+.section-header {
+  margin-bottom: 2rem;
+  width: 100%;
+  
+  @media (max-width: $breakpoint-tablet) {
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-tag {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: rgba(233, 30, 99, 0.1);
+    color: $primary-color;
+    border-radius: $radius-lg;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    
+    @media (max-width: $breakpoint-tablet) {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: $secondary-color;
+    line-height: 1.2;
+    margin: 0;
+    
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 2.2rem;
+    }
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 1.9rem;
+      line-height: 1.3;
+    }
+    
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 1.7rem;
+    }
+  }
+}
+
+.experience-text {
+  margin-bottom: 2.5rem;
+  width: 100%;
+  
+  @media (max-width: $breakpoint-tablet) {
+    margin-bottom: 2rem;
+  }
+  
+  p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(28, 28, 28, 0.8);
+    margin-bottom: 1.2rem;
+    text-align: right;
+    width: 100%;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: $breakpoint-tablet) {
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    
+    strong {
+      color: $primary-color;
+      font-weight: 700;
+    }
+  }
+}
+
+// ===================================
+// Services Grid - Fixed Layout
+// ===================================
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  
+  @media (max-width: $breakpoint-desktop) {
+    gap: 1.25rem;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+}
+
+.service-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: $background-color;
+  border-radius: $radius-lg;
+  border: 2px solid transparent;
+  transition: all $transition-normal;
+  cursor: pointer;
+  text-align: right;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  
+  &:hover {
+    border-color: rgba(233, 30, 99, 0.3);
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.15);
+    
+    .service-icon {
+      transform: scale(1.1) rotate(5deg);
+      background: $gradient-primary;
+      color: $text-white;
+    }
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 1.25rem;
+    gap: 0.8rem;
+    min-height: 110px;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem;
+  }
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  background: rgba(233, 30, 99, 0.1);
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $primary-color;
+  font-size: 1.3rem;
+  transition: all $transition-normal;
+  
+  @media (max-width: $breakpoint-tablet) {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    font-size: 1.2rem;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 1.1rem;
+  }
+}
+
+.service-content {
+  flex: 1;
+  overflow: hidden;
+  
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $secondary-color;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+    
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 1rem;
+    }
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 0.95rem;
+    }
+  }
+  
+  p {
+    font-size: 0.9rem;
+    color: rgba(28, 28, 28, 0.6);
+    line-height: 1.4;
+    margin: 0;
+    
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 0.85rem;
+    }
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 0.8rem;
+      line-height: 1.3;
+    }
+  }
+}
+
+// ===================================
+// CTA Button - Fixed Positioning
+// ===================================
+.about-cta {
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+  
+  @media (max-width: $breakpoint-tablet) {
+    margin-top: 0.5rem;
+  }
+}
+
+.about-details .cta-button {
+  padding: 1rem 2.5rem;
+  background: $gradient-primary;
+  color: $text-white;
+  border: none;
+  border-radius: $radius-xl;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-normal;
+  box-shadow: $shadow-pink;
+  font-family: 'Tajawal', sans-serif;
+  display: inline-block;
+  min-width: 200px;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(233, 30, 99, 0.4);
+  }
+  
+  @media (max-width: $breakpoint-desktop) {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 0.9rem 2rem;
+    min-width: 180px;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+// ===================================
+// Decorative Elements - Fixed
+// ===================================
+.decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233, 30, 99, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  
+  @media (max-width: $breakpoint-tablet) {
+    opacity: 0.5;
+  }
+}
+
+.circle-1 {
+  width: 500px;
+  height: 500px;
+  top: -150px;
+  right: -150px;
+  
+  @media (max-width: $breakpoint-desktop) {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -100px;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    width: 300px;
+    height: 300px;
+    top: -80px;
+    right: -80px;
+  }
+}
+
+.circle-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -50px;
+  left: -50px;
+  
+  @media (max-width: $breakpoint-desktop) {
+    width: 250px;
+    height: 250px;
+    bottom: -40px;
+    left: -40px;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    width: 200px;
+    height: 200px;
+    bottom: -30px;
+    left: -30px;
+  }
+}
+
+// ===================================
+// Animation Fixes
+// ===================================
+@media (max-width: $breakpoint-tablet) {
+  .about-content {
+    .trainer-profile,
+    .about-details {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+}
