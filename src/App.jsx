@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Home from './pages/Home';
 import FAQPage from './pages/FAQPage';
 import AuthPage from './pages/AuthPage.jsx';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard.jsx';
 import Profile from './pages/Profile.jsx';
 
 import './styles/global.scss';
