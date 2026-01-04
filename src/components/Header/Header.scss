@@ -28,7 +28,7 @@
       border-radius: $radius-xl;
       padding: 0.9rem 2.5rem;
       box-shadow: $shadow-md;
-          gap: 8px;
+      
       @media (max-width: $breakpoint-tablet) {
         padding: 0.7rem 1.5rem;
         max-width: 95%;
@@ -88,7 +88,6 @@
 // ===================================
 // Logo
 // ===================================
-
 .logo {
   display: flex;
   align-items: center;
@@ -112,7 +111,7 @@
   
   .logo-text {
     font-size: 1.4rem;
-    font-weight: 900px;
+    font-weight: 900;
     color: $text-white;
     letter-spacing: 0.5px;
     transition: all $transition-normal;
@@ -140,17 +139,30 @@
     position: fixed;
     top: 0;
     right: -100%;
-    width: 300px;
+    width: 320px;
     height: 100vh;
-    background: $background-color;
+    background: linear-gradient(135deg, #3a1f3d 0%, #2d1b2e 50%, #1f1520 100%);
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
     transition: right $transition-normal;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    padding: 2rem;
     
     &.open {
       right: 0;
+    }
+    
+    // إضافة ديكور
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 150px;
+      background: linear-gradient(180deg, rgba(233, 30, 99, 0.1) 0%, transparent 100%);
+      pointer-events: none;
     }
   }
 }
@@ -162,7 +174,7 @@
   font-weight: 500;
   font-size: 1rem;
   transition: all $transition-fast;
-  white-space: nowrap; // منع كسر السطر
+  white-space: nowrap;
   
   &::after {
     content: '';
@@ -184,8 +196,22 @@
   }
   
   @media (max-width: $breakpoint-tablet) {
-    color: $text-dark;
-    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.8rem 1.5rem;
+    width: 100%;
+    text-align: center;
+    border-radius: $radius-lg;
+    
+    &:hover {
+      background: rgba(233, 30, 99, 0.15);
+      color: $text-white;
+    }
+    
+    &::after {
+      display: none;
+    }
   }
 }
 
@@ -249,8 +275,22 @@
     @media (max-width: $breakpoint-tablet) {
       display: flex;
       margin-top: 2rem;
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
+      padding: 1rem 2.5rem;
+      font-size: 1.05rem;
+      background: rgba(233, 30, 99, 0.1);
+      border-color: rgba(233, 30, 99, 0.3);
+      color: rgba(255, 255, 255, 0.9);
+      
+      .login-icon {
+        color: $primary-color;
+      }
+      
+      &:hover {
+        background: rgba(233, 30, 99, 0.2);
+        border-color: $primary-color;
+        color: $text-white;
+        transform: translateY(-2px);
+      }
     }
   }
   
@@ -318,7 +358,7 @@
   &.open {
     span:nth-child(1) {
       transform: rotate(45deg) translateY(8px);
-      background: $secondary-color;
+      background: $primary-color;
     }
     
     span:nth-child(2) {
@@ -327,9 +367,10 @@
     
     span:nth-child(3) {
       transform: rotate(-45deg) translateY(-8px);
-      background: $secondary-color;
+      background: $primary-color;
     }
   }
-}.header a {
+}
+.header a {
   text-decoration: none !important;
 }

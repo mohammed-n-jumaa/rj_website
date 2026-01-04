@@ -1,331 +1,386 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FaChevronDown,
-  FaQuestion,
-  FaDumbbell,
-  FaAppleAlt,
-  FaCreditCard,
-  FaClock,
-  FaCheckCircle,
-  FaUserFriends
-} from 'react-icons/fa';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { FaLock, FaMapMarkerAlt, FaArrowDown } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 import './FAQ.scss';
 
-const FAQ = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
+const JourneyNode = ({ node, index, activeNode, handleNodeClick, scrollProgress, revealedNodes, setRevealedNodes }) => {
+  const nodeRef = useRef(null);
+  
+  // حساب متى يجب أن يظهر الجواب بناءً على الخط الزمني
+  const nodeProgressThreshold = index / 11;
+  const shouldReveal = scrollProgress > nodeProgressThreshold && !node.locked;
+  
+  // إضافة النقطة للـ revealed nodes عند وصول الخط
+  useEffect(() => {
+    if (shouldReveal && !revealedNodes.includes(node.id)) {
+      const timer = setTimeout(() => {
+        setRevealedNodes(prev => [...prev, node.id]);
+        handleNodeClick(node);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldReveal]);
 
-  const faqCategories = [
+  // النقطة active إذا كانت مضغوطة أو revealed
+  const isActive = activeNode === node.id || revealedNodes.includes(node.id);
+
+  return (
+    <motion.div
+      ref={nodeRef}
+      className={`journey-node ${isActive ? 'active' : ''} ${node.locked ? 'locked' : ''}`}
+      style={{
+        top: node.position.top,
+        left: node.position.left
+      }}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ delay: index * 0.15, type: "spring" }}
+      whileHover={{ scale: 1.1 }}
+      onClick={() => handleNodeClick(node)}
+    >
+      {/* Node Point */}
+      <motion.div 
+        className="node-point"
+        style={{ 
+          background: `linear-gradient(135deg, ${node.color}, ${node.color}dd)`,
+          boxShadow: `0 0 20px ${node.color}44`
+        }}
+        animate={{
+          boxShadow: isActive 
+            ? [`0 0 20px ${node.color}44`, `0 0 40px ${node.color}88`, `0 0 20px ${node.color}44`]
+            : `0 0 20px ${node.color}44`
+        }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        {node.locked ? (
+          <FaLock className="node-icon" />
+        ) : (
+          <FaMapMarkerAlt className="node-icon" />
+        )}
+      </motion.div>
+
+      {/* Question Bubble */}
+      <motion.div 
+        className="node-question"
+        whileHover={{ scale: 1.05 }}
+      >
+        {node.question}
+      </motion.div>
+
+      {/* Answer Popover - يبقى ظاهر */}
+      {!node.locked && (
+        <motion.div
+          className="node-answer"
+          initial={{ opacity: 0, scale: 0.8, y: 10 }}
+          animate={{ 
+            opacity: isActive ? 1 : 0,
+            scale: isActive ? 1 : 0.8,
+            y: isActive ? 0 : 10
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="answer-arrow"></div>
+          <p>{node.answer}</p>
+        </motion.div>
+      )}
+
+      {/* Locked Message */}
+      {node.locked && activeNode === node.id && (
+        <motion.div
+          className="locked-message"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <p>هذا سؤال شخصي…</p>
+          <p>ما له جواب عام.</p>
+          <FaArrowDown className="arrow-down" />
+        </motion.div>
+      )}
+
+      {/* Pulse Ring */}
+      {isActive && (
+        <motion.div
+          className="pulse-ring"
+          style={{ borderColor: node.color }}
+          initial={{ scale: 1, opacity: 0.6 }}
+          animate={{ scale: 2, opacity: 0 }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        />
+      )}
+    </motion.div>
+  );
+};
+
+const FAQ = () => {
+  const [activeNode, setActiveNode] = useState(null);
+  const [revealedNodes, setRevealedNodes] = useState([]); // النقاط اللي ظهرت
+  const [formData, setFormData] = useState({ question: '', contact: '' });
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  
+  // تحويل scrollYProgress لقيمة عادية
+  const [scrollProgress, setScrollProgress] = useState(0);
+  
+  useEffect(() => {
+    return scrollYProgress.on('change', (latest) => {
+      setScrollProgress(latest);
+    });
+  }, [scrollYProgress]);
+
+  const journeyNodes = [
     {
-      category: 'عام',
-      icon: <FaQuestion />,
-      color: '#E91E63',
-      questions: [
-        {
-          id: 1,
-          question: 'من هي رند جرار؟',
-          answer: 'رند جرار مدربة لياقة بدنية معتمدة دولياً مع أكثر من 5 سنوات من الخبرة في تحويل حياة النساء. حاصلة على شهادات من NASM، ACE، ISSA وغيرها من المنظمات العالمية المرموقة.'
-        },
-        {
-          id: 2,
-          question: 'هل التدريب مناسب للمبتدئات؟',
-          answer: 'نعم بالتأكيد! البرامج مصممة لتناسب جميع المستويات من المبتدئات إلى المتقدمات. كل برنامج يتم تخصيصه حسب مستواك الحالي وأهدافك الشخصية.'
-        },
-        {
-          id: 3,
-          question: 'كم عدد المتدربات اللواتي تم تدريبهن؟',
-          answer: 'تم تدريب أكثر من 500 متدربة بنجاح، وحققن نتائج مذهلة في اللياقة والصحة. نسبة النجاح تصل إلى 98% مع الالتزام بالبرنامج.'
-        }
-      ]
+      id: 1,
+      position: { top: '6%', left: '20%' },
+      question: 'من وين أبلّش؟',
+      answer: 'البداية مش بقوتك، البداية بقرارك.',
+      locked: false,
+      color: '#E91E63'
     },
     {
-      category: 'البرامج التدريبية',
-      icon: <FaDumbbell />,
-      color: '#9C27B0',
-      questions: [
-        {
-          id: 4,
-          question: 'ما هي أنواع البرامج المتوفرة؟',
-          answer: 'نقدم برامج متنوعة تشمل: تنشيف وحرق الدهون، نحت القوام، زيادة الكتلة العضلية، تدريب للحوامل، تدريب ما بعد الولادة، وبرامج مخصصة للمبتدئات.'
-        },
-        {
-          id: 5,
-          question: 'كم مدة البرنامج التدريبي؟',
-          answer: 'تتراوح مدة البرامج من شهرين إلى 6 أشهر حسب الهدف المطلوب. البرامج القصيرة (2-3 أشهر) مناسبة للتنشيف، بينما البرامج الأطول (4-6 أشهر) مناسبة لإعادة بناء الجسم بالكامل.'
-        },
-        {
-          id: 6,
-          question: 'هل التدريب أونلاين أم في الجيم؟',
-          answer: 'التدريب أونلاين بالكامل! تحصلين على جلسات تدريب مباشرة عبر الفيديو، برنامج تمارين مخصص، متابعة يومية، ودعم مستمر عبر الواتساب.'
-        },
-        {
-          id: 7,
-          question: 'كم عدد الجلسات التدريبية في الأسبوع؟',
-          answer: 'عادةً 3-5 جلسات أسبوعياً حسب البرنامج المختار ومستوى اللياقة. كل جلسة تتراوح بين 45-60 دقيقة، مع إمكانية التعديل حسب جدولك.'
-        }
-      ]
+      id: 2,
+      position: { top: '14%', left: '75%' },
+      question: 'بخاف ما أكمّل…',
+      answer: 'أغلب المتدربات بلشن بنفس الشعور.',
+      locked: false,
+      color: '#9C27B0'
     },
     {
-      category: 'التغذية',
-      icon: <FaAppleAlt />,
-      color: '#4CAF50',
-      questions: [
-        {
-          id: 8,
-          question: 'هل يشمل البرنامج نظام غذائي؟',
-          answer: 'نعم! كل برنامج يتضمن خطة تغذية مخصصة مصممة خصيصاً لك بناءً على أهدافك، نمط حياتك، وتفضيلاتك الغذائية. النظام مرن ويمكن تعديله حسب احتياجاتك.'
-        },
-        {
-          id: 9,
-          question: 'هل النظام الغذائي صارم؟',
-          answer: 'لا! نؤمن بالتوازن وليس الحرمان. النظام الغذائي مرن ويسمح بتناول الأطعمة التي تحبينها ضمن حدود معقولة، مع التركيز على خيارات صحية ومستدامة.'
-        },
-        {
-          id: 10,
-          question: 'هل يمكن تعديل النظام الغذائي؟',
-          answer: 'بالتأكيد! يتم مراجعة وتعديل النظام الغذائي بشكل دوري حسب تقدمك ونتائجك. إذا كان هناك أطعمة لا تحبينها أو لديك حساسية، يتم استبدالها ببدائل مناسبة.'
-        }
-      ]
+      id: 3,
+      position: { top: '23%', left: '30%' },
+      question: 'شو عن خصوصيتي؟',
+      answer: 'خصوصيتك خط أحمر.',
+      locked: false,
+      color: '#2196F3'
     },
     {
-      category: 'الأسعار والدفع',
-      icon: <FaCreditCard />,
-      color: '#FF9800',
-      questions: [
-        {
-          id: 11,
-          question: 'كم تكلفة البرنامج التدريبي؟',
-          answer: 'الأسعار تبدأ من 199$ للبرنامج الشهري، مع خصومات للباقات الطويلة (3-6 أشهر). للحصول على سعر دقيق حسب احتياجاتك، يرجى التواصل معنا للاستشارة المجانية.'
-        },
-        {
-          id: 12,
-          question: 'ما هي طرق الدفع المتاحة؟',
-          answer: 'نقبل الدفع عبر: التحويل البنكي، بطاقات الائتمان (Visa/Mastercard)، PayPal، وخدمات الدفع الإلكتروني المحلية. يمكن الدفع دفعة واحدة أو على أقساط شهرية.'
-        },
-        {
-          id: 13,
-          question: 'هل يوجد ضمان استرداد الأموال؟',
-          answer: 'نعم! نقدم ضمان استرداد كامل خلال أول 14 يوم إذا لم تكوني راضية عن البرنامج. نحن واثقون من جودة خدماتنا ونريدك أن تكوني راضية تماماً.'
-        }
-      ]
+      id: 4,
+      position: { top: '32%', left: '70%' },
+      question: 'وقتي قليل',
+      answer: '30 دقيقة كافية لما تكون صح.',
+      locked: false,
+      color: '#4CAF50'
     },
     {
-      category: 'النتائج والالتزام',
-      icon: <FaCheckCircle />,
-      color: '#2196F3',
-      questions: [
-        {
-          id: 14,
-          question: 'متى ستظهر النتائج؟',
-          answer: 'النتائج الأولية تظهر خلال 2-4 أسابيع مع الالتزام بالبرنامج. النتائج الملموسة والتحول الكامل يظهر بعد 8-12 أسبوع. كل جسم مختلف، لكن الالتزام يضمن النجاح.'
-        },
-        {
-          id: 15,
-          question: 'ماذا لو لم ألتزم ببعض الأيام؟',
-          answer: 'لا مشكلة! الحياة تحدث والمرونة مهمة. إذا فاتك يوم أو اثنين، يمكن تعديل الجدول والاستمرار. المهم هو الالتزام الإجمالي والعودة للمسار الصحيح بسرعة.'
-        },
-        {
-          id: 16,
-          question: 'كم كيلو يمكن أن أخسر؟',
-          answer: 'بشكل صحي ومستدام، يمكن خسارة 2-4 كيلو شهرياً. المتوسط هو 8-15 كيلو خلال 3 أشهر مع الالتزام الكامل. نركز على خسارة الدهون وليس الوزن فقط، مع الحفاظ على العضلات.'
-        }
-      ]
+      id: 5,
+      position: { top: '41%', left: '25%' },
+      question: 'متى أشوف فرق؟',
+      answer: 'الفرق يبدأ قبل ما يبان.',
+      locked: false,
+      color: '#FF9800'
     },
     {
-      category: 'المتابعة والدعم',
-      icon: <FaUserFriends />,
-      color: '#795548',
-      questions: [
-        {
-          id: 17,
-          question: 'كيف تتم المتابعة؟',
-          answer: 'متابعة يومية عبر الواتساب، جلسات فيديو أسبوعية للتقييم، تقارير تقدم شهرية، ودعم مستمر طوال فترة البرنامج. أنت لست وحدك في هذه الرحلة!'
-        },
-        {
-          id: 18,
-          question: 'هل يمكن التواصل في أي وقت؟',
-          answer: 'نعم! يمكنك إرسال الأسئلة والاستفسارات في أي وقت عبر الواتساب. الرد يكون خلال 24 ساعة كحد أقصى، وعادة أسرع من ذلك. للحالات الطارئة، هناك خط مباشر متاح.'
-        }
-      ]
+      id: 6,
+      position: { top: '50%', left: '65%' },
+      question: 'التدريب أونلاين؟',
+      answer: 'أيوه! من بيتك وبوقتك.',
+      locked: false,
+      color: '#00BCD4'
+    },
+    {
+      id: 7,
+      position: { top: '59%', left: '35%' },
+      question: 'بحتاج معدات؟',
+      answer: 'لا، جسمك وحافزك كافيين.',
+      locked: false,
+      color: '#FF5722'
+    },
+    {
+      id: 8,
+      position: { top: '68%', left: '70%' },
+      question: 'النظام الغذائي؟',
+      answer: 'مرن وما فيه حرمان.',
+      locked: false,
+      color: '#8BC34A'
+    },
+    {
+      id: 9,
+      position: { top: '77%', left: '30%' },
+      question: 'كم التكلفة؟',
+      answer: '',
+      locked: true,
+      color: '#795548'
+    },
+    {
+      id: 10,
+      position: { top: '86%', left: '60%' },
+      question: 'هل التدريب صعب؟',
+      answer: '',
+      locked: true,
+      color: '#607D8B'
+    },
+    {
+      id: 11,
+      position: { top: '94%', left: '40%' },
+      question: 'كم المدة للنتيجة؟',
+      answer: '',
+      locked: true,
+      color: '#9E9E9E'
     }
   ];
 
-  const toggleAccordion = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
-
-  const filteredFAQs = faqCategories.map(category => ({
-    ...category,
-    questions: category.questions.filter(
-      q => 
-        q.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        q.answer.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  })).filter(category => category.questions.length > 0);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+  const handleNodeClick = (node) => {
+    if (node.locked) {
+      // Scroll to form
+      document.getElementById('question-form').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+    } else {
+      setActiveNode(activeNode === node.id ? null : node.id);
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    Swal.fire({
+      title: 'شكراً لك! 💕',
+      text: 'سيتم الرد على سؤالك قريباً',
+      icon: 'success',
+      confirmButtonText: 'تمام',
+      confirmButtonColor: '#E91E63',
+      iconColor: '#E91E63',
+      background: '#fff',
+      customClass: {
+        popup: 'faq-swal-popup',
+        title: 'faq-swal-title',
+        confirmButton: 'faq-swal-button'
       }
-    }
+    });
+    
+    setFormData({ question: '', contact: '' });
   };
 
   return (
-    <section className="faq-section" id="faq">
-      <div className="faq-container">
-        {/* Header */}
-        <motion.div 
-          className="faq-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="section-tag">الأسئلة الشائعة</span>
-          <h2 className="section-title">كل ما تحتاجين معرفته</h2>
-          <p className="section-description">
-            إجابات واضحة على جميع أسئلتك. لم تجدي سؤالك؟ تواصلي معنا مباشرة!
-          </p>
+    <div className="faq-journey" ref={containerRef}>
+      {/* Header */}
+      <motion.div 
+        className="journey-header"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1 className="journey-title">خريطة رحلتك</h1>
+        <p className="journey-subtitle">كل نقطة سؤال… وكل طريق له جواب 🤍</p>
+      </motion.div>
 
-          {/* Search Bar */}
-          <div className="search-bar">
+      {/* SVG Path - الخط المتعرج */}
+      <svg className="journey-path" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <motion.path
+          d="M 20,8 Q 40,12 30,16 T 75,16 Q 60,20 30,26 T 70,34 Q 50,38 25,42 T 65,50 Q 45,54 35,58 T 70,66 Q 55,70 30,74 T 60,82 Q 50,86 40,90"
+          fill="none"
+          stroke="url(#gradient)"
+          strokeWidth="0.3"
+          strokeLinecap="round"
+          strokeDasharray="2,2"
+          style={{
+            pathLength: pathLength
+          }}
+        />
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#E91E63" stopOpacity="0.6" />
+            <stop offset="25%" stopColor="#9C27B0" stopOpacity="0.6" />
+            <stop offset="50%" stopColor="#2196F3" stopOpacity="0.6" />
+            <stop offset="75%" stopColor="#4CAF50" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#FF9800" stopOpacity="0.6" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      {/* Journey Nodes */}
+      <div className="journey-nodes">
+        {journeyNodes.map((node, index) => (
+          <JourneyNode
+            key={node.id}
+            node={node}
+            index={index}
+            activeNode={activeNode}
+            handleNodeClick={handleNodeClick}
+            scrollProgress={scrollProgress}
+            revealedNodes={revealedNodes}
+            setRevealedNodes={setRevealedNodes}
+          />
+        ))}
+      </div>
+
+      {/* Question Form */}
+      <motion.div 
+        id="question-form"
+        className="question-form"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="form-header">
+          <h2>نقطة سؤالك أنتِ</h2>
+          <p>هذا السؤال مكانه هون</p>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <textarea
+              placeholder="سؤالك..."
+              value={formData.question}
+              onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+              required
+              rows="4"
+            />
+          </div>
+
+          <div className="form-group">
             <input
               type="text"
-              placeholder="ابحثي عن سؤال..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
+              placeholder="إيميلك أو رقمك"
+              value={formData.contact}
+              onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+              required
             />
-            <FaQuestion className="search-icon" />
           </div>
-        </motion.div>
 
-        {/* FAQ Categories */}
-        <motion.div 
-          className="faq-content"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {filteredFAQs.map((category, categoryIndex) => (
-            <motion.div 
-              key={categoryIndex} 
-              className="faq-category"
-              variants={itemVariants}
-            >
-              <div className="category-header">
-                <div 
-                  className="category-icon"
-                  style={{ background: `linear-gradient(135deg, ${category.color}, ${category.color}dd)` }}
-                >
-                  {category.icon}
-                </div>
-                <h3 className="category-title">{category.category}</h3>
-              </div>
+          <p className="form-note">الجواب رح يوصلك مباشرة</p>
 
-              <div className="questions-list">
-                {category.questions.map((item, index) => {
-                  const globalIndex = `${categoryIndex}-${index}`;
-                  const isActive = activeIndex === globalIndex;
+          <motion.button
+            type="submit"
+            className="submit-button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            أضيف سؤالي للخريطة
+          </motion.button>
+        </form>
+      </motion.div>
 
-                  return (
-                    <motion.div
-                      key={item.id}
-                      className={`faq-item ${isActive ? 'active' : ''}`}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <button
-                        className="faq-question"
-                        onClick={() => toggleAccordion(globalIndex)}
-                      >
-                        <span className="question-text">{item.question}</span>
-                        <motion.div
-                          className="question-icon"
-                          animate={{ rotate: isActive ? 180 : 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <FaChevronDown />
-                        </motion.div>
-                      </button>
-
-                      <AnimatePresence>
-                        {isActive && (
-                          <motion.div
-                            className="faq-answer"
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            <div className="answer-content">
-                              <p>{item.answer}</p>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div 
-          className="faq-cta"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <h3>لم تجدي إجابة لسؤالك؟</h3>
-          <p>تواصلي معنا مباشرة وسنكون سعداء بمساعدتك</p>
-          <div className="cta-buttons">
-            <motion.button 
-              className="btn-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              تواصلي معنا
-            </motion.button>
-            <motion.button 
-              className="btn-secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              احجزي استشارة مجانية
-            </motion.button>
-          </div>
-        </motion.div>
+      {/* Decorative Elements */}
+      <div className="journey-decorations">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="floating-particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.3, 0.6, 0.3]
+            }}
+            transition={{
+              duration: 3 + i,
+              repeat: Infinity,
+              delay: i * 0.5
+            }}
+          />
+        ))}
       </div>
-
-      {/* Background Decoration */}
-      <div className="faq-bg">
-        <div className="bg-circle circle-1"></div>
-        <div className="bg-circle circle-2"></div>
-        <div className="bg-circle circle-3"></div>
-      </div>
-    </section>
+    </div>
   );
 };
 
