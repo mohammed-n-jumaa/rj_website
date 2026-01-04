@@ -125,8 +125,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/faq" element={<FAQPage />} />
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+
       </Routes>
     </Router>
   );
