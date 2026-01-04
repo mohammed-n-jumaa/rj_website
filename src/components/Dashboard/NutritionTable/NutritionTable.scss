@@ -1,0 +1,338 @@
+@import '../../../styles/variables.scss';
+
+.nutrition-table-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// ===================================
+// Header
+// ===================================
+.nutrition-header {
+  background: white;
+  border-radius: $radius-lg;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: $shadow-md;
+  
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .header-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    svg {
+      font-size: 2rem;
+      color: $primary-color;
+    }
+    
+    h2 {
+      color: $text-dark;
+      font-size: 1.8rem;
+      font-weight: 800;
+      
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  
+  .completion-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    .circular-progress {
+      position: relative;
+      
+      svg {
+        transform: rotate(-90deg);
+      }
+      
+      .progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1rem;
+        font-weight: 700;
+        color: $primary-color;
+      }
+    }
+    
+    p {
+      color: $text-light;
+      font-weight: 600;
+    }
+  }
+}
+
+// ===================================
+// Nutrition Summary
+// ===================================
+.nutrition-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+  
+  .summary-card {
+    background: white;
+    border-radius: $radius-lg;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: $shadow-sm;
+    transition: all $transition-normal;
+    border-left: 4px solid;
+    
+    &.calories {
+      border-left-color: #FF5722;
+      
+      .summary-icon {
+        background: linear-gradient(135deg, #FF5722, #FF9800);
+      }
+    }
+    
+    &.protein {
+      border-left-color: #E91E63;
+      
+      .summary-icon {
+        background: linear-gradient(135deg, #E91E63, #F06292);
+      }
+    }
+    
+    &.carbs {
+      border-left-color: #2196F3;
+      
+      .summary-icon {
+        background: linear-gradient(135deg, #2196F3, #64B5F6);
+      }
+    }
+    
+    &.fats {
+      border-left-color: #FF9800;
+      
+      .summary-icon {
+        background: linear-gradient(135deg, #FF9800, #FFB74D);
+      }
+    }
+    
+    .summary-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: $radius-md;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .summary-info {
+      .summary-label {
+        color: $text-light;
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+      }
+      
+      .summary-value {
+        color: $text-dark;
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+      
+      .summary-unit {
+        color: $text-light;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+// ===================================
+// Meals List
+// ===================================
+.meals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.meal-card {
+  background: white;
+  border-radius: $radius-lg;
+  padding: 1.5rem;
+  box-shadow: $shadow-sm;
+  transition: all $transition-normal;
+  border: 2px solid transparent;
+  
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+  
+  &.checked {
+    border-color: #4CAF50;
+    background: linear-gradient(to right, rgba(76, 175, 80, 0.05), white);
+    
+    .meal-header {
+      opacity: 0.7;
+    }
+    
+    .check-button {
+      color: #4CAF50;
+    }
+  }
+  
+  .meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    
+    .meal-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      
+      .meal-icon {
+        font-size: 2.5rem;
+      }
+      
+      h4 {
+        color: $text-dark;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      
+      .meal-time {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $text-light;
+        font-size: 0.9rem;
+        
+        svg {
+          font-size: 0.85rem;
+        }
+      }
+    }
+    
+    .check-button {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #E0E0E0;
+      cursor: pointer;
+      transition: all $transition-fast;
+      
+      &:hover {
+        color: #4CAF50;
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  .meal-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: $bg-light;
+    border-radius: $radius-md;
+    
+    .meal-item {
+      color: $text-dark;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  }
+  
+  .meal-nutrition {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    
+    @media (max-width: $breakpoint-mobile) {
+      gap: 1rem;
+    }
+    
+    .nutrition-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: $bg-light;
+      border-radius: $radius-xl;
+      font-weight: 600;
+      font-size: 0.9rem;
+      
+      .icon {
+        font-size: 1rem;
+        
+        &.calories-icon {
+          color: #FF5722;
+        }
+        
+        &.protein-icon {
+          color: #E91E63;
+        }
+        
+        &.carbs-icon {
+          color: #2196F3;
+        }
+        
+        &.fats-icon {
+          color: #FF9800;
+        }
+      }
+    }
+  }
+}
+
+// ===================================
+// Completion Message
+// ===================================
+.completion-message {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  color: white;
+  border-radius: $radius-lg;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: $shadow-md;
+  
+  .emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+  }
+}

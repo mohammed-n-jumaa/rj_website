@@ -1,0 +1,2427 @@
+@import '../styles/variables.scss';
+
+// ===================================
+// Profile Page - Main Container
+// ===================================
+.profile-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 2rem 0;
+  font-family: 'Tajawal', sans-serif;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem 0;
+  }
+}
+
+// ===================================
+// Profile Header
+// ===================================
+.profile-header {
+  background: white;
+  border-radius: $radius-lg;
+  padding: 2.5rem;
+  margin: 0 auto 2rem;
+  max-width: 1400px;
+  box-shadow: $shadow-md;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem 1.5rem;
+    border-radius: $radius-md;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1.5rem 1rem;
+    margin: 0 0.5rem 1rem;
+  }
+
+  .header-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: $gradient-primary;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+
+    @media (max-width: $breakpoint-tablet) {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+
+  .profile-info {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 1rem;
+    }
+  }
+
+  .avatar-wrapper {
+    position: relative;
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      object-fit: cover;
+
+      @media (max-width: $breakpoint-mobile) {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    .avatar-badge {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(255, 165, 0, 0.4);
+      color: white;
+      font-size: 1rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .info-text {
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: $text-dark;
+      margin-bottom: 0.5rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .program-name {
+      font-size: 1.1rem;
+      color: $primary-color;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 1rem;
+      }
+    }
+
+    .stats-mini {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      color: $text-light;
+
+      @media (max-width: $breakpoint-mobile) {
+        gap: 1rem;
+        font-size: 0.85rem;
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        svg {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .quick-actions {
+    display: flex;
+    gap: 1rem;
+
+    @media (max-width: $breakpoint-tablet) {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  .action-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: $radius-md;
+    border: 2px solid $border-color;
+    background: white;
+    color: $text-dark;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all $transition-normal;
+    font-family: 'Tajawal', sans-serif;
+    position: relative;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 0.65rem 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+      transform: translateY(-2px);
+      box-shadow: $shadow-sm;
+    }
+
+    &.notification {
+      padding: 0.75rem;
+
+      .notification-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: $primary-color;
+        color: white;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .progress-container {
+    position: relative;
+    z-index: 1;
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $text-dark;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 0.9rem;
+      }
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: #f0f0f0;
+      border-radius: $radius-xl;
+      overflow: hidden;
+      position: relative;
+
+      @media (max-width: $breakpoint-mobile) {
+        height: 10px;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: $gradient-primary;
+        border-radius: $radius-xl;
+        position: relative;
+        transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent
+          );
+          animation: shimmer 2s infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+// ===================================
+// Profile Tabs
+// ===================================
+.profile-tabs {
+  display: flex;
+  gap: 1rem;
+  margin: 0 auto 2rem;
+  max-width: 1400px;
+  overflow-x: auto;
+  padding: 0 1rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 10px;
+  }
+
+  .tab {
+    background: white;
+    border: 2px solid transparent;
+    border-radius: $radius-md;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all $transition-normal;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    color: $text-light;
+    white-space: nowrap;
+    position: relative;
+    box-shadow: $shadow-sm;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 0.75rem 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .tab-icon {
+      font-size: 1.2rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 1.1rem;
+      }
+    }
+
+    .tab-label {
+      @media (max-width: $breakpoint-mobile) {
+        display: none;
+      }
+    }
+
+    .tab-badge {
+      background: $primary-color;
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+
+      @media (max-width: $breakpoint-mobile) {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: $shadow-md;
+      border-color: rgba($primary-color, 0.3);
+    }
+
+    &.active {
+      background: $gradient-primary;
+      color: white;
+      border-color: transparent;
+      box-shadow: $shadow-pink;
+
+      .tab-icon {
+        color: white;
+      }
+
+      .tab-badge {
+        background: white;
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+// ===================================
+// Profile Content
+// ===================================
+.profile-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0 0.5rem;
+  }
+}
+
+// ===================================
+// Overview Tab
+// ===================================
+.overview-tab {
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+
+    @media (max-width: $breakpoint-laptop) {
+      grid-template-columns: 1fr;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 1rem;
+    }
+  }
+
+  .stats-card,
+  .subscription-card,
+  .today-card,
+  .achievements-card {
+    background: white;
+    border-radius: $radius-lg;
+    padding: 2rem;
+    box-shadow: $shadow-md;
+    transition: all $transition-normal;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 1.5rem;
+      border-radius: $radius-md;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-lg;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: $text-dark;
+
+        @media (max-width: $breakpoint-mobile) {
+          font-size: 1.1rem;
+        }
+      }
+
+      .header-icon {
+        font-size: 1.5rem;
+        color: $primary-color;
+
+        @media (max-width: $breakpoint-mobile) {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 1rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: $radius-md;
+      transition: all $transition-normal;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 0.75rem;
+        gap: 0.75rem;
+      }
+
+      &:hover {
+        transform: translateX(-5px);
+        box-shadow: $shadow-sm;
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        color: white;
+
+        @media (max-width: $breakpoint-mobile) {
+          width: 45px;
+          height: 45px;
+          font-size: 1.2rem;
+        }
+
+        &.height {
+          background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        &.weight {
+          background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        &.age {
+          background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        &.goal {
+          background: $gradient-primary;
+        }
+      }
+
+      .stat-info {
+        display: flex;
+        flex-direction: column;
+
+        .stat-label {
+          font-size: 0.85rem;
+          color: $text-light;
+          margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: $text-dark;
+
+          @media (max-width: $breakpoint-mobile) {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .subscription-details {
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid $border-color;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.status {
+        margin-top: 0.5rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid $border-color;
+      }
+
+      .detail-label {
+        font-size: 0.95rem;
+        color: $text-light;
+      }
+
+      .detail-value {
+        font-weight: 600;
+        color: $text-dark;
+
+        &.price {
+          font-size: 1.3rem;
+          color: $primary-color;
+        }
+      }
+
+      .payment-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: $radius-xl;
+        font-weight: 600;
+        font-size: 0.9rem;
+
+        &.paid {
+          background: linear-gradient(135deg, #d4fc79, #96e6a1);
+          color: #2d5016;
+
+          svg {
+            color: #2d5016;
+          }
+        }
+
+        &.pending {
+          background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+          color: #d63031;
+        }
+      }
+    }
+  }
+
+  .today-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .today-item {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: $radius-md;
+      transition: all $transition-normal;
+
+      &:hover {
+        transform: translateX(-5px);
+        box-shadow: $shadow-sm;
+      }
+
+      .today-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+
+        @media (max-width: $breakpoint-mobile) {
+          width: 50px;
+          height: 50px;
+          font-size: 1.3rem;
+        }
+
+        &.calories {
+          background: linear-gradient(135deg, #FA709A, #FEE140);
+        }
+
+        &.meals {
+          background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+
+        &.workout {
+          background: $gradient-primary;
+        }
+      }
+
+      .today-info {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .today-value {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: $text-dark;
+
+          @media (max-width: $breakpoint-mobile) {
+            font-size: 1.2rem;
+          }
+        }
+
+        .today-label {
+          font-size: 0.9rem;
+          color: $text-light;
+        }
+      }
+    }
+  }
+
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.75rem;
+    }
+
+    .achievement {
+      padding: 1.25rem;
+      border-radius: $radius-md;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      text-align: center;
+      transition: all $transition-normal;
+      font-weight: 600;
+      font-size: 0.9rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 1rem;
+        font-size: 0.85rem;
+      }
+
+      svg {
+        font-size: 2rem;
+
+        @media (max-width: $breakpoint-mobile) {
+          font-size: 1.7rem;
+        }
+      }
+
+      &.unlocked {
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+        color: white;
+        box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+
+        &:hover {
+          transform: scale(1.05) rotate(2deg);
+        }
+      }
+
+      &.locked {
+        background: #f1f3f5;
+        color: #adb5bd;
+        opacity: 0.6;
+
+        svg {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+
+// ===================================
+// Nutrition Tab
+// ===================================
+.nutrition-tab {
+  .macros-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 1rem;
+    }
+
+    .macro-card {
+      background: white;
+      border-radius: $radius-lg;
+      padding: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      box-shadow: $shadow-md;
+      transition: all $transition-normal;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 1.25rem;
+        gap: 1rem;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: $shadow-lg;
+      }
+
+      .macro-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: white;
+
+        @media (max-width: $breakpoint-mobile) {
+          width: 50px;
+          height: 50px;
+          font-size: 1.5rem;
+        }
+
+        &.calories {
+          background: linear-gradient(135deg, #FA709A, #FEE140);
+        }
+
+        &.protein {
+          background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        &.carbs {
+          background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        &.fats {
+          background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+      }
+
+      .macro-info {
+        display: flex;
+        flex-direction: column;
+
+        .macro-value {
+          font-size: 1.8rem;
+          font-weight: 800;
+          color: $text-dark;
+          line-height: 1;
+          margin-bottom: 0.25rem;
+
+          @media (max-width: $breakpoint-mobile) {
+            font-size: 1.5rem;
+          }
+        }
+
+        .macro-label {
+          font-size: 0.85rem;
+          color: $text-light;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .meals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.75rem;
+    }
+
+    .meal-card {
+      background: white;
+      border-radius: $radius-lg;
+      box-shadow: $shadow-md;
+      overflow: hidden;
+      transition: all $transition-normal;
+
+      @media (max-width: $breakpoint-mobile) {
+        border-radius: $radius-md;
+      }
+
+      &:hover {
+        transform: translateX(-5px);
+        box-shadow: $shadow-lg;
+      }
+
+      &.checked {
+        opacity: 0.7;
+
+        .meal-header {
+          background: linear-gradient(135deg, #d4fc79, #96e6a1);
+        }
+      }
+
+      &.expanded {
+        box-shadow: 0 8px 30px rgba(233, 30, 99, 0.15);
+      }
+
+      .meal-header {
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: background $transition-normal;
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 1.2rem;
+        }
+
+        &:hover {
+          background: #f8f9fa;
+        }
+
+        .meal-main {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+
+          @media (max-width: $breakpoint-mobile) {
+            gap: 1rem;
+          }
+
+          .check-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 3px solid #dee2e6;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all $transition-normal;
+            color: white;
+            font-size: 1.1rem;
+
+            @media (max-width: $breakpoint-mobile) {
+              width: 28px;
+              height: 28px;
+              font-size: 1rem;
+            }
+
+            &:hover {
+              border-color: $primary-color;
+              transform: scale(1.1);
+            }
+
+            &.checked {
+              border-color: #2ecc71;
+              background: linear-gradient(135deg, #2ecc71, #27ae60);
+            }
+          }
+
+          .meal-info {
+            h4 {
+              font-size: 1.2rem;
+              font-weight: 700;
+              color: $text-dark;
+              margin-bottom: 0.25rem;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 1.1rem;
+              }
+            }
+
+            .meal-time {
+              font-size: 0.9rem;
+              color: $text-light;
+              display: flex;
+              align-items: center;
+              gap: 0.4rem;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 0.85rem;
+              }
+            }
+          }
+        }
+
+        .meal-summary {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+
+          @media (max-width: $breakpoint-mobile) {
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+          }
+
+          .calories {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: $primary-color;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 1.1rem;
+            }
+          }
+
+          .expand-icon {
+            font-size: 1.2rem;
+            color: $text-light;
+            transition: transform $transition-normal;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+
+      .meal-details {
+        padding: 0 1.5rem 1.5rem;
+        overflow: hidden;
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 0 1.2rem 1.2rem;
+        }
+
+        .macros-row {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+          padding: 1rem;
+          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+          border-radius: $radius-md;
+
+          @media (max-width: $breakpoint-mobile) {
+            gap: 0.75rem;
+            padding: 0.75rem;
+          }
+
+          .macro-item {
+            text-align: center;
+
+            .macro-label {
+              display: block;
+              font-size: 0.85rem;
+              color: $text-light;
+              margin-bottom: 0.25rem;
+            }
+
+            .macro-value {
+              font-size: 1.2rem;
+              font-weight: 700;
+              color: $primary-color;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 1.1rem;
+              }
+            }
+          }
+        }
+
+        .meal-items {
+          h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: $text-dark;
+            margin-bottom: 0.75rem;
+          }
+
+          ul {
+            list-style: none;
+            padding: 0;
+
+            li {
+              padding: 0.5rem 0;
+              padding-right: 1.5rem;
+              position: relative;
+              color: $text-dark;
+              font-size: 0.95rem;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 0.9rem;
+              }
+
+              &::before {
+                content: '•';
+                position: absolute;
+                right: 0;
+                color: $primary-color;
+                font-weight: bold;
+                font-size: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// ===================================
+// Workout Tab
+// ===================================
+.workout-tab {
+  .workout-week {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.75rem;
+    }
+
+    .day-card {
+      background: white;
+      border-radius: $radius-lg;
+      box-shadow: $shadow-md;
+      overflow: hidden;
+      transition: all $transition-normal;
+
+      @media (max-width: $breakpoint-mobile) {
+        border-radius: $radius-md;
+      }
+
+      &:hover {
+        transform: translateX(-5px);
+        box-shadow: $shadow-lg;
+      }
+
+      &.expanded {
+        box-shadow: 0 8px 30px rgba(233, 30, 99, 0.15);
+      }
+
+      &.rest-day {
+        .day-header {
+          background: linear-gradient(135deg, #d4fc79, #96e6a1);
+
+          h3, p {
+            color: #2d5016;
+          }
+
+          .rest-label {
+            padding: 0.5rem 1rem;
+            background: white;
+            color: #2d5016;
+            border-radius: $radius-xl;
+            font-weight: 700;
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .day-header {
+        padding: 1.75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: background $transition-normal;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 1.25rem;
+        }
+
+        &:hover {
+          background: linear-gradient(135deg, #e9ecef, #dee2e6);
+        }
+
+        .day-info {
+          h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: $text-dark;
+            margin-bottom: 0.25rem;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 1.2rem;
+            }
+          }
+
+          p {
+            font-size: 1rem;
+            color: $primary-color;
+            font-weight: 600;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 0.9rem;
+            }
+          }
+        }
+
+        .day-stats {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+
+          .exercise-count {
+            font-size: 0.95rem;
+            color: $text-light;
+            font-weight: 600;
+          }
+
+          .expand-icon {
+            font-size: 1.3rem;
+            color: $text-light;
+            transition: transform $transition-normal;
+          }
+        }
+      }
+
+      .exercises-list {
+        padding: 0 1.75rem 1.75rem;
+        overflow: hidden;
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 0 1.25rem 1.25rem;
+        }
+
+        .exercise-item {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+          padding: 1.25rem;
+          margin-bottom: 0.75rem;
+          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+          border-radius: $radius-md;
+          transition: all $transition-normal;
+
+          @media (max-width: $breakpoint-mobile) {
+            padding: 1rem;
+            gap: 1rem;
+          }
+
+          &:hover {
+            transform: translateX(-5px);
+            box-shadow: $shadow-sm;
+          }
+
+          &.checked {
+            opacity: 0.6;
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+          }
+
+          .check-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 3px solid #dee2e6;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all $transition-normal;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+
+            @media (max-width: $breakpoint-mobile) {
+              width: 28px;
+              height: 28px;
+              font-size: 1rem;
+            }
+
+            &:hover {
+              border-color: $primary-color;
+              transform: scale(1.1);
+            }
+
+            &.checked {
+              border-color: #2ecc71;
+              background: linear-gradient(135deg, #2ecc71, #27ae60);
+            }
+          }
+
+          .exercise-info {
+            flex: 1;
+
+            h5 {
+              font-size: 1.1rem;
+              font-weight: 700;
+              color: $text-dark;
+              margin-bottom: 0.25rem;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 1rem;
+              }
+            }
+
+            .exercise-details {
+              font-size: 0.9rem;
+              color: $text-light;
+              font-weight: 600;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 0.85rem;
+              }
+            }
+          }
+
+          .video-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: $gradient-primary;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all $transition-normal;
+            flex-shrink: 0;
+
+            @media (max-width: $breakpoint-mobile) {
+              width: 40px;
+              height: 40px;
+              font-size: 1.2rem;
+            }
+
+            &:hover {
+              transform: scale(1.1);
+              box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// ===================================
+// Nutrition Tab
+// ===================================
+.nutrition-tab {
+  .macros-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 1rem;
+    }
+
+    .macro-card {
+      background: white;
+      border-radius: $radius-lg;
+      padding: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      box-shadow: $shadow-md;
+      transition: all $transition-normal;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 1.25rem;
+        gap: 1rem;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: $shadow-lg;
+      }
+
+      .macro-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: white;
+
+        @media (max-width: $breakpoint-mobile) {
+          width: 50px;
+          height: 50px;
+          font-size: 1.5rem;
+        }
+
+        &.calories {
+          background: linear-gradient(135deg, #FA709A, #FEE140);
+        }
+
+        &.protein {
+          background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        &.carbs {
+          background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        &.fats {
+          background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+      }
+
+      .macro-info {
+        display: flex;
+        flex-direction: column;
+
+        .macro-value {
+          font-size: 1.8rem;
+          font-weight: 800;
+          color: $text-dark;
+          line-height: 1;
+          margin-bottom: 0.25rem;
+
+          @media (max-width: $breakpoint-mobile) {
+            font-size: 1.5rem;
+          }
+        }
+
+        .macro-label {
+          font-size: 0.85rem;
+          color: $text-light;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .meals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.75rem;
+    }
+
+    .meal-card {
+      background: white;
+      border-radius: $radius-lg;
+      box-shadow: $shadow-md;
+      overflow: hidden;
+      transition: all $transition-normal;
+
+      @media (max-width: $breakpoint-mobile) {
+        border-radius: $radius-md;
+      }
+
+      &:hover {
+        transform: translateX(-5px);
+        box-shadow: $shadow-lg;
+      }
+
+      &.checked {
+        opacity: 0.7;
+
+        .meal-header {
+          background: linear-gradient(135deg, #d4fc79, #96e6a1);
+        }
+      }
+
+      &.expanded {
+        box-shadow: 0 8px 30px rgba(233, 30, 99, 0.15);
+      }
+
+      .meal-header {
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: background $transition-normal;
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 1.2rem;
+        }
+
+        &:hover {
+          background: #f8f9fa;
+        }
+
+        .meal-main {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+
+          @media (max-width: $breakpoint-mobile) {
+            gap: 1rem;
+          }
+
+          .check-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 3px solid #dee2e6;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all $transition-normal;
+            color: white;
+            font-size: 1.1rem;
+
+            @media (max-width: $breakpoint-mobile) {
+              width: 28px;
+              height: 28px;
+              font-size: 1rem;
+            }
+
+            &:hover {
+              border-color: $primary-color;
+              transform: scale(1.1);
+            }
+
+            &.checked {
+              border-color: #2ecc71;
+              background: linear-gradient(135deg, #2ecc71, #27ae60);
+            }
+          }
+
+          .meal-info {
+            h4 {
+              font-size: 1.2rem;
+              font-weight: 700;
+              color: $text-dark;
+              margin-bottom: 0.25rem;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 1.1rem;
+              }
+            }
+
+            .meal-time {
+              font-size: 0.9rem;
+              color: $text-light;
+              display: flex;
+              align-items: center;
+              gap: 0.4rem;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 0.85rem;
+              }
+            }
+          }
+        }
+
+        .meal-summary {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+
+          @media (max-width: $breakpoint-mobile) {
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+          }
+
+          .calories {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: $primary-color;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 1.1rem;
+            }
+          }
+
+          .expand-icon {
+            font-size: 1.2rem;
+            color: $text-light;
+            transition: transform $transition-normal;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+
+      .meal-details {
+        padding: 0 1.5rem 1.5rem;
+        overflow: hidden;
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 0 1.2rem 1.2rem;
+        }
+
+        .macros-row {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+          padding: 1rem;
+          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+          border-radius: $radius-md;
+
+          @media (max-width: $breakpoint-mobile) {
+            gap: 0.75rem;
+            padding: 0.75rem;
+          }
+
+          .macro-item {
+            text-align: center;
+
+            .macro-label {
+              display: block;
+              font-size: 0.85rem;
+              color: $text-light;
+              margin-bottom: 0.25rem;
+            }
+
+            .macro-value {
+              font-size: 1.2rem;
+              font-weight: 700;
+              color: $primary-color;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 1.1rem;
+              }
+            }
+          }
+        }
+
+        .meal-items {
+          h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: $text-dark;
+            margin-bottom: 0.75rem;
+          }
+
+          ul {
+            list-style: none;
+            padding: 0;
+
+            li {
+              padding: 0.5rem 0;
+              padding-right: 1.5rem;
+              position: relative;
+              color: $text-dark;
+              font-size: 0.95rem;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 0.9rem;
+              }
+
+              &::before {
+                content: '•';
+                position: absolute;
+                right: 0;
+                color: $primary-color;
+                font-weight: bold;
+                font-size: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// ===================================
+// Workout Tab
+// ===================================
+.workout-tab {
+  .workout-week {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.75rem;
+    }
+
+    .day-card {
+      background: white;
+      border-radius: $radius-lg;
+      box-shadow: $shadow-md;
+      overflow: hidden;
+      transition: all $transition-normal;
+
+      @media (max-width: $breakpoint-mobile) {
+        border-radius: $radius-md;
+      }
+
+      &:hover {
+        transform: translateX(-5px);
+        box-shadow: $shadow-lg;
+      }
+
+      &.expanded {
+        box-shadow: 0 8px 30px rgba(233, 30, 99, 0.15);
+      }
+
+      &.rest-day {
+        .day-header {
+          background: linear-gradient(135deg, #d4fc79, #96e6a1);
+
+          h3, p {
+            color: #2d5016;
+          }
+
+          .rest-label {
+            padding: 0.5rem 1rem;
+            background: white;
+            color: #2d5016;
+            border-radius: $radius-xl;
+            font-weight: 700;
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .day-header {
+        padding: 1.75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: background $transition-normal;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 1.25rem;
+        }
+
+        &:hover {
+          background: linear-gradient(135deg, #e9ecef, #dee2e6);
+        }
+
+        .day-info {
+          h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: $text-dark;
+            margin-bottom: 0.25rem;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 1.2rem;
+            }
+          }
+
+          p {
+            font-size: 1rem;
+            color: $primary-color;
+            font-weight: 600;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 0.9rem;
+            }
+          }
+        }
+
+        .day-stats {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+
+          .exercise-count {
+            font-size: 0.95rem;
+            color: $text-light;
+            font-weight: 600;
+          }
+
+          .expand-icon {
+            font-size: 1.3rem;
+            color: $text-light;
+            transition: transform $transition-normal;
+          }
+        }
+      }
+
+      .exercises-list {
+        padding: 0 1.75rem 1.75rem;
+        overflow: hidden;
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 0 1.25rem 1.25rem;
+        }
+
+        .exercise-item {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+          padding: 1.25rem;
+          margin-bottom: 0.75rem;
+          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+          border-radius: $radius-md;
+          transition: all $transition-normal;
+
+          @media (max-width: $breakpoint-mobile) {
+            padding: 1rem;
+            gap: 1rem;
+          }
+
+          &:hover {
+            transform: translateX(-5px);
+            box-shadow: $shadow-sm;
+          }
+
+          &.checked {
+            opacity: 0.6;
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+          }
+
+          .check-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 3px solid #dee2e6;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all $transition-normal;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+
+            @media (max-width: $breakpoint-mobile) {
+              width: 28px;
+              height: 28px;
+              font-size: 1rem;
+            }
+
+            &:hover {
+              border-color: $primary-color;
+              transform: scale(1.1);
+            }
+
+            &.checked {
+              border-color: #2ecc71;
+              background: linear-gradient(135deg, #2ecc71, #27ae60);
+            }
+          }
+
+          .exercise-info {
+            flex: 1;
+
+            h5 {
+              font-size: 1.1rem;
+              font-weight: 700;
+              color: $text-dark;
+              margin-bottom: 0.25rem;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 1rem;
+              }
+            }
+
+            .exercise-details {
+              font-size: 0.9rem;
+              color: $text-light;
+              font-weight: 600;
+
+              @media (max-width: $breakpoint-mobile) {
+                font-size: 0.85rem;
+              }
+            }
+          }
+
+          .video-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: $gradient-primary;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all $transition-normal;
+            flex-shrink: 0;
+
+            @media (max-width: $breakpoint-mobile) {
+              width: 40px;
+              height: 40px;
+              font-size: 1.2rem;
+            }
+
+            &:hover {
+              transform: scale(1.1);
+              box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// ===================================
+// Chat Tab
+// ===================================
+.chat-tab {
+  .chat-container {
+    background: white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+
+    @media (max-width: $breakpoint-mobile) {
+      height: 500px;
+      border-radius: $radius-md;
+    }
+
+    .messages-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+      }
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f3f5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $primary-color;
+        border-radius: 10px;
+      }
+
+      .message {
+        display: flex;
+        gap: 1rem;
+        max-width: 70%;
+        animation: slideIn 0.3s ease;
+
+        @media (max-width: $breakpoint-mobile) {
+          max-width: 85%;
+          gap: 0.75rem;
+        }
+
+        &.trainer {
+          align-self: flex-start;
+
+          .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            @media (max-width: $breakpoint-mobile) {
+              width: 35px;
+              height: 35px;
+            }
+          }
+
+          .message-content {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: $radius-md $radius-md $radius-md 0;
+
+            .message-name {
+              display: block;
+              font-size: 0.85rem;
+              font-weight: 700;
+              color: $primary-color;
+              margin-bottom: 0.25rem;
+            }
+          }
+        }
+
+        &.user {
+          align-self: flex-end;
+          flex-direction: row-reverse;
+
+          .message-content {
+            background: $gradient-primary;
+            color: white;
+            border-radius: $radius-md $radius-md 0 $radius-md;
+
+            .message-time {
+              color: rgba(255, 255, 255, 0.8);
+            }
+          }
+        }
+
+        .message-content {
+          padding: 1rem 1.25rem;
+          box-shadow: $shadow-sm;
+
+          @media (max-width: $breakpoint-mobile) {
+            padding: 0.85rem 1rem;
+          }
+
+          .message-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+
+            @media (max-width: $breakpoint-mobile) {
+              font-size: 0.9rem;
+            }
+          }
+
+          .message-time {
+            font-size: 0.75rem;
+            color: $text-light;
+            display: block;
+          }
+        }
+      }
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-top: 2px solid $border-color;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 1rem;
+        gap: 0.75rem;
+      }
+
+      input {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        border: 2px solid $border-color;
+        border-radius: $radius-xl;
+        font-size: 0.95rem;
+        font-family: 'Tajawal', sans-serif;
+        transition: all $transition-normal;
+
+        @media (max-width: $breakpoint-mobile) {
+          padding: 0.85rem 1.2rem;
+          font-size: 0.9rem;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+        }
+
+        &::placeholder {
+          color: $text-light;
+        }
+      }
+
+      .send-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: $gradient-primary;
+        color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all $transition-normal;
+
+        @media (max-width: $breakpoint-mobile) {
+          width: 45px;
+          height: 45px;
+          font-size: 1.1rem;
+        }
+
+        &:hover {
+          transform: scale(1.1);
+          box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ===================================
+// Payment Tab
+// ===================================
+.payment-tab {
+  .payment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+
+    @media (max-width: $breakpoint-laptop) {
+      grid-template-columns: 1fr;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 1rem;
+    }
+  }
+
+  .payment-status-card,
+  .subscription-timeline,
+  .upload-receipt-card,
+  .renewal-card {
+    background: white;
+    border-radius: $radius-lg;
+    padding: 2rem;
+    box-shadow: $shadow-md;
+    transition: all $transition-normal;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 1.5rem;
+      border-radius: $radius-md;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-lg;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: $text-dark;
+
+        @media (max-width: $breakpoint-mobile) {
+          font-size: 1.1rem;
+        }
+      }
+
+      .header-icon,
+      .status-icon {
+        font-size: 1.5rem;
+
+        @media (max-width: $breakpoint-mobile) {
+          font-size: 1.3rem;
+        }
+
+        &.paid {
+          color: #2ecc71;
+        }
+      }
+    }
+  }
+
+  .payment-details {
+    .payment-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid $border-color;
+      font-size: 0.95rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 0.9rem;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.status {
+        margin-top: 0.5rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid $border-color;
+      }
+
+      span:first-child {
+        color: $text-light;
+      }
+
+      span:last-child {
+        font-weight: 600;
+        color: $text-dark;
+      }
+
+      .amount {
+        font-size: 1.5rem;
+        color: $primary-color;
+        font-weight: 800;
+      }
+
+      .status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: $radius-xl;
+        font-weight: 700;
+        font-size: 0.9rem;
+
+        &.paid {
+          background: linear-gradient(135deg, #d4fc79, #96e6a1);
+          color: #2d5016;
+        }
+
+        &.pending {
+          background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+          color: #d63031;
+        }
+      }
+    }
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    padding-right: 2rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding-right: 1.5rem;
+      gap: 1.5rem;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      right: 22px;
+      top: 30px;
+      bottom: 30px;
+      width: 3px;
+      background: linear-gradient(180deg, #2ecc71, $primary-color);
+
+      @media (max-width: $breakpoint-mobile) {
+        right: 18px;
+      }
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 1.25rem;
+      position: relative;
+
+      .timeline-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1;
+        flex-shrink: 0;
+
+        @media (max-width: $breakpoint-mobile) {
+          width: 40px;
+          height: 40px;
+          font-size: 1.1rem;
+        }
+      }
+
+      &.active {
+        .timeline-icon {
+          background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+      }
+
+      &.upcoming {
+        .timeline-icon {
+          background: $gradient-primary;
+        }
+      }
+
+      .timeline-content {
+        flex: 1;
+        padding-top: 0.5rem;
+
+        h5 {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: $text-dark;
+          margin-bottom: 0.5rem;
+
+          @media (max-width: $breakpoint-mobile) {
+            font-size: 1rem;
+          }
+        }
+
+        span {
+          display: block;
+          font-size: 0.9rem;
+          color: $text-light;
+
+          &.days-left {
+            margin-top: 0.25rem;
+            color: $primary-color;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .upload-area {
+    border: 3px dashed $border-color;
+    border-radius: $radius-lg;
+    padding: 3rem;
+    text-align: center;
+    transition: all $transition-normal;
+    position: relative;
+    cursor: pointer;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 2rem 1rem;
+    }
+
+    &:hover {
+      border-color: $primary-color;
+      background: rgba(233, 30, 99, 0.02);
+
+      .upload-icon {
+        transform: scale(1.1);
+        color: $primary-color;
+      }
+    }
+
+    .upload-icon {
+      font-size: 3rem;
+      color: $text-light;
+      margin-bottom: 1rem;
+      transition: all $transition-normal;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 2.5rem;
+      }
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: $text-light;
+      margin-bottom: 1.5rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 0.9rem;
+      }
+    }
+
+    input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-btn {
+      padding: 0.85rem 2rem;
+      background: $gradient-primary;
+      color: white;
+      border: none;
+      border-radius: $radius-xl;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all $transition-normal;
+      font-family: 'Tajawal', sans-serif;
+      box-shadow: $shadow-pink;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 0.75rem 1.75rem;
+        font-size: 0.9rem;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+      }
+    }
+  }
+
+  .renewal-content {
+    p {
+      font-size: 0.95rem;
+      color: $text-dark;
+      margin-bottom: 0.75rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 0.9rem;
+      }
+
+      strong {
+        color: $primary-color;
+      }
+
+      &.reminder {
+        font-size: 0.85rem;
+        color: $text-light;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: $radius-md;
+        border-right: 4px solid $primary-color;
+
+        @media (max-width: $breakpoint-mobile) {
+          font-size: 0.8rem;
+          padding: 0.85rem;
+        }
+      }
+    }
+
+    .renew-btn {
+      width: 100%;
+      padding: 1.1rem;
+      background: $gradient-primary;
+      color: white;
+      border: none;
+      border-radius: $radius-md;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: all $transition-normal;
+      font-family: 'Tajawal', sans-serif;
+      box-shadow: $shadow-pink;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+      }
+    }
+  }}

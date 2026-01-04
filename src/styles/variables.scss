@@ -1,27 +1,22 @@
 // ===================================
-// نظام الألوان - نظيف ورسمي ومريح
+// نظام الألوان
 // ===================================
 
 // Main Colors
-$primary-color: #E91E63;      // وردي غامق - رسمي ومميز
-$secondary-color: #1C1C1C;    // أسود فحمي - أنيق
-$background-color: #FFFFFF;   // أبيض نقي - مريح للعين
-$accent-color: #F2F2F2;       // رمادي فاتح - ناعم
+$primary-color: #E91E63;
+$secondary-color: #1C1C1C;
+$background-color: #FFFFFF;
+$accent-color: #F2F2F2;
 
 // Text Colors
-$text-dark: #1C1C1C;          // نص داكن
-$text-light: #757575;         // نص فاتح
-$text-white: #FFFFFF;         // نص أبيض
-$text-muted: #718096;         // نص رمادي (للنصوص الثانوية)
+$text-dark: #1C1C1C;
+$text-light: #757575;
+$text-white: #FFFFFF;
+$text-muted: #718096;
 
 // Additional Colors
-$bg-light: #F7FAFC;           // خلفية فاتحة
-$border-color: #E2E8F0;       // لون الحدود
-$text-muted: #718096;         // نص رمادي (للنصوص الثانوية)
-
-// Additional Colors
-$bg-light: #F7FAFC;           // خلفية فاتحة
-$border-color: #E2E8F0;       // لون الحدود
+$bg-light: #F7FAFC;
+$border-color: #E2E8F0;
 
 // Gradients
 $gradient-primary: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
@@ -61,7 +56,7 @@ $shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
 $shadow-pink: 0 4px 20px rgba(233, 30, 99, 0.25);
 
 // ===================================
-// Breakpoints - Responsive
+// Breakpoints
 // ===================================
 $breakpoint-mobile: 480px;
 $breakpoint-tablet: 768px;

@@ -1,0 +1,458 @@
+@import '../../../styles/variables.scss';
+
+.workout-table-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// ===================================
+// Header
+// ===================================
+.workout-header {
+  background: white;
+  border-radius: $radius-lg;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: $shadow-md;
+  
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  
+  .header-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    svg {
+      font-size: 2.5rem;
+      color: $primary-color;
+    }
+    
+    h2 {
+      color: $text-dark;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+    }
+    
+    p {
+      color: $text-light;
+      font-size: 0.95rem;
+    }
+  }
+  
+  .workout-stats {
+    display: flex;
+    gap: 2rem;
+    
+    @media (max-width: $breakpoint-mobile) {
+      width: 100%;
+      justify-content: space-around;
+    }
+    
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      
+      .stat-icon {
+        font-size: 2rem;
+        color: $primary-color;
+      }
+      
+      .stat-value {
+        color: $text-dark;
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+      
+      .stat-label {
+        color: $text-light;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+// ===================================
+// Days Selector
+// ===================================
+.days-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .day-button {
+    background: white;
+    border: 2px solid transparent;
+    border-radius: $radius-lg;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all $transition-normal;
+    box-shadow: $shadow-sm;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: $shadow-md;
+    }
+    
+    &.active {
+      border-color: var(--day-color);
+      background: linear-gradient(to bottom, white, rgba(var(--day-color), 0.05));
+      
+      .day-icon {
+        transform: scale(1.2);
+      }
+    }
+    
+    .day-icon {
+      font-size: 2rem;
+      transition: transform $transition-normal;
+    }
+    
+    .day-name {
+      color: $text-dark;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    
+    .day-type {
+      color: $text-light;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+// ===================================
+// Progress Bar
+// ===================================
+.workout-progress {
+  background: white;
+  border-radius: $radius-lg;
+  padding: 1.5rem;
+  box-shadow: $shadow-sm;
+  
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    
+    span {
+      font-weight: 600;
+      color: $text-dark;
+    }
+    
+    .progress-percentage {
+      color: $primary-color;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+  }
+  
+  .progress-bar-container {
+    height: 12px;
+    background: #f0f0f0;
+    border-radius: $radius-xl;
+    overflow: hidden;
+    
+    .progress-bar {
+      height: 100%;
+      border-radius: $radius-xl;
+      transition: width 0.5s ease;
+    }
+  }
+}
+
+// ===================================
+// Exercises List
+// ===================================
+.exercises-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.exercise-card {
+  background: white;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  transition: all $transition-normal;
+  border: 2px solid transparent;
+  
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+  
+  &.checked {
+    border-color: #4CAF50;
+    
+    .exercise-content {
+      opacity: 0.8;
+    }
+  }
+  
+  .exercise-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition-normal;
+    }
+    
+    &:hover img {
+      transform: scale(1.05);
+    }
+    
+    .exercise-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity $transition-normal;
+      
+      .play-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: $primary-color;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all $transition-normal;
+        
+        &:hover {
+          transform: scale(1.1);
+          background: #C2185B;
+        }
+      }
+    }
+    
+    &:hover .exercise-overlay {
+      opacity: 1;
+    }
+    
+    .checked-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      background: #4CAF50;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+  }
+  
+  .exercise-content {
+    padding: 1.5rem;
+    
+    .exercise-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      
+      .exercise-title {
+        h4 {
+          color: $text-dark;
+          font-size: 1.3rem;
+          font-weight: 700;
+          margin-bottom: 0.3rem;
+        }
+        
+        .exercise-name-en {
+          color: $text-light;
+          font-size: 0.9rem;
+        }
+      }
+      
+      .check-button {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: #E0E0E0;
+        cursor: pointer;
+        transition: all $transition-fast;
+        
+        &:hover {
+          color: #4CAF50;
+          transform: scale(1.1);
+        }
+      }
+    }
+    
+    .exercise-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+      
+      .detail-item {
+        display: flex;
+        gap: 0.6rem;
+        padding: 0.8rem;
+        background: $bg-light;
+        border-radius: $radius-md;
+        
+        .detail-icon {
+          color: $primary-color;
+          font-size: 1.2rem;
+          flex-shrink: 0;
+        }
+        
+        .detail-label {
+          color: $text-light;
+          font-size: 0.75rem;
+          margin-bottom: 0.2rem;
+        }
+        
+        .detail-value {
+          color: $text-dark;
+          font-weight: 700;
+          font-size: 0.9rem;
+        }
+      }
+    }
+    
+    .exercise-tips {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem;
+      background: rgba(255, 193, 7, 0.1);
+      border-radius: $radius-md;
+      border-left: 3px solid #FFC107;
+      
+      .tips-icon {
+        font-size: 1.3rem;
+      }
+      
+      p {
+        color: $text-dark;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+// ===================================
+// Completion Message
+// ===================================
+.completion-message {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  color: white;
+  border-radius: $radius-lg;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: $shadow-md;
+  
+  .emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+  }
+}
+
+// ===================================
+// Video Modal
+// ===================================
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 2rem;
+  
+  .video-content {
+    background: white;
+    border-radius: $radius-lg;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    
+    @media (max-width: $breakpoint-mobile) {
+      padding: 1rem;
+    }
+    
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $primary-color;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:hover {
+        background: #C2185B;
+      }
+    }
+    
+    iframe {
+      border-radius: $radius-md;
+    }
+  }
+}
