@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaPlay } from 'react-icons/fa';
 import './Hero.scss';
 
 const Hero = () => {
+  const navigate = useNavigate();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -79,12 +81,23 @@ const Hero = () => {
             className="hero-buttons"
             variants={itemVariants}
           >
-            <button className="btn btn-primary">
+            <button 
+              className="btn btn-primary"
+              onClick={() => navigate('/auth')}
+            >
               ابدئي الآن
               <FaArrowLeft />
             </button>
 
-            <button className="btn btn-white">
+            <button 
+              className="btn btn-white"
+              onClick={() => {
+                const aboutSection = document.getElementById('about');
+                if (aboutSection) {
+                  aboutSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               <FaPlay />
               تعرفي على البرامج
             </button>
@@ -148,9 +161,7 @@ const Hero = () => {
           <div className="wheel"></div>
         </div>
       </motion.div>
-      
     </section>
-    
   );
 };
 

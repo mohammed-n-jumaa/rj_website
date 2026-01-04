@@ -12,6 +12,16 @@ $accent-color: #F2F2F2;       // رمادي فاتح - ناعم
 $text-dark: #1C1C1C;          // نص داكن
 $text-light: #757575;         // نص فاتح
 $text-white: #FFFFFF;         // نص أبيض
+$text-muted: #718096;         // نص رمادي (للنصوص الثانوية)
+
+// Additional Colors
+$bg-light: #F7FAFC;           // خلفية فاتحة
+$border-color: #E2E8F0;       // لون الحدود
+$text-muted: #718096;         // نص رمادي (للنصوص الثانوية)
+
+// Additional Colors
+$bg-light: #F7FAFC;           // خلفية فاتحة
+$border-color: #E2E8F0;       // لون الحدود
 
 // Gradients
 $gradient-primary: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
@@ -33,6 +43,7 @@ $radius-sm: 8px;
 $radius-md: 16px;
 $radius-lg: 24px;
 $radius-xl: 50px;
+$radius-xxl: 32px;
 
 // ===================================
 // Transitions
@@ -54,5 +65,6 @@ $shadow-pink: 0 4px 20px rgba(233, 30, 99, 0.25);
 // ===================================
 $breakpoint-mobile: 480px;
 $breakpoint-tablet: 768px;
+$breakpoint-laptop: 1024px;
 $breakpoint-desktop: 1024px;
 $breakpoint-wide: 1440px;

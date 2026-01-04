@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import Home from './pages/Home';
 import FAQPage from './pages/FAQPage';
+import AuthPage from './pages/AuthPage.jsx';
 import './styles/global.scss';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
     const initPageEffects = () => {
       // إضافة CSS للتمرير السلس
       document.documentElement.style.scrollBehavior = 'smooth';
-      
+
       // إضافة margin للسكرول
       const style = document.createElement('style');
       style.textContent = `
@@ -69,17 +70,17 @@ function App() {
       if (window.innerWidth > 768) {
         const cursorDot = document.createElement('div');
         cursorDot.className = 'cursor-dot';
-        
+
         const cursorRing = document.createElement('div');
         cursorRing.className = 'cursor-ring';
-        
+
         document.body.appendChild(cursorDot);
         document.body.appendChild(cursorRing);
 
         const moveCursor = (e) => {
           cursorDot.style.left = `${e.clientX}px`;
           cursorDot.style.top = `${e.clientY}px`;
-          
+
           setTimeout(() => {
             cursorRing.style.left = `${e.clientX}px`;
             cursorRing.style.top = `${e.clientY}px`;
@@ -96,7 +97,7 @@ function App() {
             cursorRing.style.transform = 'scale(1.5)';
             cursorRing.style.borderColor = '#E91E63';
           });
-          
+
           el.addEventListener('mouseleave', () => {
             cursorDot.style.transform = 'scale(1)';
             cursorRing.style.transform = 'scale(1)';
@@ -120,6 +121,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/faq" element={<FAQPage />} />
+        <Route path="/auth" element={<AuthPage />} />
       </Routes>
     </Router>
   );

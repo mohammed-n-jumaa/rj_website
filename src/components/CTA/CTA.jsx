@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaDumbbell, FaFire, FaStar, FaBolt } from 'react-icons/fa';
 import './CTA.scss';
 
 const CTA = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="cta-section">
       <div className="cta-container">
@@ -164,6 +167,7 @@ const CTA = () => {
           >
             <motion.button 
               className="cta-main-button"
+              onClick={() => navigate('/auth')}
               whileHover={{ 
                 scale: 1.05,
                 boxShadow: "0 15px 40px rgba(233, 30, 99, 0.5)"

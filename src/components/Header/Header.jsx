@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaDumbbell, FaUser } from 'react-icons/fa';
+import Auth from '../Auth/Auth';
 import './Header.scss';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,10 +21,26 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // منع السكرول عند فتح القائمة
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [menuOpen]);
 
   const handleLoginClick = () => {
-    console.log('تسجيل الدخول');
-    setIsLoggedIn(!isLoggedIn);
+    if (isLoggedIn) {
+      console.log('عرض الحساب');
+    } else {
+      setShowAuth(true);
+      setMenuOpen(false);
+    }
   };
 
   // روابط الصفحات
@@ -39,12 +58,29 @@ const Header = () => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <motion.header 
-      className={`header ${scrolled ? 'scrolled' : ''}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <>
+      {/* Auth Modal */}
+      <AnimatePresence>
+        <Auth isOpen={showAuth} onClose={() => setShowAuth(false)} />
+      </AnimatePresence>
+
+      {/* Menu Overlay */}
+      {menuOpen && (
+        <motion.div 
+          className="menu-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
+      
+      <motion.header 
+        className={`header ${scrolled ? 'scrolled' : ''}`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
       <div className="header-container">
         <Link to="/">
           <motion.div 
@@ -118,6 +154,7 @@ const Header = () => {
 
           <motion.button 
             className="cta-button"
+            onClick={() => navigate('/auth')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -136,6 +173,7 @@ const Header = () => {
         </button>
       </div>
     </motion.header>
+    </>
   );
 };
 

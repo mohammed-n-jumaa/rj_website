@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import {
   FaUserFriends,
   FaAppleAlt,
@@ -10,6 +11,7 @@ import {
 import './About.scss';
 
 const About = () => {
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
 
@@ -174,13 +176,7 @@ const About = () => {
                 className="cta-button"
                 whileHover={!isMobile ? { scale: 1.05 } : {}}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  // Navigate to programs section or open contact form
-                  const contactSection = document.getElementById('programs');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => navigate('/auth')}
               >
                 ابدئي رحلتك الآن
               </motion.button>
