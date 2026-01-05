@@ -3,9 +3,7 @@ import { useEffect } from 'react';
 import Home from './pages/Home';
 import FAQPage from './pages/FAQPage';
 import AuthPage from './pages/AuthPage.jsx';
-import Dashboard from './pages/Dashboard.jsx';
-import Profile from './pages/Profile.jsx';
-
+import Profile from './Profile/Profile-Clean.jsx';
 import './styles/global.scss';
 
 function App() {
@@ -126,7 +124,6 @@ function App() {
         <Route path="/faq" element={<FAQPage />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/Profile" element={<Profile />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
 
       </Routes>
     </Router>

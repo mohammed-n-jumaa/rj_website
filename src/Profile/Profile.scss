@@ -1,8 +1,9 @@
 @import '../styles/variables.scss';
 
 // ===================================
-// Profile Page - Main Container
+// BASE STYLES
 // ===================================
+
 .profile-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -15,8 +16,9 @@
 }
 
 // ===================================
-// Profile Header
+// PROFILE HEADER
 // ===================================
+
 .profile-header {
   background: white;
   border-radius: $radius-lg;
@@ -30,14 +32,15 @@
   @media (max-width: $breakpoint-tablet) {
     padding: 2rem 1.5rem;
     margin: 0 1rem 1.5rem;
-    border-radius: $radius-md;
   }
 
   @media (max-width: $breakpoint-mobile) {
-    padding: 1.5rem 1rem;
-    margin: 0 0.5rem 1rem;
+    padding: 1.5rem;
+    margin: 0 0.5rem 0.5rem; // تقليل المسافة السفلية
+    border-radius: $radius-md;
   }
 
+  // Decorative gradient
   .header-gradient {
     position: absolute;
     top: 0;
@@ -49,6 +52,7 @@
     z-index: 0;
   }
 
+  // Header content
   .header-content {
     position: relative;
     z-index: 1;
@@ -63,6 +67,7 @@
     }
   }
 
+  // Profile info section
   .profile-info {
     display: flex;
     gap: 1.5rem;
@@ -73,6 +78,7 @@
     }
   }
 
+  // Avatar
   .avatar-wrapper {
     position: relative;
 
@@ -113,12 +119,13 @@
     }
   }
 
+  // Info text
   .info-text {
     h1 {
       font-size: 2rem;
       font-weight: 800;
       color: $text-dark;
-      margin-bottom: 0.5rem;
+      margin: 0 0 0.5rem 0;
 
       @media (max-width: $breakpoint-mobile) {
         font-size: 1.5rem;
@@ -130,6 +137,7 @@
       color: $primary-color;
       font-weight: 600;
       margin-bottom: 0.75rem;
+      display: block;
 
       @media (max-width: $breakpoint-mobile) {
         font-size: 1rem;
@@ -159,6 +167,7 @@
     }
   }
 
+  // Quick actions
   .quick-actions {
     display: flex;
     gap: 1rem;
@@ -218,9 +227,15 @@
     }
   }
 
+  // Progress bar
   .progress-container {
     position: relative;
     z-index: 1;
+    margin-top: 1rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      margin-top: 0.75rem;
+    }
 
     .progress-info {
       display: flex;
@@ -260,7 +275,8 @@
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(90deg,
+          background: linear-gradient(
+            90deg,
             transparent,
             rgba(255, 255, 255, 0.3),
             transparent
@@ -273,13 +289,18 @@
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 // ===================================
-// Profile Tabs
+// PROFILE TABS
 // ===================================
+
 .profile-tabs {
   display: flex;
   gap: 1rem;
@@ -287,11 +308,18 @@
   max-width: 1400px;
   overflow-x: auto;
   padding: 0 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: $primary-color #f1f1f1;
 
   @media (max-width: $breakpoint-mobile) {
-    padding: 0 0.5rem;
+    padding: 0.5rem;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding-bottom: 0.75rem;
   }
 
   &::-webkit-scrollbar {
@@ -326,21 +354,26 @@
     box-shadow: $shadow-sm;
 
     @media (max-width: $breakpoint-mobile) {
-      padding: 0.75rem 1.2rem;
-      font-size: 0.9rem;
+      padding: 0.65rem 1rem;
+      font-size: 0.8rem;
+      flex-direction: column;
+      gap: 0.3rem;
+      min-width: 70px;
+      text-align: center;
     }
 
     .tab-icon {
       font-size: 1.2rem;
 
       @media (max-width: $breakpoint-mobile) {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
       }
     }
 
     .tab-label {
       @media (max-width: $breakpoint-mobile) {
-        display: none;
+        font-size: 0.7rem;
+        line-height: 1;
       }
     }
 
@@ -358,10 +391,11 @@
 
       @media (max-width: $breakpoint-mobile) {
         position: absolute;
-        top: -8px;
-        right: -8px;
-        width: 20px;
-        height: 20px;
+        top: -6px;
+        right: -6px;
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
       }
     }
 
@@ -390,8 +424,9 @@
 }
 
 // ===================================
-// Profile Content
+// PROFILE CONTENT
 // ===================================
+
 .profile-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -403,8 +438,9 @@
 }
 
 // ===================================
-// Overview Tab
+// OVERVIEW TAB
 // ===================================
+
 .overview-tab {
   .overview-grid {
     display: grid;
@@ -420,6 +456,7 @@
     }
   }
 
+  // Base card styles
   .stats-card,
   .subscription-card,
   .today-card,
@@ -450,6 +487,7 @@
         font-size: 1.3rem;
         font-weight: 700;
         color: $text-dark;
+        margin: 0;
 
         @media (max-width: $breakpoint-mobile) {
           font-size: 1.1rem;
@@ -467,6 +505,7 @@
     }
   }
 
+  // Stats card
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -504,6 +543,7 @@
         justify-content: center;
         font-size: 1.3rem;
         color: white;
+        flex-shrink: 0;
 
         @media (max-width: $breakpoint-mobile) {
           width: 45px;
@@ -551,6 +591,7 @@
     }
   }
 
+  // Subscription card
   .subscription-details {
     .detail-row {
       display: flex;
@@ -609,6 +650,7 @@
     }
   }
 
+  // Today card
   .today-stats {
     display: flex;
     flex-direction: column;
@@ -637,6 +679,7 @@
         justify-content: center;
         font-size: 1.5rem;
         color: white;
+        flex-shrink: 0;
 
         @media (max-width: $breakpoint-mobile) {
           width: 50px;
@@ -645,7 +688,7 @@
         }
 
         &.calories {
-          background: linear-gradient(135deg, #FA709A, #FEE140);
+          background: linear-gradient(135deg, #fa709a, #fee140);
         }
 
         &.meals {
@@ -680,6 +723,7 @@
     }
   }
 
+  // Achievements card
   .achievements-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -715,7 +759,7 @@
       }
 
       &.unlocked {
-        background: linear-gradient(135deg, #FFD700, #FFA500);
+        background: linear-gradient(135deg, #ffd700, #ffa500);
         color: white;
         box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
 
@@ -737,11 +781,12 @@
   }
 }
 
+// ===================================
+// NUTRITION TAB
+// ===================================
 
-// ===================================
-// Nutrition Tab
-// ===================================
 .nutrition-tab {
+  // Macros summary
   .macros-summary {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -785,6 +830,7 @@
         justify-content: center;
         font-size: 1.8rem;
         color: white;
+        flex-shrink: 0;
 
         @media (max-width: $breakpoint-mobile) {
           width: 50px;
@@ -793,7 +839,7 @@
         }
 
         &.calories {
-          background: linear-gradient(135deg, #FA709A, #FEE140);
+          background: linear-gradient(135deg, #fa709a, #fee140);
         }
 
         &.protein {
@@ -834,6 +880,7 @@
     }
   }
 
+  // Meals list
   .meals-list {
     display: flex;
     flex-direction: column;
@@ -909,6 +956,7 @@
             transition: all $transition-normal;
             color: white;
             font-size: 1.1rem;
+            flex-shrink: 0;
 
             @media (max-width: $breakpoint-mobile) {
               width: 28px;
@@ -932,7 +980,7 @@
               font-size: 1.2rem;
               font-weight: 700;
               color: $text-dark;
-              margin-bottom: 0.25rem;
+              margin: 0 0 0.25rem 0;
 
               @media (max-width: $breakpoint-mobile) {
                 font-size: 1.1rem;
@@ -1035,12 +1083,13 @@
             font-size: 1rem;
             font-weight: 600;
             color: $text-dark;
-            margin-bottom: 0.75rem;
+            margin: 0 0 0.75rem 0;
           }
 
           ul {
             list-style: none;
             padding: 0;
+            margin: 0;
 
             li {
               padding: 0.5rem 0;
@@ -1070,8 +1119,9 @@
 }
 
 // ===================================
-// Workout Tab
+// WORKOUT TAB
 // ===================================
+
 .workout-tab {
   .workout-week {
     display: flex;
@@ -1106,7 +1156,8 @@
         .day-header {
           background: linear-gradient(135deg, #d4fc79, #96e6a1);
 
-          h3, p {
+          h3,
+          p {
             color: #2d5016;
           }
 
@@ -1143,7 +1194,7 @@
             font-size: 1.4rem;
             font-weight: 800;
             color: $text-dark;
-            margin-bottom: 0.25rem;
+            margin: 0 0 0.25rem 0;
 
             @media (max-width: $breakpoint-mobile) {
               font-size: 1.2rem;
@@ -1154,6 +1205,7 @@
             font-size: 1rem;
             color: $primary-color;
             font-weight: 600;
+            margin: 0;
 
             @media (max-width: $breakpoint-mobile) {
               font-size: 0.9rem;
@@ -1252,7 +1304,7 @@
               font-size: 1.1rem;
               font-weight: 700;
               color: $text-dark;
-              margin-bottom: 0.25rem;
+              margin: 0 0 0.25rem 0;
 
               @media (max-width: $breakpoint-mobile) {
                 font-size: 1rem;
@@ -1301,573 +1353,11 @@
     }
   }
 }
-// ===================================
-// Nutrition Tab
-// ===================================
-.nutrition-tab {
-  .macros-summary {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-
-    @media (max-width: $breakpoint-tablet) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: $breakpoint-mobile) {
-      gap: 1rem;
-    }
-
-    .macro-card {
-      background: white;
-      border-radius: $radius-lg;
-      padding: 1.75rem;
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      box-shadow: $shadow-md;
-      transition: all $transition-normal;
-
-      @media (max-width: $breakpoint-mobile) {
-        padding: 1.25rem;
-        gap: 1rem;
-      }
-
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: $shadow-lg;
-      }
-
-      .macro-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: $radius-md;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.8rem;
-        color: white;
-
-        @media (max-width: $breakpoint-mobile) {
-          width: 50px;
-          height: 50px;
-          font-size: 1.5rem;
-        }
-
-        &.calories {
-          background: linear-gradient(135deg, #FA709A, #FEE140);
-        }
-
-        &.protein {
-          background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        &.carbs {
-          background: linear-gradient(135deg, #43e97b, #38f9d7);
-        }
-
-        &.fats {
-          background: linear-gradient(135deg, #f093fb, #f5576c);
-        }
-      }
-
-      .macro-info {
-        display: flex;
-        flex-direction: column;
-
-        .macro-value {
-          font-size: 1.8rem;
-          font-weight: 800;
-          color: $text-dark;
-          line-height: 1;
-          margin-bottom: 0.25rem;
-
-          @media (max-width: $breakpoint-mobile) {
-            font-size: 1.5rem;
-          }
-        }
-
-        .macro-label {
-          font-size: 0.85rem;
-          color: $text-light;
-          font-weight: 600;
-        }
-      }
-    }
-  }
-
-  .meals-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    @media (max-width: $breakpoint-mobile) {
-      gap: 0.75rem;
-    }
-
-    .meal-card {
-      background: white;
-      border-radius: $radius-lg;
-      box-shadow: $shadow-md;
-      overflow: hidden;
-      transition: all $transition-normal;
-
-      @media (max-width: $breakpoint-mobile) {
-        border-radius: $radius-md;
-      }
-
-      &:hover {
-        transform: translateX(-5px);
-        box-shadow: $shadow-lg;
-      }
-
-      &.checked {
-        opacity: 0.7;
-
-        .meal-header {
-          background: linear-gradient(135deg, #d4fc79, #96e6a1);
-        }
-      }
-
-      &.expanded {
-        box-shadow: 0 8px 30px rgba(233, 30, 99, 0.15);
-      }
-
-      .meal-header {
-        padding: 1.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        transition: background $transition-normal;
-
-        @media (max-width: $breakpoint-mobile) {
-          padding: 1.2rem;
-        }
-
-        &:hover {
-          background: #f8f9fa;
-        }
-
-        .meal-main {
-          display: flex;
-          align-items: center;
-          gap: 1.25rem;
-
-          @media (max-width: $breakpoint-mobile) {
-            gap: 1rem;
-          }
-
-          .check-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 3px solid #dee2e6;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all $transition-normal;
-            color: white;
-            font-size: 1.1rem;
-
-            @media (max-width: $breakpoint-mobile) {
-              width: 28px;
-              height: 28px;
-              font-size: 1rem;
-            }
-
-            &:hover {
-              border-color: $primary-color;
-              transform: scale(1.1);
-            }
-
-            &.checked {
-              border-color: #2ecc71;
-              background: linear-gradient(135deg, #2ecc71, #27ae60);
-            }
-          }
-
-          .meal-info {
-            h4 {
-              font-size: 1.2rem;
-              font-weight: 700;
-              color: $text-dark;
-              margin-bottom: 0.25rem;
-
-              @media (max-width: $breakpoint-mobile) {
-                font-size: 1.1rem;
-              }
-            }
-
-            .meal-time {
-              font-size: 0.9rem;
-              color: $text-light;
-              display: flex;
-              align-items: center;
-              gap: 0.4rem;
-
-              @media (max-width: $breakpoint-mobile) {
-                font-size: 0.85rem;
-              }
-            }
-          }
-        }
-
-        .meal-summary {
-          display: flex;
-          align-items: center;
-          gap: 1.25rem;
-
-          @media (max-width: $breakpoint-mobile) {
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0.5rem;
-          }
-
-          .calories {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: $primary-color;
-
-            @media (max-width: $breakpoint-mobile) {
-              font-size: 1.1rem;
-            }
-          }
-
-          .expand-icon {
-            font-size: 1.2rem;
-            color: $text-light;
-            transition: transform $transition-normal;
-
-            @media (max-width: $breakpoint-mobile) {
-              font-size: 1rem;
-            }
-          }
-        }
-      }
-
-      .meal-details {
-        padding: 0 1.5rem 1.5rem;
-        overflow: hidden;
-
-        @media (max-width: $breakpoint-mobile) {
-          padding: 0 1.2rem 1.2rem;
-        }
-
-        .macros-row {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1rem;
-          margin-bottom: 1.5rem;
-          padding: 1rem;
-          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-          border-radius: $radius-md;
-
-          @media (max-width: $breakpoint-mobile) {
-            gap: 0.75rem;
-            padding: 0.75rem;
-          }
-
-          .macro-item {
-            text-align: center;
-
-            .macro-label {
-              display: block;
-              font-size: 0.85rem;
-              color: $text-light;
-              margin-bottom: 0.25rem;
-            }
-
-            .macro-value {
-              font-size: 1.2rem;
-              font-weight: 700;
-              color: $primary-color;
-
-              @media (max-width: $breakpoint-mobile) {
-                font-size: 1.1rem;
-              }
-            }
-          }
-        }
-
-        .meal-items {
-          h5 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: $text-dark;
-            margin-bottom: 0.75rem;
-          }
-
-          ul {
-            list-style: none;
-            padding: 0;
-
-            li {
-              padding: 0.5rem 0;
-              padding-right: 1.5rem;
-              position: relative;
-              color: $text-dark;
-              font-size: 0.95rem;
-
-              @media (max-width: $breakpoint-mobile) {
-                font-size: 0.9rem;
-              }
-
-              &::before {
-                content: '•';
-                position: absolute;
-                right: 0;
-                color: $primary-color;
-                font-weight: bold;
-                font-size: 1.2rem;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
 // ===================================
-// Workout Tab
+// CHAT TAB
 // ===================================
-.workout-tab {
-  .workout-week {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
 
-    @media (max-width: $breakpoint-mobile) {
-      gap: 0.75rem;
-    }
-
-    .day-card {
-      background: white;
-      border-radius: $radius-lg;
-      box-shadow: $shadow-md;
-      overflow: hidden;
-      transition: all $transition-normal;
-
-      @media (max-width: $breakpoint-mobile) {
-        border-radius: $radius-md;
-      }
-
-      &:hover {
-        transform: translateX(-5px);
-        box-shadow: $shadow-lg;
-      }
-
-      &.expanded {
-        box-shadow: 0 8px 30px rgba(233, 30, 99, 0.15);
-      }
-
-      &.rest-day {
-        .day-header {
-          background: linear-gradient(135deg, #d4fc79, #96e6a1);
-
-          h3, p {
-            color: #2d5016;
-          }
-
-          .rest-label {
-            padding: 0.5rem 1rem;
-            background: white;
-            color: #2d5016;
-            border-radius: $radius-xl;
-            font-weight: 700;
-            font-size: 0.9rem;
-          }
-        }
-      }
-
-      .day-header {
-        padding: 1.75rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        transition: background $transition-normal;
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-
-        @media (max-width: $breakpoint-mobile) {
-          padding: 1.25rem;
-        }
-
-        &:hover {
-          background: linear-gradient(135deg, #e9ecef, #dee2e6);
-        }
-
-        .day-info {
-          h3 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: $text-dark;
-            margin-bottom: 0.25rem;
-
-            @media (max-width: $breakpoint-mobile) {
-              font-size: 1.2rem;
-            }
-          }
-
-          p {
-            font-size: 1rem;
-            color: $primary-color;
-            font-weight: 600;
-
-            @media (max-width: $breakpoint-mobile) {
-              font-size: 0.9rem;
-            }
-          }
-        }
-
-        .day-stats {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-
-          .exercise-count {
-            font-size: 0.95rem;
-            color: $text-light;
-            font-weight: 600;
-          }
-
-          .expand-icon {
-            font-size: 1.3rem;
-            color: $text-light;
-            transition: transform $transition-normal;
-          }
-        }
-      }
-
-      .exercises-list {
-        padding: 0 1.75rem 1.75rem;
-        overflow: hidden;
-
-        @media (max-width: $breakpoint-mobile) {
-          padding: 0 1.25rem 1.25rem;
-        }
-
-        .exercise-item {
-          display: flex;
-          align-items: center;
-          gap: 1.25rem;
-          padding: 1.25rem;
-          margin-bottom: 0.75rem;
-          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-          border-radius: $radius-md;
-          transition: all $transition-normal;
-
-          @media (max-width: $breakpoint-mobile) {
-            padding: 1rem;
-            gap: 1rem;
-          }
-
-          &:hover {
-            transform: translateX(-5px);
-            box-shadow: $shadow-sm;
-          }
-
-          &.checked {
-            opacity: 0.6;
-            background: linear-gradient(135deg, #d4fc79, #96e6a1);
-          }
-
-          .check-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 3px solid #dee2e6;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all $transition-normal;
-            color: white;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-
-            @media (max-width: $breakpoint-mobile) {
-              width: 28px;
-              height: 28px;
-              font-size: 1rem;
-            }
-
-            &:hover {
-              border-color: $primary-color;
-              transform: scale(1.1);
-            }
-
-            &.checked {
-              border-color: #2ecc71;
-              background: linear-gradient(135deg, #2ecc71, #27ae60);
-            }
-          }
-
-          .exercise-info {
-            flex: 1;
-
-            h5 {
-              font-size: 1.1rem;
-              font-weight: 700;
-              color: $text-dark;
-              margin-bottom: 0.25rem;
-
-              @media (max-width: $breakpoint-mobile) {
-                font-size: 1rem;
-              }
-            }
-
-            .exercise-details {
-              font-size: 0.9rem;
-              color: $text-light;
-              font-weight: 600;
-
-              @media (max-width: $breakpoint-mobile) {
-                font-size: 0.85rem;
-              }
-            }
-          }
-
-          .video-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: $gradient-primary;
-            color: white;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: all $transition-normal;
-            flex-shrink: 0;
-
-            @media (max-width: $breakpoint-mobile) {
-              width: 40px;
-              height: 40px;
-              font-size: 1.2rem;
-            }
-
-            &:hover {
-              transform: scale(1.1);
-              box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-// ===================================
-// Chat Tab
-// ===================================
 .chat-tab {
   .chat-container {
     background: white;
@@ -1929,6 +1419,7 @@
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
 
             @media (max-width: $breakpoint-mobile) {
               width: 35px;
@@ -1976,7 +1467,7 @@
           .message-text {
             font-size: 0.95rem;
             line-height: 1.5;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem 0;
 
             @media (max-width: $breakpoint-mobile) {
               font-size: 0.9rem;
@@ -2042,6 +1533,7 @@
         font-size: 1.2rem;
         cursor: pointer;
         transition: all $transition-normal;
+        flex-shrink: 0;
 
         @media (max-width: $breakpoint-mobile) {
           width: 45px;
@@ -2074,8 +1566,9 @@
 }
 
 // ===================================
-// Payment Tab
+// PAYMENT TAB
 // ===================================
+
 .payment-tab {
   .payment-grid {
     display: grid;
@@ -2121,6 +1614,7 @@
         font-size: 1.3rem;
         font-weight: 700;
         color: $text-dark;
+        margin: 0;
 
         @media (max-width: $breakpoint-mobile) {
           font-size: 1.1rem;
@@ -2269,7 +1763,7 @@
           font-size: 1.1rem;
           font-weight: 700;
           color: $text-dark;
-          margin-bottom: 0.5rem;
+          margin: 0 0 0.5rem 0;
 
           @media (max-width: $breakpoint-mobile) {
             font-size: 1rem;
@@ -2328,14 +1822,14 @@
     p {
       font-size: 0.95rem;
       color: $text-light;
-      margin-bottom: 1.5rem;
+      margin: 0 0 1.5rem 0;
 
       @media (max-width: $breakpoint-mobile) {
         font-size: 0.9rem;
       }
     }
 
-    input[type="file"] {
+    input[type='file'] {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -2374,7 +1868,7 @@
     p {
       font-size: 0.95rem;
       color: $text-dark;
-      margin-bottom: 0.75rem;
+      margin: 0 0 0.75rem 0;
 
       @media (max-width: $breakpoint-mobile) {
         font-size: 0.9rem;
@@ -2424,4 +1918,5 @@
         box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
       }
     }
-  }}
+  }
+}
