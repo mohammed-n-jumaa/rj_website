@@ -1,12 +1,53 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
 import FAQPage from './pages/FAQPage';
 import AuthPage from './pages/AuthPage.jsx';
 import Profile from './Profile/Profile-Clean.jsx';
+import LoadingSpinner from './components/LoadingSpinner';
 import './styles/global.scss';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
+
+  useEffect(() => {
+    // Preload the GIF for smooth experience
+    const preloadGif = new Image();
+    preloadGif.src = '/Jumping Lunges.gif';
+
+    // Check if first visit (use localStorage for persistent check)
+    const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
+    
+    if (!hasVisitedBefore) {
+      // First time ever visiting - show loader longer
+      setIsFirstVisit(true);
+      const timer = setTimeout(() => {
+        setLoading(false);
+        localStorage.setItem('hasVisitedBefore', 'true');
+      }, 3000); // 3 seconds for first visit
+
+      return () => clearTimeout(timer);
+    } else {
+      // Check session visit
+      const hasVisitedThisSession = sessionStorage.getItem('hasVisitedThisSession');
+      
+      if (!hasVisitedThisSession) {
+        // New session but has visited before - shorter loader
+        const timer = setTimeout(() => {
+          setLoading(false);
+          sessionStorage.setItem('hasVisitedThisSession', 'true');
+        }, 1500); // 1.5 seconds for returning visitors
+
+        return () => clearTimeout(timer);
+      } else {
+        // Already visited in this session - skip loader
+        setLoading(false);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     // تهيئة تأثيرات الصفحة
     const initPageEffects = () => {
@@ -114,18 +155,31 @@ function App() {
       }
     };
 
-    initPageEffects();
-  }, []);
+    // Initialize page effects only after loading is complete
+    if (!loading) {
+      initPageEffects();
+    }
+  }, [loading]);
+
+  // Show loading spinner with different messages
+  if (loading) {
+    const message = isFirstVisit 
+      ? "مرحباً بك في عالم الصحة والرشاقة مع رند جرار 💪"
+      : "مرحباً بعودتك 💕";
+    
+    return <LoadingSpinner message={message} />;
+  }
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/Profile" element={<Profile />} />
-
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </AnimatePresence>
     </Router>
   );
 }

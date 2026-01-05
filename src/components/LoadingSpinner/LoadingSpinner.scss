@@ -1,0 +1,144 @@
+@import '../../styles/variables.scss';
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+
+  &.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(233, 30, 99, 0.95), rgba(194, 24, 91, 0.95));
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+  }
+
+  .spinner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+
+    .spinner-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border: 6px solid white;
+      background: white;
+
+      @media (max-width: $breakpoint-mobile) {
+        width: 150px;
+        height: 150px;
+        border: 4px solid white;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .spinner-message {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .spinner-dots {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 2rem;
+      color: white;
+      font-weight: 900;
+
+      span {
+        display: inline-block;
+      }
+    }
+
+    .spinner-bar {
+      width: 200px;
+      height: 4px;
+      background: white;
+      border-radius: 10px;
+      transform-origin: left;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+
+      @media (max-width: $breakpoint-mobile) {
+        width: 150px;
+      }
+    }
+  }
+}
+
+// Alternative compact version
+.loading-spinner.compact {
+  padding: 2rem;
+
+  .spinner-content {
+    gap: 1rem;
+
+    .spinner-image {
+      width: 100px;
+      height: 100px;
+      border: 4px solid white;
+    }
+
+    .spinner-message {
+      font-size: 1.2rem;
+    }
+
+    .spinner-dots {
+      font-size: 1.5rem;
+    }
+
+    .spinner-bar {
+      width: 100px;
+      height: 3px;
+    }
+  }
+}
+
+// Card loading version
+.loading-spinner.card {
+  background: white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  padding: 3rem;
+
+  .spinner-content {
+    .spinner-image {
+      border: 4px solid $primary-color;
+      box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+    }
+
+    .spinner-message {
+      color: $text-dark;
+      text-shadow: none;
+    }
+
+    .spinner-dots {
+      color: $primary-color;
+    }
+
+    .spinner-bar {
+      background: $gradient-primary;
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+    }
+  }
+}
