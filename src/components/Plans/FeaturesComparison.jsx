@@ -1,118 +1,102 @@
 import { motion } from 'framer-motion';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 
-const FeaturesComparison = ({ plans }) => {
+const FeaturesComparison = () => {
   const allFeatures = [
-    { 
-      name: 'برنامج تدريب مخصص',
-      basic: true,
-      premium: true,
-      vip: true
+    {
+      name: 'برنامج تمارين مخصص',
+      starter: true,
+      commitment: true,
+      elite: true
     },
-    { 
-      name: 'خطة تغذية',
-      basic: 'شهرية',
-      premium: 'أسبوعية',
-      vip: 'أسبوعية + مكملات'
+    {
+      name: 'نظام غذائي شخصي',
+      starter: true,
+      commitment: true,
+      elite: true
     },
-    { 
-      name: 'المتابعة',
-      basic: 'أسبوعية',
-      premium: 'يومية',
-      vip: '24/7'
-    },
-    { 
-      name: 'الدعم',
-      basic: 'واتساب',
-      premium: 'واتساب',
-      vip: 'واتساب + مكالمات'
-    },
-    { 
+    {
       name: 'تحديث البرنامج',
-      basic: 'شهرياً',
-      premium: 'كل أسبوعين',
-      vip: 'أسبوعياً'
+      starter: 'شهري',
+      commitment: 'حسب التقدم',
+      elite: 'مستمر'
     },
-    { 
-      name: 'جلسات استشارية',
-      basic: '3 جلسات',
-      premium: 'غير محدودة',
-      vip: 'غير محدودة'
+    {
+      name: 'المتابعة',
+      starter: 'أسبوعية',
+      commitment: 'عدة مرات أسبوعيًا',
+      elite: 'يومية'
     },
-    { 
-      name: 'فيديوهات تدريبية',
-      basic: false,
-      premium: true,
-      vip: true
+    {
+      name: 'الشات مع المدربة',
+      starter: 'خاص (رد خلال 24 ساعة)',
+      commitment: 'خاص (رد سريع)',
+      elite: 'خاص 24/7'
     },
-    { 
-      name: 'وصفات طعام صحية',
-      basic: false,
-      premium: true,
-      vip: true
+    {
+      name: 'متابعة الوزن والقياسات',
+      starter: false,
+      commitment: true,
+      elite: true
     },
-    { 
-      name: 'كتاب التحول الشامل',
-      basic: false,
-      premium: true,
-      vip: true
+    {
+      name: 'إرشادات نمط حياة صحي',
+      starter: false,
+      commitment: true,
+      elite: true
     },
-    { 
-      name: 'مكالمات فيديو',
-      basic: false,
-      premium: false,
-      vip: 'أسبوعية'
+    {
+      name: 'تقييم شامل للجسم',
+      starter: false,
+      commitment: false,
+      elite: true
     },
-    { 
-      name: 'تحليل شامل للجسم',
-      basic: false,
-      premium: false,
-      vip: true
+    {
+      name: 'خطة لتحسين شكل الجسم',
+      starter: false,
+      commitment: false,
+      elite: true
     },
-    { 
-      name: 'أولوية في الدعم',
-      basic: false,
-      premium: false,
-      vip: true
+    {
+      name: 'دعم وتحفيز نفسي',
+      starter: false,
+      commitment: true,
+      elite: true
     },
-    { 
-      name: 'ورشة عمل شهرية',
-      basic: false,
-      premium: false,
-      vip: true
-    },
-    { 
-      name: 'مجموعة VIP حصرية',
-      basic: false,
-      premium: false,
-      vip: true
+    {
+      name: 'أولوية في الرد والدعم',
+      starter: false,
+      commitment: false,
+      elite: true
     }
   ];
 
   const renderCell = (value) => {
     if (value === true) {
       return <FaCheck className="check-icon" />;
-    } else if (value === false) {
-      return <FaTimes className="times-icon" />;
-    } else {
-      return <span className="feature-value">{value}</span>;
     }
+    if (value === false) {
+      return <FaTimes className="times-icon" />;
+    }
+    return <span className="feature-value">{value}</span>;
   };
 
   return (
     <section className="comparison-section">
       <div className="container">
-        <motion.div 
+        <motion.div
           className="section-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2>قارني بين الخطط</h2>
-          <p>اختاري الخطة المناسبة بناءً على احتياجاتك</p>
+          <h2>قارني بين خطط التدريب</h2>
+          <p>
+            كل خطة مصممة لتناسب مستوى مختلف من الالتزام والهدف
+          </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="comparison-table"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -124,14 +108,15 @@ const FeaturesComparison = ({ plans }) => {
               <thead>
                 <tr>
                   <th className="feature-column">الميزة</th>
-                  <th className="plan-column basic">الأساسي</th>
-                  <th className="plan-column premium">الذهبي</th>
-                  <th className="plan-column vip">VIP</th>
+                  <th className="plan-column starter">البداية الصحية</th>
+                  <th className="plan-column commitment">الالتزام والتغيير</th>
+                  <th className="plan-column elite">التحول الكامل</th>
                 </tr>
               </thead>
+
               <tbody>
                 {allFeatures.map((feature, index) => (
-                  <motion.tr 
+                  <motion.tr
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -139,9 +124,9 @@ const FeaturesComparison = ({ plans }) => {
                     transition={{ delay: index * 0.05 }}
                   >
                     <td className="feature-name">{feature.name}</td>
-                    <td className="basic">{renderCell(feature.basic)}</td>
-                    <td className="premium">{renderCell(feature.premium)}</td>
-                    <td className="vip">{renderCell(feature.vip)}</td>
+                    <td className="starter">{renderCell(feature.starter)}</td>
+                    <td className="commitment">{renderCell(feature.commitment)}</td>
+                    <td className="elite">{renderCell(feature.elite)}</td>
                   </motion.tr>
                 ))}
               </tbody>
