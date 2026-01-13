@@ -181,6 +181,17 @@ const Header = () => {
               </span>
             </motion.button>
 
+            {/* زر الترجمة للتابلت والموبايل */}
+            <motion.button
+              className="language-button mobile-tablet-only"
+              onClick={handleLanguageToggle}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title={currentLang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
+            >
+              <FaGlobe className="language-icon" />
+            </motion.button>
+
             {/* زر تسجيل الدخول للشاشات الكبيرة */}
             <motion.button
               className="login-button desktop-only"
