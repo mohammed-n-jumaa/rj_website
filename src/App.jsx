@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import FAQPage from './pages/FAQPage';
 import AuthPage from './pages/AuthPage.jsx';
 import Profile from './Profile/Profile-Clean.jsx';
+import Plans from './pages/Plans.jsx';
 import LoadingSpinner from './components/LoadingSpinner';
 import './styles/global.scss';
 
@@ -178,6 +179,7 @@ function App() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/plans" element={<Plans />} />
         </Routes>
       </AnimatePresence>
     </Router>
