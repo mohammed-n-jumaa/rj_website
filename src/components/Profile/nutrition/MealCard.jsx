@@ -1,10 +1,19 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCheckCircle, FaClock, FaChevronDown } from 'react-icons/fa';
+import { FaCheckCircle, FaClock, FaChevronDown, FaFilePdf } from 'react-icons/fa';
 
 const MealCard = ({ meal, index, isSelected, onToggle }) => {
   const handleCheckToggle = (e) => {
     e.stopPropagation();
     // Handle meal check toggle
+  };
+
+  const handleDownloadPDF = (e) => {
+    e.stopPropagation();
+    if (meal.pdfUrl) {
+      // في المستقبل سيتم تحميل PDF من Laravel API
+      window.open(meal.pdfUrl, '_blank');
+      console.log('Downloading PDF:', meal.pdfUrl);
+    }
   };
 
   return (
@@ -33,6 +42,17 @@ const MealCard = ({ meal, index, isSelected, onToggle }) => {
         </div>
         <div className="meal-summary">
           <span className="calories">{meal.calories} kcal</span>
+          {meal.pdfUrl && (
+            <motion.button
+              className="pdf-btn"
+              onClick={handleDownloadPDF}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="تحميل النظام الغذائي PDF"
+            >
+              <FaFilePdf />
+            </motion.button>
+          )}
           <motion.div 
             className="expand-icon"
             animate={{ rotate: isSelected ? 180 : 0 }}
@@ -73,6 +93,18 @@ const MealCard = ({ meal, index, isSelected, onToggle }) => {
                 ))}
               </ul>
             </div>
+            
+            {meal.pdfUrl && (
+              <motion.button
+                className="download-full-pdf"
+                onClick={handleDownloadPDF}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <FaFilePdf />
+                تحميل النظام الغذائي الكامل PDF
+              </motion.button>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

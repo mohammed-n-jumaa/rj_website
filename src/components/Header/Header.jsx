@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaDumbbell, FaUser } from 'react-icons/fa';
+import { FaDumbbell, FaUser, FaGlobe } from 'react-icons/fa';
 import Auth from '../Auth/Auth';
 import './Header.scss';
 
@@ -10,6 +10,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
+  const [currentLang, setCurrentLang] = useState('ar'); // 'ar' or 'en'
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -41,6 +42,18 @@ const Header = () => {
       setShowAuth(true);
       setMenuOpen(false);
     }
+  };
+
+  // دالة تبديل اللغة - ستتصل بـ Laravel API في المستقبل
+  const handleLanguageToggle = () => {
+    const newLang = currentLang === 'ar' ? 'en' : 'ar';
+    setCurrentLang(newLang);
+    
+    // في المستقبل سيتم إرسال طلب للـ API
+    // axios.post('/api/change-language', { language: newLang })
+    
+    console.log(`Language changed to: ${newLang}`);
+    setMenuOpen(false);
   };
 
   // روابط الصفحات
@@ -81,98 +94,125 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
       >
-      <div className="header-container">
-        <Link to="/">
-          <motion.div 
-            className="logo"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <FaDumbbell className="logo-icon" />
-            <span className="logo-text">RAND JARAR</span>
-          </motion.div>
-        </Link>
-
-        <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-          {/* روابط الصفحات */}
-          {pageLinks.map((link, index) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className="nav-link"
-              onClick={() => setMenuOpen(false)}
+        <div className="header-container">
+          <Link to="/">
+            <motion.div 
+              className="logo"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              {link.name}
-            </Link>
-          ))}
+              <FaDumbbell className="logo-icon" />
+              <span className="logo-text">RAND JARAR</span>
+            </motion.div>
+          </Link>
 
-          {/* روابط السيكشنات (فقط في الصفحة الرئيسية) */}
-          {isHomePage && sectionLinks.map((link, index) => (
-            <motion.a
-              key={link.name}
-              href={link.href}
-              className="nav-link"
+          <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+            {/* روابط الصفحات */}
+            {pageLinks.map((link, index) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="nav-link"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            {/* روابط السيكشنات (فقط في الصفحة الرئيسية) */}
+            {isHomePage && sectionLinks.map((link, index) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                className="nav-link"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -2 }}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.name}
+              </motion.a>
+            ))}
+            
+            {/* زر الترجمة في القائمة المتحركة */}
+            <motion.button
+              className="language-button mobile-only"
+              onClick={handleLanguageToggle}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaGlobe className="language-icon" />
+              <span className="language-text">
+                {currentLang === 'ar' ? 'English' : 'العربية'}
+              </span>
+            </motion.button>
+
+            {/* زر تسجيل الدخول في القائمة المتحركة */}
+            <motion.button
+              className="login-button mobile-only"
+              onClick={() => {
+                handleLoginClick();
+                setMenuOpen(false);
+              }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -2 }}
-              onClick={() => setMenuOpen(false)}
+              transition={{ delay: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {link.name}
-            </motion.a>
-          ))}
-          
-          {/* زر تسجيل الدخول في القائمة المتحركة */}
-          <motion.button
-            className="login-button mobile-only"
-            onClick={() => {
-              handleLoginClick();
-              setMenuOpen(false);
-            }}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaUser className="login-icon" />
-            {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
-          </motion.button>
-        </nav>
+              <FaUser className="login-icon" />
+              {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
+            </motion.button>
+          </nav>
 
-        <div className="header-actions">
-          {/* زر تسجيل الدخول للشاشات الكبيرة */}
-          <motion.button
-            className="login-button desktop-only"
-            onClick={handleLoginClick}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaUser className="login-icon" />
-            {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
-          </motion.button>
+          <div className="header-actions">
+            {/* زر الترجمة للشاشات الكبيرة */}
+            <motion.button
+              className="language-button desktop-only"
+              onClick={handleLanguageToggle}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title={currentLang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
+            >
+              <FaGlobe className="language-icon" />
+              <span className="language-text">
+                {currentLang === 'ar' ? 'EN' : 'ع'}
+              </span>
+            </motion.button>
 
-          <motion.button 
-            className="cta-button"
-            onClick={() => navigate('/auth')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            {/* زر تسجيل الدخول للشاشات الكبيرة */}
+            <motion.button
+              className="login-button desktop-only"
+              onClick={handleLoginClick}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaUser className="login-icon" />
+              {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
+            </motion.button>
+
+            <motion.button 
+              className="cta-button"
+              onClick={() => navigate('/auth')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              احجزي الآن
+            </motion.button>
+          </div>
+
+          <button 
+            className={`menu-toggle ${menuOpen ? 'open' : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
           >
-            احجزي الآن
-          </motion.button>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-
-        <button 
-          className={`menu-toggle ${menuOpen ? 'open' : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </motion.header>
+      </motion.header>
     </>
   );
 };
