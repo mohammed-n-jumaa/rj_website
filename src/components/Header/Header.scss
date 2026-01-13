@@ -70,6 +70,27 @@
       .language-icon {
         color: $primary-color;
       }
+      
+      // تحسين زر الترجمة الدائري للموبايل/تابلت بعد السكرول
+      &.mobile-tablet-only {
+        background: white;
+        border-color: rgba($primary-color, 0.25);
+        box-shadow: 0 2px 8px rgba(233, 30, 99, 0.15);
+        
+        .language-icon {
+          color: $primary-color;
+        }
+        
+        &:hover {
+          background: $primary-color;
+          border-color: $primary-color;
+          box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+          
+          .language-icon {
+            color: white;
+          }
+        }
+      }
     }
   }
 }
@@ -281,30 +302,53 @@
     }
   }
   
-  // إخفاء على الشاشات الصغيرة
-  &.mobile-only {
+  // زر للموبايل والتابلت - دائري مع أيقونة فقط
+  &.mobile-tablet-only {
     display: none;
     
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $breakpoint-desktop) {
       display: flex;
-      margin-top: 1rem;
-      padding: 1rem 2rem;
-      font-size: 1.05rem;
-      background: rgba(233, 30, 99, 0.1);
-      border-color: rgba(233, 30, 99, 0.3);
-      color: rgba(255, 255, 255, 0.9);
-      width: 100%;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border-radius: 50%;
       justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      flex-shrink: 0;
       
       .language-icon {
-        color: $primary-color;
+        font-size: 1.1rem;
       }
       
       &:hover {
         background: rgba(233, 30, 99, 0.2);
         border-color: $primary-color;
-        color: $text-white;
-        transform: translateY(-2px);
+        transform: scale(1.08);
+      }
+      
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    
+    @media (max-width: $breakpoint-tablet) {
+      width: 42px;
+      height: 42px;
+      
+      .language-icon {
+        font-size: 1.05rem;
+      }
+    }
+    
+    @media (max-width: $breakpoint-mobile) {
+      width: 40px;
+      height: 40px;
+      
+      .language-icon {
+        font-size: 1rem;
       }
     }
   }
@@ -312,7 +356,7 @@
   // إخفاء على التابلت والموبايل
   &.desktop-only {
     @media (max-width: $breakpoint-desktop) {
-      display: none; // إخفاء على 1024px وأقل (التابلت والموبايل)
+      display: none;
     }
   }
 }
@@ -470,7 +514,7 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
   
-  @media (min-width: ($breakpoint-tablet + 1)) {
+  @media (min-width: calc($breakpoint-tablet + 1px)) {
     display: none;
   }
 }
