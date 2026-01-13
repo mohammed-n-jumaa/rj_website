@@ -2,55 +2,67 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaDumbbell, FaUser, FaGlobe } from 'react-icons/fa';
-import Login from '../Auth/Login';
-import Register from '../Auth/Register';
+import Auth from '../Auth/Auth';
 import './Header.scss';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
   const [currentLang, setCurrentLang] = useState('ar'); // 'ar' or 'en'
-
   const location = useLocation();
   const navigate = useNavigate();
 
-  // التعامل مع السكرول لتغيير حالة الهيدر
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // منع التمرير عند فتح القائمة
+  
+  // منع السكرول عند فتح القائمة
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [menuOpen]);
 
   const handleLoginClick = () => {
-    setShowLogin(true);
-    setMenuOpen(false);
+    if (isLoggedIn) {
+      console.log('عرض الحساب');
+    } else {
+      setShowAuth(true);
+      setMenuOpen(false);
+    }
   };
 
-  const handleRegisterClick = () => {
-    setShowRegister(true);
-    setMenuOpen(false);
-  };
-
+  // دالة تبديل اللغة - ستتصل بـ Laravel API في المستقبل
   const handleLanguageToggle = () => {
     const newLang = currentLang === 'ar' ? 'en' : 'ar';
     setCurrentLang(newLang);
+    
+    // في المستقبل سيتم إرسال طلب للـ API
+    // axios.post('/api/change-language', { language: newLang })
+    
     console.log(`Language changed to: ${newLang}`);
     setMenuOpen(false);
   };
 
+  // روابط الصفحات
   const pageLinks = [
     { name: 'الرئيسية', path: '/' },
     { name: 'الأسئلة الشائعة', path: '/faq' }
   ];
 
+  // روابط السيكشنات (للصفحة الرئيسية فقط)
   const sectionLinks = [
     { name: 'عن المدربة', href: '#about' },
     { name: 'آراء المتدربات', href: '#testimonials' }
@@ -60,48 +72,29 @@ const Header = () => {
 
   return (
     <>
-      {/* Login Modal */}
+      {/* Auth Modal */}
       <AnimatePresence>
-        {showLogin && (
-          <Login 
-            isOpen={showLogin} 
-            onClose={() => setShowLogin(false)} 
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Register Modal */}
-      <AnimatePresence>
-        {showRegister && (
-          <Register 
-            isOpen={showRegister} 
-            onClose={() => setShowRegister(false)} 
-          />
-        )}
+        <Auth isOpen={showAuth} onClose={() => setShowAuth(false)} />
       </AnimatePresence>
 
       {/* Menu Overlay */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            className="menu-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setMenuOpen(false)}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Header */}
-      <motion.header
+      {menuOpen && (
+        <motion.div 
+          className="menu-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
+      
+      <motion.header 
         className={`header ${scrolled ? 'scrolled' : ''}`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <div className="header-container">
-          {/* الشعار */}
           <Link to="/">
             <motion.div 
               className="logo"
@@ -113,9 +106,9 @@ const Header = () => {
             </motion.div>
           </Link>
 
-          {/* القائمة */}
           <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-            {pageLinks.map(link => (
+            {/* روابط الصفحات */}
+            {pageLinks.map((link, index) => (
               <Link
                 key={link.name}
                 to={link.path}
@@ -126,6 +119,7 @@ const Header = () => {
               </Link>
             ))}
 
+            {/* روابط السيكشنات (فقط في الصفحة الرئيسية) */}
             {isHomePage && sectionLinks.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -140,11 +134,27 @@ const Header = () => {
                 {link.name}
               </motion.a>
             ))}
+            
+            {/* زر الترجمة في القائمة المتحركة */}
+            <motion.button
+              className="language-button mobile-only"
+              onClick={handleLanguageToggle}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaGlobe className="language-icon" />
+              <span className="language-text">
+                {currentLang === 'ar' ? 'English' : 'العربية'}
+              </span>
+            </motion.button>
 
-            {/* زر تسجيل الدخول للقائمة المتحركة */}
+            {/* زر تسجيل الدخول في القائمة المتحركة */}
             <motion.button
               className="login-button mobile-only"
-              onClick={handleLoginClick}
+              onClick={() => {
+                handleLoginClick();
+                setMenuOpen(false);
+              }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -152,13 +162,12 @@ const Header = () => {
               whileTap={{ scale: 0.95 }}
             >
               <FaUser className="login-icon" />
-              تسجيل دخول
+              {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
             </motion.button>
           </nav>
 
-          {/* أزرار الهيدر */}
           <div className="header-actions">
-            {/* تبديل اللغة للشاشات الكبيرة */}
+            {/* زر الترجمة للشاشات الكبيرة */}
             <motion.button
               className="language-button desktop-only"
               onClick={handleLanguageToggle}
@@ -172,17 +181,6 @@ const Header = () => {
               </span>
             </motion.button>
 
-            {/* تبديل اللغة للتابلت والموبايل */}
-            <motion.button
-              className="language-button mobile-tablet-only"
-              onClick={handleLanguageToggle}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              title={currentLang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
-            >
-              <FaGlobe className="language-icon" />
-            </motion.button>
-
             {/* زر تسجيل الدخول للشاشات الكبيرة */}
             <motion.button
               className="login-button desktop-only"
@@ -191,13 +189,12 @@ const Header = () => {
               whileTap={{ scale: 0.95 }}
             >
               <FaUser className="login-icon" />
-              تسجيل دخول
+              {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
             </motion.button>
 
-            {/* زر احجزي الآن */}
             <motion.button 
               className="cta-button"
-              onClick={handleRegisterClick}
+              onClick={() => navigate('/auth')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -205,7 +202,6 @@ const Header = () => {
             </motion.button>
           </div>
 
-          {/* زر القائمة للهواتف */}
           <button 
             className={`menu-toggle ${menuOpen ? 'open' : ''}`}
             onClick={() => setMenuOpen(!menuOpen)}
