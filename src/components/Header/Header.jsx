@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaDumbbell, FaUser, FaGlobe } from 'react-icons/fa';
+import { FaUser, FaGlobe } from 'react-icons/fa';
 import Auth from '../Auth/Auth';
 import './Header.scss';
 
@@ -101,8 +101,7 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <FaDumbbell className="logo-icon" />
-              <span className="logo-text">RAND JARAR</span>
+              <img src="https://i.ibb.co/QjtFVCQq/logo.png" alt="Rand Jarar Fitness" className="logo-image" />
             </motion.div>
           </Link>
 
@@ -134,19 +133,6 @@ const Header = () => {
                 {link.name}
               </motion.a>
             ))}
-            
-            {/* زر الترجمة في القائمة المتحركة */}
-            <motion.button
-              className="language-button mobile-only"
-              onClick={handleLanguageToggle}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaGlobe className="language-icon" />
-              <span className="language-text">
-                {currentLang === 'ar' ? 'English' : 'العربية'}
-              </span>
-            </motion.button>
 
             {/* زر تسجيل الدخول في القائمة المتحركة */}
             <motion.button
@@ -167,9 +153,9 @@ const Header = () => {
           </nav>
 
           <div className="header-actions">
-            {/* زر الترجمة للشاشات الكبيرة */}
+            {/* زر الترجمة - يظهر على جميع الشاشات */}
             <motion.button
-              className="language-button desktop-only"
+              className="language-button"
               onClick={handleLanguageToggle}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

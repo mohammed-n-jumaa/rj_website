@@ -41,13 +41,8 @@
       }
     }
     
-    .logo-text,
     .nav-link {
       color: $text-dark;
-    }
-    
-    .logo-icon {
-      color: $primary-color;
     }
     
     .menu-toggle span {
@@ -69,25 +64,6 @@
       .login-icon,
       .language-icon {
         color: $primary-color;
-      }
-      
-      // تحسين زر الترجمة الدائري للموبايل/تابلت بعد السكرول
-      &.mobile-tablet-only {
-        background: rgba($primary-color, 0.1);
-        border-color: rgba($primary-color, 0.3);
-        
-        .language-icon {
-          color: $primary-color;
-        }
-        
-        &:hover {
-          background: $primary-color;
-          border-color: $primary-color;
-          
-          .language-icon {
-            color: white;
-          }
-        }
       }
     }
   }
@@ -118,39 +94,27 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
   cursor: pointer;
   flex-shrink: 0;
   
-  @media (max-width: $breakpoint-tablet) {
-    gap: 0.5rem;
-  }
-  
-  .logo-icon {
-    font-size: 1.8rem;
-    color: $text-white;
+  .logo-image {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
     transition: all $transition-normal;
+    filter: brightness(1.1) contrast(1.1);
     
     @media (max-width: $breakpoint-tablet) {
-      font-size: 1.5rem;
-    }
-  }
-  
-  .logo-text {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: $text-white;
-    letter-spacing: 0.5px;
-    transition: all $transition-normal;
-    white-space: nowrap;
-    
-    @media (max-width: $breakpoint-tablet) {
-      font-size: 1.1rem;
+      height: 58px;
     }
     
     @media (max-width: 480px) {
-      font-size: 1rem;
+      height: 50px;
     }
+  }
+  
+  &:hover .logo-image {
+    filter: brightness(1.2) contrast(1.15);
   }
 }
 
@@ -255,7 +219,7 @@
   }
   
   @media (max-width: 480px) {
-    gap: 0.3rem;
+    gap: 0.4rem;
   }
 }
 
@@ -265,6 +229,7 @@
 .language-button {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
   padding: 0.7rem 1rem;
   background: transparent;
@@ -277,6 +242,7 @@
   transition: all $transition-normal;
   font-family: 'Tajawal', sans-serif;
   white-space: nowrap;
+  flex-shrink: 0;
   
   .language-icon {
     font-size: 1rem;
@@ -300,78 +266,43 @@
     }
   }
   
-  // زر للموبايل والتابلت - دائري مع أيقونة فقط
-  &.mobile-tablet-only {
-    display: none;
+  // تنسيق خاص للتابلت والموبايل - زر دائري مع أيقونة فقط
+  @media (max-width: $breakpoint-tablet) {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     
-    @media (max-width: $breakpoint-desktop) {
-      display: flex;
-      width: 45px;
-      height: 45px;
-      padding: 0;
-      border-radius: 50%;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      
-      .language-icon {
-        font-size: 1.1rem;
-      }
-      
-      &:hover {
-        background: rgba(233, 30, 99, 0.2);
-        border-color: $primary-color;
-        transform: scale(1.1);
-      }
-      
-      &:active {
-        transform: scale(0.95);
-      }
+    .language-text {
+      display: none; // إخفاء النص على الشاشات الصغيرة
     }
     
-    @media (max-width: $breakpoint-mobile) {
-      width: 42px;
-      height: 42px;
-      
-      .language-icon {
-        font-size: 1rem;
-      }
+    .language-icon {
+      font-size: 1.1rem;
+    }
+    
+    &:hover {
+      background: rgba(233, 30, 99, 0.2);
+      border-color: $primary-color;
+      transform: scale(1.1);
+    }
+    
+    &:active {
+      transform: scale(0.95);
     }
   }
   
-  // إخفاء على الشاشات الصغيرة
-  &.mobile-only {
-    display: none;
+  @media (max-width: 480px) {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
     
-    @media (max-width: $breakpoint-tablet) {
-      display: flex;
-      margin-top: 1rem;
-      padding: 1rem 2rem;
-      font-size: 1.05rem;
-      background: rgba(233, 30, 99, 0.1);
-      border-color: rgba(233, 30, 99, 0.3);
-      color: rgba(255, 255, 255, 0.9);
-      width: 100%;
-      justify-content: center;
-      
-      .language-icon {
-        color: $primary-color;
-      }
-      
-      &:hover {
-        background: rgba(233, 30, 99, 0.2);
-        border-color: $primary-color;
-        color: $text-white;
-        transform: translateY(-2px);
-      }
-    }
-  }
-  
-  // إخفاء على التابلت والموبايل
-  &.desktop-only {
-    @media (max-width: $breakpoint-desktop) {
-      display: none;
+    .language-icon {
+      font-size: 1rem;
     }
   }
 }
@@ -411,6 +342,7 @@
     }
   }
   
+  // زر تسجيل الدخول في القائمة المنسدلة على الموبايل
   &.mobile-only {
     display: none;
     
@@ -422,6 +354,8 @@
       background: rgba(233, 30, 99, 0.1);
       border-color: rgba(233, 30, 99, 0.3);
       color: rgba(255, 255, 255, 0.9);
+      width: 100%;
+      justify-content: center;
       
       .login-icon {
         color: $primary-color;
@@ -436,9 +370,10 @@
     }
   }
   
+  // زر تسجيل الدخول في الهيدر - مخفي على التابلت والموبايل
   &.desktop-only {
-    @media (max-width: $breakpoint-desktop) {
-      display: none; // إخفاء على 1024px وأقل (التابلت والموبايل)
+    @media (max-width: $breakpoint-tablet) {
+      display: none;
     }
   }
 }
