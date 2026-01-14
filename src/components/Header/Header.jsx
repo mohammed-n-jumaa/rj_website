@@ -95,7 +95,8 @@ const Header = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="header-container">
-          <Link to="/">
+          {/* Logo - Always Centered on Mobile */}
+          <Link to="/" className="logo-link">
             <motion.div 
               className="logo"
               whileHover={{ scale: 1.05 }}
@@ -105,14 +106,14 @@ const Header = () => {
             </motion.div>
           </Link>
 
-          <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+          {/* Desktop Navigation */}
+          <nav className={`nav desktop-nav`}>
             {/* روابط الصفحات */}
             {pageLinks.map((link, index) => (
               <Link
                 key={link.name}
                 to={link.path}
                 className="nav-link"
-                onClick={() => setMenuOpen(false)}
               >
                 {link.name}
               </Link>
@@ -128,34 +129,43 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -2 }}
-                onClick={() => setMenuOpen(false)}
               >
                 {link.name}
               </motion.a>
             ))}
-
-            {/* زر تسجيل الدخول في القائمة المتحركة */}
-            <motion.button
-              className="login-button mobile-only"
-              onClick={() => {
-                handleLoginClick();
-                setMenuOpen(false);
-              }}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaUser className="login-icon" />
-              {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
-            </motion.button>
           </nav>
 
-          <div className="header-actions">
-            {/* زر الترجمة - يظهر على جميع الشاشات */}
+          {/* Mobile Left Side: Language Button */}
+          <div className="mobile-left">
             <motion.button
-              className="language-button"
+              className="language-button-mobile"
+              onClick={handleLanguageToggle}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              title={currentLang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
+            >
+              <FaGlobe className="language-icon" />
+            </motion.button>
+          </div>
+
+          {/* Mobile Right Side: Menu Toggle */}
+          <div className="mobile-right">
+            <button 
+              className={`menu-toggle ${menuOpen ? 'open' : ''}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+
+          {/* Desktop Actions */}
+          <div className="header-actions">
+            {/* زر الترجمة للشاشات الكبيرة */}
+            <motion.button
+              className="language-button desktop-only"
               onClick={handleLanguageToggle}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -187,18 +197,52 @@ const Header = () => {
               احجزي الآن
             </motion.button>
           </div>
-
-          <button 
-            className={`menu-toggle ${menuOpen ? 'open' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
         </div>
       </motion.header>
+
+      {/* Mobile Menu Sidebar */}
+      <nav className={`nav mobile-nav ${menuOpen ? 'open' : ''}`}>
+        {/* روابط الصفحات */}
+        {pageLinks.map((link, index) => (
+          <Link
+            key={link.name}
+            to={link.path}
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            {link.name}
+          </Link>
+        ))}
+
+        {/* روابط السيكشنات (فقط في الصفحة الرئيسية) */}
+        {isHomePage && sectionLinks.map((link, index) => (
+          <motion.a
+            key={link.name}
+            href={link.href}
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            {link.name}
+          </motion.a>
+        ))}
+
+        {/* فاصل */}
+        <div className="nav-divider"></div>
+
+        {/* زر تسجيل الدخول في القائمة */}
+        <motion.button
+          className="login-button mobile-menu"
+          onClick={() => {
+            handleLoginClick();
+            setMenuOpen(false);
+          }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <FaUser className="login-icon" />
+          {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
+        </motion.button>
+      </nav>
     </>
   );
 };
