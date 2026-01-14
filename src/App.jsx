@@ -50,12 +50,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // تهيئة تأثيرات الصفحة
+    // Initialize page effects
     const initPageEffects = () => {
-      // إضافة CSS للتمرير السلس
+      // Add smooth scrolling CSS
       document.documentElement.style.scrollBehavior = 'smooth';
 
-      // إضافة margin للسكرول
+      // Add scroll margin
       const style = document.createElement('style');
       style.textContent = `
         html {
@@ -109,7 +109,7 @@ function App() {
       `;
       document.head.appendChild(style);
 
-      // تأثيرات المؤشر (اختياري)
+      // Cursor effects (optional)
       if (window.innerWidth > 768) {
         const cursorDot = document.createElement('div');
         cursorDot.className = 'cursor-dot';
@@ -132,7 +132,7 @@ function App() {
 
         document.addEventListener('mousemove', moveCursor);
 
-        // تأثير عند المرور على العناصر
+        // Effect when hovering over elements
         const interactiveElements = document.querySelectorAll('button, a, .nav-link');
         interactiveElements.forEach(el => {
           el.addEventListener('mouseenter', () => {
@@ -165,8 +165,8 @@ function App() {
   // Show loading spinner with different messages
   if (loading) {
     const message = isFirstVisit 
-      ? "مرحباً بك في عالم الصحة والرشاقة مع رند جرار 💪"
-      : "مرحباً بعودتك 💕";
+      ? "Welcome to the world of health and fitness with Rand Jarrar 💪"
+      : "Welcome back 💕";
     
     return <LoadingSpinner message={message} />;
   }
