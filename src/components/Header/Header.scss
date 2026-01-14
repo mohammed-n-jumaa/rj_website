@@ -98,18 +98,18 @@
   flex-shrink: 0;
   
   .logo-image {
-    height: 70px;
+    height: 60px;
     width: auto;
     object-fit: contain;
     transition: all $transition-normal;
     filter: brightness(1.1) contrast(1.1);
     
     @media (max-width: $breakpoint-tablet) {
-      height: 58px;
+      height: 48px;
     }
     
     @media (max-width: 480px) {
-      height: 50px;
+      height: 42px;
     }
   }
   
