@@ -1,15 +1,30 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBell, FaPaypal } from 'react-icons/fa';
+import { FaBell, FaPaypal, FaUniversity } from 'react-icons/fa';
 import PayPalPayment from './PayPalPayment';
+import BankTransferPayment from './BankTransferPayment';
 
 const RenewalCard = ({ userData, delay }) => {
   const [showPayment, setShowPayment] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null); // 'paypal' or 'bank'
 
   const handleRenewalSuccess = () => {
     setShowPayment(false);
+    setPaymentMethod(null);
     // في المستقبل: تحديث بيانات المستخدم من Laravel API
     console.log('Renewal successful!');
+  };
+
+  const handleSelectPaymentMethod = (method) => {
+    setPaymentMethod(method);
+    setShowPayment(true);
+  };
+
+  const handleBack = () => {
+    if (showPayment && paymentMethod) {
+      setShowPayment(false);
+      setPaymentMethod(null);
+    }
   };
 
   const daysLeft = userData.daysLeft;
@@ -61,19 +76,40 @@ const RenewalCard = ({ userData, delay }) => {
               </div>
             </div>
 
-            <motion.button
-              className="renew-btn"
-              onClick={() => setShowPayment(true)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <FaPaypal />
-              جددي الآن عبر PayPal
-            </motion.button>
+            {/* Payment Method Selection */}
+            <div className="payment-methods">
+              <h4>اختاري طريقة الدفع:</h4>
+              
+              <div className="methods-grid">
+                <motion.button
+                  className="method-button paypal"
+                  onClick={() => handleSelectPaymentMethod('paypal')}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <FaPaypal className="method-icon" />
+                  <div className="method-info">
+                    <span className="method-name">PayPal</span>
+                    <span className="method-desc">دفع فوري وآمن</span>
+                  </div>
+                </motion.button>
 
-            <p className="auto-renewal-note">
-              سيتم تجديد اشتراكك تلقائياً قبل انتهائه بـ 3 أيام
-            </p>
+                <motion.button
+                  className="method-button bank"
+                  onClick={() => handleSelectPaymentMethod('bank')}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <FaUniversity className="method-icon" />
+                  <div className="method-info">
+                    <span className="method-name">تحويل بنكي</span>
+                    <span className="method-desc">خلال 24 ساعة</span>
+                  </div>
+                </motion.button>
+              </div>
+            </div>
+
+           
           </motion.div>
         ) : (
           <motion.div
@@ -83,20 +119,19 @@ const RenewalCard = ({ userData, delay }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <PayPalPayment
-              amount={(userData.price * 0.9).toFixed(2)}
-              onSuccess={handleRenewalSuccess}
-              onCancel={() => setShowPayment(false)}
-            />
-
-            <motion.button
-              className="cancel-btn"
-              onClick={() => setShowPayment(false)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              إلغاء
-            </motion.button>
+            {paymentMethod === 'paypal' ? (
+              <PayPalPayment
+                amount={(userData.price * 0.9).toFixed(2)}
+                onSuccess={handleRenewalSuccess}
+                onCancel={handleBack}
+              />
+            ) : (
+              <BankTransferPayment
+                amount={(userData.price * 0.9).toFixed(2)}
+                onSuccess={handleRenewalSuccess}
+                onCancel={handleBack}
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
