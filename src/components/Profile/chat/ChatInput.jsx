@@ -12,7 +12,7 @@ const ChatInput = ({ value, onChange, onSend }) => {
     <div className="chat-input">
       <input
         type="text"
-        placeholder="اكتبي رسالتك..."
+        placeholder="Type your message..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyPress={handleKeyPress}
@@ -20,7 +20,7 @@ const ChatInput = ({ value, onChange, onSend }) => {
       <motion.button
         className="send-btn"
         onClick={onSend}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >
         <FaPaperPlane />

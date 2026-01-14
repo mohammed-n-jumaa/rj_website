@@ -9,7 +9,7 @@ const ExerciseItem = ({ exercise, dayIndex, exerciseIndex }) => {
   const handleVideoClick = (e) => {
     e.stopPropagation();
     if (exercise.videoUrl) {
-      // فتح رابط الفيديو في تاب جديد
+      // Open video link in new tab
       window.open(exercise.videoUrl, '_blank');
       console.log('Opening video:', exercise.videoUrl);
     }
@@ -18,56 +18,59 @@ const ExerciseItem = ({ exercise, dayIndex, exerciseIndex }) => {
   const handleYoutubeClick = (e) => {
     e.stopPropagation();
     if (exercise.youtubeUrl) {
-      // فتح رابط يوتيوب في تاب جديد
+      // Open YouTube link in new tab
       window.open(exercise.youtubeUrl, '_blank');
       console.log('Opening YouTube:', exercise.youtubeUrl);
     }
   };
 
   return (
-    <div className={`exercise-item ${exercise.checked ? 'checked' : ''}`}>
-      <motion.button
+    <motion.div
+      className={`exercise-item ${exercise.checked ? 'checked' : ''}`}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: exerciseIndex * 0.05 }}
+    >
+      <button
         className={`check-btn ${exercise.checked ? 'checked' : ''}`}
         onClick={handleCheckToggle}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
       >
         {exercise.checked && <FaCheckCircle />}
-      </motion.button>
-      
+      </button>
+
       <div className="exercise-info">
         <h5>{exercise.name}</h5>
         <span className="exercise-details">
-          {exercise.sets} جولات × {exercise.reps} تكرار
+          {exercise.sets} sets × {exercise.reps} reps
         </span>
       </div>
-      
+
       <div className="exercise-actions">
         {exercise.videoUrl && (
           <motion.button
             className="video-btn"
             onClick={handleVideoClick}
             whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            title="مشاهدة الفيديو"
+            whileTap={{ scale: 0.95 }}
+            title="Watch Video"
           >
             <FaPlayCircle />
           </motion.button>
         )}
-        
+
         {exercise.youtubeUrl && (
           <motion.button
             className="youtube-btn"
             onClick={handleYoutubeClick}
             whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            title="مشاهدة على يوتيوب"
+            whileTap={{ scale: 0.95 }}
+            title="Watch on YouTube"
           >
             <FaYoutube />
           </motion.button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

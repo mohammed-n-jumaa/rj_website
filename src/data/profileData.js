@@ -1,13 +1,13 @@
 export const userData = {
-  name: 'سارة أحمد',
+  name: 'Sarah Ahmed',
   avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
   height: 165,
   weight: 65,
   age: 28,
-  goal: 'خسارة وزن وتنشيف',
-  program: 'برنامج التحول الذهبي',
+  goal: 'Weight Loss & Toning',
+  program: 'Golden Transformation Program',
   price: 299,
-  duration: '3 أشهر',
+  duration: '3 months',
   paymentStatus: 'paid',
   startDate: '2024-01-01',
   endDate: '2024-04-01',
@@ -23,61 +23,61 @@ export const nutritionPlan = {
   meals: [
     {
       id: 1,
-      name: 'الفطور',
+      name: 'Breakfast',
       time: '07:00 AM',
       calories: 450,
       protein: 30,
       carbs: 45,
       fats: 15,
-      items: ['3 بيضات مسلوقة', 'خبز توست أسمر (2 شريحة)', 'أفوكادو نصف حبة', 'قهوة سوداء'],
+      items: ['3 boiled eggs', 'Whole wheat toast (2 slices)', 'Half avocado', 'Black coffee'],
       checked: true,
-      pdfUrl: '/pdfs/breakfast-meal-plan.pdf' // رابط PDF من Laravel
+      pdfUrl: '/pdfs/breakfast-meal-plan.pdf' // PDF link from Laravel
     },
     {
       id: 2,
-      name: 'سناك صباحي',
+      name: 'Morning Snack',
       time: '10:30 AM',
       calories: 200,
       protein: 15,
       carbs: 25,
       fats: 8,
-      items: ['زبادي يوناني قليل الدسم', 'حفنة لوز (10 حبات)'],
+      items: ['Low-fat Greek yogurt', 'Handful of almonds (10 pieces)'],
       checked: true,
       pdfUrl: '/pdfs/morning-snack.pdf'
     },
     {
       id: 3,
-      name: 'الغداء',
+      name: 'Lunch',
       time: '01:00 PM',
       calories: 600,
       protein: 45,
       carbs: 60,
       fats: 20,
-      items: ['صدر دجاج مشوي (200g)', 'أرز بسمتي (1 كوب)', 'سلطة خضراء', 'زيت زيتون (1 ملعقة)'],
+      items: ['Grilled chicken breast (200g)', 'Basmati rice (1 cup)', 'Green salad', 'Olive oil (1 tablespoon)'],
       checked: false,
       pdfUrl: '/pdfs/lunch-meal-plan.pdf'
     },
     {
       id: 4,
-      name: 'سناك مسائي',
+      name: 'Afternoon Snack',
       time: '04:30 PM',
       calories: 250,
       protein: 20,
       carbs: 30,
       fats: 8,
-      items: ['بروتين شيك', 'موزة متوسطة'],
+      items: ['Protein shake', 'Medium banana'],
       checked: false,
       pdfUrl: '/pdfs/afternoon-snack.pdf'
     },
     {
       id: 5,
-      name: 'العشاء',
+      name: 'Dinner',
       time: '07:00 PM',
       calories: 300,
       protein: 25,
       carbs: 20,
       fats: 9,
-      items: ['سمك سلمون مشوي (150g)', 'خضار مشوية', 'سلطة'],
+      items: ['Grilled salmon (150g)', 'Grilled vegetables', 'Salad'],
       checked: false,
       pdfUrl: '/pdfs/dinner-meal-plan.pdf'
     }
@@ -86,15 +86,15 @@ export const nutritionPlan = {
 
 export const workoutPlan = [
   {
-    day: 'الأحد',
-    title: 'تمارين الجزء العلوي',
+    day: 'Sunday',
+    title: 'Upper Body Workout',
     exercises: [
       { 
         name: 'Bench Press', 
         sets: 4, 
         reps: '10-12', 
         videoUrl: 'https://example.com/bench.mp4',
-        youtubeUrl: 'https://www.youtube.com/watch?v=rT7DgCr-3pg', // رابط يوتيوب حقيقي
+        youtubeUrl: 'https://www.youtube.com/watch?v=rT7DgCr-3pg', // Real YouTube link
         checked: true 
       },
       { 
@@ -124,8 +124,8 @@ export const workoutPlan = [
     ]
   },
   {
-    day: 'الإثنين',
-    title: 'كارديو و Core',
+    day: 'Monday',
+    title: 'Cardio & Core',
     exercises: [
       { 
         name: 'Running', 
@@ -154,8 +154,8 @@ export const workoutPlan = [
     ]
   },
   {
-    day: 'الثلاثاء',
-    title: 'راحة نشطة',
+    day: 'Tuesday',
+    title: 'Active Rest',
     exercises: [
       { 
         name: 'Walking', 
@@ -176,8 +176,8 @@ export const workoutPlan = [
     ]
   },
   {
-    day: 'الأربعاء',
-    title: 'تمارين الجزء السفلي',
+    day: 'Wednesday',
+    title: 'Lower Body Workout',
     exercises: [
       { 
         name: 'Squats', 
@@ -214,7 +214,7 @@ export const workoutPlan = [
     ]
   },
   {
-    day: 'الخميس',
+    day: 'Thursday',
     title: 'HIIT Training',
     exercises: [
       { 
@@ -244,7 +244,7 @@ export const workoutPlan = [
     ]
   },
   {
-    day: 'الجمعة',
+    day: 'Friday',
     title: 'Full Body',
     exercises: [
       { 
@@ -274,8 +274,8 @@ export const workoutPlan = [
     ]
   },
   {
-    day: 'السبت',
-    title: 'يوم راحة',
+    day: 'Saturday',
+    title: 'Rest Day',
     exercises: []
   }
 ];
@@ -284,32 +284,32 @@ export const messages = [
   {
     id: 1,
     sender: 'trainer',
-    name: 'رند جرار',
+    name: 'Rand Jarrar',
     avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=50&h=50&fit=crop',
-    message: 'مرحباً سارة! كيف حالك اليوم؟',
+    message: 'Hello Sarah! How are you today?',
     time: '10:30 AM',
     date: '2024-01-15'
   },
   {
     id: 2,
     sender: 'user',
-    message: 'الحمد لله، بخير! أكملت تمارين اليوم 💪',
+    message: 'I\'m doing great! I completed today\'s workout 💪',
     time: '10:45 AM',
     date: '2024-01-15'
   },
   {
     id: 3,
     sender: 'trainer',
-    name: 'رند جرار',
+    name: 'Rand Jarrar',
     avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=50&h=50&fit=crop',
-    message: 'ممتاز! استمري على هذا المستوى. لاحظت التزامك الرائع بالنظام الغذائي',
+    message: 'Excellent! Keep up this level. I noticed your amazing commitment to the nutrition plan',
     time: '10:50 AM',
     date: '2024-01-15'
   },
   {
     id: 4,
     sender: 'user',
-    message: 'شكراً لك! عندي سؤال عن الوجبة المسائية',
+    message: 'Thank you! I have a question about the evening meal',
     time: '11:00 AM',
     date: '2024-01-15'
   }

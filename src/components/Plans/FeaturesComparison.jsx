@@ -4,67 +4,67 @@ import { FaCheck, FaTimes } from 'react-icons/fa';
 const FeaturesComparison = () => {
   const allFeatures = [
     {
-      name: 'برنامج تمارين مخصص',
+      name: 'Custom workout program',
       starter: true,
       commitment: true,
       elite: true
     },
     {
-      name: 'نظام غذائي شخصي',
+      name: 'Personal nutrition plan',
       starter: true,
       commitment: true,
       elite: true
     },
     {
-      name: 'تحديث البرنامج',
-      starter: 'شهري',
-      commitment: 'حسب التقدم',
-      elite: 'مستمر'
+      name: 'Program updates',
+      starter: 'Monthly',
+      commitment: 'Based on progress',
+      elite: 'Continuous'
     },
     {
-      name: 'المتابعة',
-      starter: 'أسبوعية',
-      commitment: 'عدة مرات أسبوعيًا',
-      elite: 'يومية'
+      name: 'Follow-up',
+      starter: 'Weekly',
+      commitment: 'Multiple times weekly',
+      elite: 'Daily'
     },
     {
-      name: 'الشات مع المدربة',
-      starter: 'خاص (رد خلال 24 ساعة)',
-      commitment: 'خاص (رد سريع)',
-      elite: 'خاص 24/7'
+      name: 'Chat with coach',
+      starter: 'Private (24hr response)',
+      commitment: 'Private (quick response)',
+      elite: 'Private 24/7'
     },
     {
-      name: 'متابعة الوزن والقياسات',
+      name: 'Weight and measurements tracking',
       starter: false,
       commitment: true,
       elite: true
     },
     {
-      name: 'إرشادات نمط حياة صحي',
+      name: 'Healthy lifestyle guidance',
       starter: false,
       commitment: true,
       elite: true
     },
     {
-      name: 'تقييم شامل للجسم',
+      name: 'Comprehensive body assessment',
       starter: false,
       commitment: false,
       elite: true
     },
     {
-      name: 'خطة لتحسين شكل الجسم',
+      name: 'Body shape improvement plan',
       starter: false,
       commitment: false,
       elite: true
     },
     {
-      name: 'دعم وتحفيز نفسي',
+      name: 'Psychological support and motivation',
       starter: false,
       commitment: true,
       elite: true
     },
     {
-      name: 'أولوية في الرد والدعم',
+      name: 'Priority in response and support',
       starter: false,
       commitment: false,
       elite: true
@@ -90,9 +90,9 @@ const FeaturesComparison = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2>قارني بين خطط التدريب</h2>
+          <h2>Compare Training Plans</h2>
           <p>
-            كل خطة مصممة لتناسب مستوى مختلف من الالتزام والهدف
+            Each plan is designed to suit a different level of commitment and goal
           </p>
         </motion.div>
 
@@ -107,10 +107,10 @@ const FeaturesComparison = () => {
             <table>
               <thead>
                 <tr>
-                  <th className="feature-column">الميزة</th>
-                  <th className="plan-column starter">البداية الصحية</th>
-                  <th className="plan-column commitment">الالتزام والتغيير</th>
-                  <th className="plan-column elite">التحول الكامل</th>
+                  <th className="feature-column">Feature</th>
+                  <th className="plan-column starter">Healthy Start</th>
+                  <th className="plan-column commitment">Commitment & Change</th>
+                  <th className="plan-column elite">Complete Transformation</th>
                 </tr>
               </thead>
 

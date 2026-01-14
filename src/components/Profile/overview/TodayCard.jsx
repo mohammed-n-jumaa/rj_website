@@ -3,25 +3,30 @@ import { FaBolt, FaFire, FaAppleAlt, FaDumbbell } from 'react-icons/fa';
 
 const TodayCard = ({ delay }) => {
   const todayStats = [
-    { icon: FaFire, label: 'السعرات', value: '1200 / 1800', type: 'calories' },
-    { icon: FaAppleAlt, label: 'الوجبات', value: '2 / 5', type: 'meals' },
-    { icon: FaDumbbell, label: 'التمارين', value: '2 / 4', type: 'workout' }
+    { icon: FaFire, label: 'Calories', value: '1200 / 1800', type: 'calories' },
+    { icon: FaAppleAlt, label: 'Meals', value: '2 / 5', type: 'meals' },
+    { icon: FaDumbbell, label: 'Workouts', value: '2 / 4', type: 'workout' }
   ];
 
   return (
-    <motion.div 
+    <motion.div
       className="today-card"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay }}
     >
       <div className="card-header">
-        <h3>ملخص اليوم</h3>
+        <h3>Today's Summary</h3>
         <FaBolt className="header-icon" />
       </div>
+
       <div className="today-stats">
         {todayStats.map((stat, index) => (
-          <div key={index} className="today-item">
+          <motion.div
+            key={index}
+            className="today-item"
+            whileHover={{ scale: 1.02 }}
+          >
             <div className={`today-icon ${stat.type}`}>
               <stat.icon />
             </div>
@@ -29,7 +34,7 @@ const TodayCard = ({ delay }) => {
               <span className="today-value">{stat.value}</span>
               <span className="today-label">{stat.label}</span>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </motion.div>

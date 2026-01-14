@@ -10,7 +10,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
-  const [currentLang, setCurrentLang] = useState('ar'); // 'ar' or 'en'
+  const [currentLang, setCurrentLang] = useState('en'); // 'ar' or 'en'
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // منع السكرول عند فتح القائمة
+  // Prevent scrolling when menu is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
@@ -37,35 +37,35 @@ const Header = () => {
 
   const handleLoginClick = () => {
     if (isLoggedIn) {
-      console.log('عرض الحساب');
+      console.log('View Account');
     } else {
       setShowAuth(true);
       setMenuOpen(false);
     }
   };
 
-  // دالة تبديل اللغة - ستتصل بـ Laravel API في المستقبل
+  // Language toggle function - will connect to Laravel API in the future
   const handleLanguageToggle = () => {
-    const newLang = currentLang === 'ar' ? 'en' : 'ar';
+    const newLang = currentLang === 'en' ? 'ar' : 'en';
     setCurrentLang(newLang);
     
-    // في المستقبل سيتم إرسال طلب للـ API
+    // In the future, will send request to API
     // axios.post('/api/change-language', { language: newLang })
     
     console.log(`Language changed to: ${newLang}`);
     setMenuOpen(false);
   };
 
-  // روابط الصفحات
+  // Page links
   const pageLinks = [
-    { name: 'الرئيسية', path: '/' },
-    { name: 'الأسئلة الشائعة', path: '/faq' }
+    { name: 'Home', path: '/' },
+    { name: 'FAQ', path: '/faq' }
   ];
 
-  // روابط السيكشنات (للصفحة الرئيسية فقط)
+  // Section links (for homepage only)
   const sectionLinks = [
-    { name: 'عن المدربة', href: '#about' },
-    { name: 'آراء المتدربات', href: '#testimonials' }
+    { name: 'About Coach', href: '#about' },
+    { name: 'Testimonials', href: '#testimonials' }
   ];
 
   const isHomePage = location.pathname === '/';
@@ -108,7 +108,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className={`nav desktop-nav`}>
-            {/* روابط الصفحات */}
+            {/* Page links */}
             {pageLinks.map((link, index) => (
               <Link
                 key={link.name}
@@ -119,7 +119,7 @@ const Header = () => {
               </Link>
             ))}
 
-            {/* روابط السيكشنات (فقط في الصفحة الرئيسية) */}
+            {/* Section links (only on homepage) */}
             {isHomePage && sectionLinks.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -135,21 +135,8 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Mobile Left Side: Language Button */}
+          {/* Mobile Left Side: Menu Toggle */}
           <div className="mobile-left">
-            <motion.button
-              className="language-button-mobile"
-              onClick={handleLanguageToggle}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              title={currentLang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
-            >
-              <FaGlobe className="language-icon" />
-            </motion.button>
-          </div>
-
-          {/* Mobile Right Side: Menu Toggle */}
-          <div className="mobile-right">
             <button 
               className={`menu-toggle ${menuOpen ? 'open' : ''}`}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -161,23 +148,36 @@ const Header = () => {
             </button>
           </div>
 
+          {/* Mobile Right Side: Language Button */}
+          <div className="mobile-right">
+            <motion.button
+              className="language-button-mobile"
+              onClick={handleLanguageToggle}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              title={currentLang === 'en' ? 'Switch to Arabic' : 'التبديل للإنجليزية'}
+            >
+              <FaGlobe className="language-icon" />
+            </motion.button>
+          </div>
+
           {/* Desktop Actions */}
           <div className="header-actions">
-            {/* زر الترجمة للشاشات الكبيرة */}
+            {/* Language button for large screens */}
             <motion.button
               className="language-button desktop-only"
               onClick={handleLanguageToggle}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              title={currentLang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
+              title={currentLang === 'en' ? 'Switch to Arabic' : 'التبديل للإنجليزية'}
             >
               <FaGlobe className="language-icon" />
               <span className="language-text">
-                {currentLang === 'ar' ? 'EN' : 'ع'}
+                {currentLang === 'en' ? 'AR' : 'EN'}
               </span>
             </motion.button>
 
-            {/* زر تسجيل الدخول للشاشات الكبيرة */}
+            {/* Login button for large screens */}
             <motion.button
               className="login-button desktop-only"
               onClick={handleLoginClick}
@@ -185,7 +185,7 @@ const Header = () => {
               whileTap={{ scale: 0.95 }}
             >
               <FaUser className="login-icon" />
-              {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
+              {isLoggedIn ? 'My Account' : 'Login'}
             </motion.button>
 
             <motion.button 
@@ -194,7 +194,7 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              احجزي الآن
+              Book Now
             </motion.button>
           </div>
         </div>
@@ -202,7 +202,7 @@ const Header = () => {
 
       {/* Mobile Menu Sidebar */}
       <nav className={`nav mobile-nav ${menuOpen ? 'open' : ''}`}>
-        {/* روابط الصفحات */}
+        {/* Page links */}
         {pageLinks.map((link, index) => (
           <Link
             key={link.name}
@@ -214,7 +214,7 @@ const Header = () => {
           </Link>
         ))}
 
-        {/* روابط السيكشنات (فقط في الصفحة الرئيسية) */}
+        {/* Section links (only on homepage) */}
         {isHomePage && sectionLinks.map((link, index) => (
           <motion.a
             key={link.name}
@@ -226,10 +226,10 @@ const Header = () => {
           </motion.a>
         ))}
 
-        {/* فاصل */}
+        {/* Divider */}
         <div className="nav-divider"></div>
 
-        {/* زر تسجيل الدخول في القائمة */}
+        {/* Login button in menu */}
         <motion.button
           className="login-button mobile-menu"
           onClick={() => {
@@ -240,7 +240,7 @@ const Header = () => {
           whileTap={{ scale: 0.98 }}
         >
           <FaUser className="login-icon" />
-          {isLoggedIn ? 'حسابي' : 'تسجيل دخول'}
+          {isLoggedIn ? 'My Account' : 'Login'}
         </motion.button>
       </nav>
     </>

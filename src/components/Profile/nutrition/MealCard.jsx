@@ -10,7 +10,7 @@ const MealCard = ({ meal, index, isSelected, onToggle }) => {
   const handleDownloadPDF = (e) => {
     e.stopPropagation();
     if (meal.pdfUrl) {
-      // في المستقبل سيتم تحميل PDF من Laravel API
+      // In the future, download PDF from Laravel API
       window.open(meal.pdfUrl, '_blank');
       console.log('Downloading PDF:', meal.pdfUrl);
     }
@@ -19,20 +19,18 @@ const MealCard = ({ meal, index, isSelected, onToggle }) => {
   return (
     <motion.div
       className={`meal-card ${meal.checked ? 'checked' : ''} ${isSelected ? 'expanded' : ''}`}
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
     >
       <div className="meal-header" onClick={onToggle}>
         <div className="meal-main">
-          <motion.button
+          <button
             className={`check-btn ${meal.checked ? 'checked' : ''}`}
             onClick={handleCheckToggle}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
             {meal.checked && <FaCheckCircle />}
-          </motion.button>
+          </button>
           <div className="meal-info">
             <h4>{meal.name}</h4>
             <span className="meal-time">
@@ -43,22 +41,18 @@ const MealCard = ({ meal, index, isSelected, onToggle }) => {
         <div className="meal-summary">
           <span className="calories">{meal.calories} kcal</span>
           {meal.pdfUrl && (
-            <motion.button
+            <button
               className="pdf-btn"
               onClick={handleDownloadPDF}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              title="تحميل النظام الغذائي PDF"
+              title="Download PDF"
             >
               <FaFilePdf />
-            </motion.button>
+            </button>
           )}
-          <motion.div 
+          <FaChevronDown
             className="expand-icon"
-            animate={{ rotate: isSelected ? 180 : 0 }}
-          >
-            <FaChevronDown />
-          </motion.div>
+            style={{ transform: isSelected ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          />
         </div>
       </div>
 
@@ -73,37 +67,36 @@ const MealCard = ({ meal, index, isSelected, onToggle }) => {
           >
             <div className="macros-row">
               <div className="macro-item">
-                <span className="macro-label">بروتين</span>
+                <span className="macro-label">Protein</span>
                 <span className="macro-value">{meal.protein}g</span>
               </div>
               <div className="macro-item">
-                <span className="macro-label">كارب</span>
+                <span className="macro-label">Carbs</span>
                 <span className="macro-value">{meal.carbs}g</span>
               </div>
               <div className="macro-item">
-                <span className="macro-label">دهون</span>
+                <span className="macro-label">Fats</span>
                 <span className="macro-value">{meal.fats}g</span>
               </div>
             </div>
+
             <div className="meal-items">
-              <h5>المكونات:</h5>
+              <h5>Ingredients:</h5>
               <ul>
                 {meal.items.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
             </div>
-            
+
             {meal.pdfUrl && (
-              <motion.button
+              <button
                 className="download-full-pdf"
                 onClick={handleDownloadPDF}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
               >
                 <FaFilePdf />
-                تحميل النظام الغذائي الكامل PDF
-              </motion.button>
+                Download Full Meal Plan PDF
+              </button>
             )}
           </motion.div>
         )}

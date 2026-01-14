@@ -7,11 +7,11 @@ import './FAQ.scss';
 const JourneyNode = ({ node, index, activeNode, handleNodeClick, scrollProgress, revealedNodes, setRevealedNodes }) => {
   const nodeRef = useRef(null);
   
-  // حساب متى يجب أن يظهر الجواب بناءً على الخط الزمني
+  // Calculate when the answer should appear based on the timeline
   const nodeProgressThreshold = index / 11;
   const shouldReveal = scrollProgress > nodeProgressThreshold && !node.locked;
   
-  // إضافة النقطة للـ revealed nodes عند وصول الخط
+  // Add node to revealed nodes when the line reaches it
   useEffect(() => {
     if (shouldReveal && !revealedNodes.includes(node.id)) {
       const timer = setTimeout(() => {
@@ -22,7 +22,7 @@ const JourneyNode = ({ node, index, activeNode, handleNodeClick, scrollProgress,
     }
   }, [shouldReveal]);
 
-  // النقطة active إذا كانت مضغوطة أو revealed
+  // Node is active if clicked or revealed
   const isActive = activeNode === node.id || revealedNodes.includes(node.id);
 
   return (
@@ -68,7 +68,7 @@ const JourneyNode = ({ node, index, activeNode, handleNodeClick, scrollProgress,
         {node.question}
       </motion.div>
 
-      {/* Answer Popover - يبقى ظاهر */}
+      {/* Answer Popover - stays visible */}
       {!node.locked && (
         <motion.div
           className="node-answer"
@@ -92,8 +92,8 @@ const JourneyNode = ({ node, index, activeNode, handleNodeClick, scrollProgress,
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <p>هذا سؤال شخصي…</p>
-          <p>ما له جواب عام.</p>
+          <p>This is a personal question…</p>
+          <p>No general answer.</p>
           <FaArrowDown className="arrow-down" />
         </motion.div>
       )}
@@ -114,7 +114,7 @@ const JourneyNode = ({ node, index, activeNode, handleNodeClick, scrollProgress,
 
 const FAQ = () => {
   const [activeNode, setActiveNode] = useState(null);
-  const [revealedNodes, setRevealedNodes] = useState([]); // النقاط اللي ظهرت
+  const [revealedNodes, setRevealedNodes] = useState([]); // Revealed nodes
   const [formData, setFormData] = useState({ question: '', contact: '' });
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -124,7 +124,7 @@ const FAQ = () => {
 
   const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
   
-  // تحويل scrollYProgress لقيمة عادية
+  // Convert scrollYProgress to regular value
   const [scrollProgress, setScrollProgress] = useState(0);
   
   useEffect(() => {
@@ -137,71 +137,71 @@ const FAQ = () => {
     {
       id: 1,
       position: { top: '6%', left: '20%' },
-      question: 'من وين أبلّش؟',
-      answer: 'البداية مش بقوتك، البداية بقرارك.',
+      question: 'Where do I start?',
+      answer: 'The beginning is not your strength, it\'s your decision.',
       locked: false,
       color: '#E91E63'
     },
     {
       id: 2,
       position: { top: '14%', left: '75%' },
-      question: 'بخاف ما أكمّل…',
-      answer: 'أغلب المتدربات بلشن بنفس الشعور.',
+      question: 'I\'m afraid I won\'t continue...',
+      answer: 'Most trainees started with the same feeling.',
       locked: false,
       color: '#9C27B0'
     },
     {
       id: 3,
       position: { top: '23%', left: '30%' },
-      question: 'شو عن خصوصيتي؟',
-      answer: 'خصوصيتك خط أحمر.',
+      question: 'What about my privacy?',
+      answer: 'Your privacy is a red line.',
       locked: false,
       color: '#2196F3'
     },
     {
       id: 4,
       position: { top: '32%', left: '70%' },
-      question: 'وقتي قليل',
-      answer: '30 دقيقة كافية لما تكون صح.',
+      question: 'I have limited time',
+      answer: '30 minutes is enough when done right.',
       locked: false,
       color: '#4CAF50'
     },
     {
       id: 5,
       position: { top: '41%', left: '25%' },
-      question: 'متى أشوف فرق؟',
-      answer: 'الفرق يبدأ قبل ما يبان.',
+      question: 'When will I see results?',
+      answer: 'The difference starts before it shows.',
       locked: false,
       color: '#FF9800'
     },
     {
       id: 6,
       position: { top: '50%', left: '65%' },
-      question: 'التدريب أونلاين؟',
-      answer: 'أيوه! من بيتك وبوقتك.',
+      question: 'Is it online training?',
+      answer: 'Yes! From your home and at your time.',
       locked: false,
       color: '#00BCD4'
     },
     {
       id: 7,
       position: { top: '59%', left: '35%' },
-      question: 'بحتاج معدات؟',
-      answer: 'لا، جسمك وحافزك كافيين.',
+      question: 'Do I need equipment?',
+      answer: 'No, your body and motivation are enough.',
       locked: false,
       color: '#FF5722'
     },
     {
       id: 8,
       position: { top: '68%', left: '70%' },
-      question: 'النظام الغذائي؟',
-      answer: 'مرن وما فيه حرمان.',
+      question: 'What about diet?',
+      answer: 'Flexible with no deprivation.',
       locked: false,
       color: '#8BC34A'
     },
     {
       id: 9,
       position: { top: '77%', left: '30%' },
-      question: 'كم التكلفة؟',
+      question: 'How much does it cost?',
       answer: '',
       locked: true,
       color: '#795548'
@@ -209,7 +209,7 @@ const FAQ = () => {
     {
       id: 10,
       position: { top: '86%', left: '60%' },
-      question: 'هل التدريب صعب؟',
+      question: 'Is the training hard?',
       answer: '',
       locked: true,
       color: '#607D8B'
@@ -217,7 +217,7 @@ const FAQ = () => {
     {
       id: 11,
       position: { top: '94%', left: '40%' },
-      question: 'كم المدة للنتيجة؟',
+      question: 'How long for results?',
       answer: '',
       locked: true,
       color: '#9E9E9E'
@@ -240,10 +240,10 @@ const FAQ = () => {
     e.preventDefault();
     
     Swal.fire({
-      title: 'شكراً لك! 💕',
-      text: 'سيتم الرد على سؤالك قريباً',
+      title: 'Thank you! 💕',
+      text: 'Your question will be answered soon',
       icon: 'success',
-      confirmButtonText: 'تمام',
+      confirmButtonText: 'OK',
       confirmButtonColor: '#E91E63',
       iconColor: '#E91E63',
       background: '#fff',
@@ -266,11 +266,11 @@ const FAQ = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="journey-title">خريطة رحلتك</h1>
-        <p className="journey-subtitle">كل نقطة سؤال… وكل طريق له جواب 🤍</p>
+        <h1 className="journey-title">Your Journey Map</h1>
+        <p className="journey-subtitle">Every point is a question… and every path has an answer 🤍</p>
       </motion.div>
 
-      {/* SVG Path - الخط المتعرج */}
+      {/* SVG Path - the winding line */}
       <svg className="journey-path" viewBox="0 0 100 100" preserveAspectRatio="none">
         <motion.path
           d="M 20,8 Q 40,12 30,16 T 75,16 Q 60,20 30,26 T 70,34 Q 50,38 25,42 T 65,50 Q 45,54 35,58 T 70,66 Q 55,70 30,74 T 60,82 Q 50,86 40,90"
@@ -320,14 +320,14 @@ const FAQ = () => {
         transition={{ duration: 0.8 }}
       >
         <div className="form-header">
-          <h2>نقطة سؤالك أنتِ</h2>
-          <p>هذا السؤال مكانه هون</p>
+          <h2>Your Question Point</h2>
+          <p>This is where your question belongs</p>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <textarea
-              placeholder="سؤالك..."
+              placeholder="Your question..."
               value={formData.question}
               onChange={(e) => setFormData({ ...formData, question: e.target.value })}
               required
@@ -338,14 +338,14 @@ const FAQ = () => {
           <div className="form-group">
             <input
               type="text"
-              placeholder="إيميلك أو رقمك"
+              placeholder="Your email or number"
               value={formData.contact}
               onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
               required
             />
           </div>
 
-          <p className="form-note">الجواب رح يوصلك مباشرة</p>
+          <p className="form-note">The answer will reach you directly</p>
 
           <motion.button
             type="submit"
@@ -353,7 +353,7 @@ const FAQ = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            أضيف سؤالي للخريطة
+            Add My Question to the Map
           </motion.button>
         </form>
       </motion.div>

@@ -18,55 +18,55 @@ const Plans = () => {
   const plans = [
     {
       id: 'starter',
-      name: 'البداية الصحية',
-      subtitle: 'للمبتدئات',
+      name: 'Healthy Start',
+      subtitle: 'For Beginners',
       price: 149,
-      duration: 'شهر واحد',
+      duration: '1 Month',
       popular: false,
       features: [
-        'برنامج تمارين مخصص حسب مستواك',
-        'نظام غذائي خاص بك',
-        'متابعة أسبوعية',
-        'شات خاص مع المدربة (رد خلال 24 ساعة)',
-        'نصائح وتحفيز مستمر'
+        'Customized workout program based on your level',
+        'Personal nutrition plan',
+        'Weekly follow-up',
+        'Private chat with coach (24-hour response)',
+        'Continuous tips and motivation'
       ],
       color: 'blue',
       icon: '💪'
     },
     {
       id: 'commitment',
-      name: 'الالتزام والتغيير',
-      subtitle: 'الأكثر اختيارًا',
+      name: 'Commitment & Change',
+      subtitle: 'Most Popular',
       price: 349,
-      duration: '3 أشهر',
+      duration: '3 Months',
       popular: true,
       features: [
-        'برنامج تمارين مخصص ويتم تحديثه حسب التقدم',
-        'نظام غذائي شخصي لكل متدربة',
-        'متابعة مستمرة طوال الأسبوع',
-        'شات خاص مباشر مع المدربة (رد سريع)',
-        'متابعة الوزن والقياسات',
-        'إرشادات لنمط حياة صحي'
+        'Custom workout program updated based on progress',
+        'Personal nutrition plan for each trainee',
+        'Continuous weekly follow-up',
+        'Direct private chat with coach (quick response)',
+        'Weight and measurements tracking',
+        'Healthy lifestyle guidance'
       ],
       color: 'pink',
       icon: '🔥'
     },
     {
       id: 'elite',
-      name: 'التحول الكامل',
-      subtitle: 'لمن تريد نتائج قوية',
+      name: 'Complete Transformation',
+      subtitle: 'For Strong Results',
       price: 549,
-      duration: '3 أشهر',
+      duration: '3 Months',
       popular: false,
       features: [
-        'برنامج تمارين احترافي متقدم',
-        'نظام غذائي دقيق حسب الهدف',
-        'متابعة يومية مباشرة',
-        'شات خاص مع المدربة 24/7',
-        'تقييم شامل للجسم',
-        'خطة مخصصة لشكل الجسم',
-        'تحفيز ومتابعة نفسية',
-        'أولوية قصوى في الرد والدعم'
+        'Advanced professional workout program',
+        'Precise nutrition plan based on goal',
+        'Direct daily follow-up',
+        'Private chat with coach 24/7',
+        'Comprehensive body assessment',
+        'Custom plan for body shape',
+        'Motivation and psychological follow-up',
+        'Top priority in response and support'
       ],
       color: 'gold',
       icon: '👑'
@@ -107,16 +107,16 @@ const Plans = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="hero-label">خطط التدريب والاشتراك</span>
+            <span className="hero-label">Training & Subscription Plans</span>
 
             <h1 className="hero-title">
-              طريقك لجسم صحي  
-              <span className="gradient-text"> يبدأ من هنا</span>
+              Your Path to a Healthy Body
+              <span className="gradient-text"> Starts Here</span>
             </h1>
 
             <p className="hero-description">
-              برامج تدريب ونظام غذائي مصممين خصيصًا لك،  
-              مع شات خاص مباشر مع المدربة لمتابعة تقدمك خطوة بخطوة
+              Training programs and nutrition plans designed specifically for you,
+              with direct private chat with the coach to track your progress step by step
             </p>
           </motion.div>
         </div>
@@ -147,17 +147,17 @@ const Plans = () => {
           >
             <div className="trust-badge">
               <span className="badge-icon">🥗</span>
-              <span>نظام غذائي مخصص لكل متدربة</span>
+              <span>Custom nutrition plan for each trainee</span>
             </div>
 
             <div className="trust-badge">
               <span className="badge-icon">💬</span>
-              <span>شات خاص مباشر مع المدربة</span>
+              <span>Direct private chat with coach</span>
             </div>
 
             <div className="trust-badge">
               <span className="badge-icon">⚡</span>
-              <span>بدء فوري بعد الاشتراك</span>
+              <span>Instant start after subscription</span>
             </div>
           </motion.div>
         </div>

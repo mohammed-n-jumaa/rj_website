@@ -22,7 +22,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
     password: '',
     confirmPassword: ''
   });
-  const [step, setStep] = useState(1); // للتسجيل متعدد الخطوات
+  const [step, setStep] = useState(1); // For multi-step registration
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
 
@@ -42,12 +42,12 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
       setIsSubmitting(false);
       
       Swal.fire({
-        title: mode === 'login' ? 'أهلاً بعودتك! 💪' : 'مرحباً بك! 🎉',
+        title: mode === 'login' ? 'Welcome Back! 💪' : 'Welcome! 🎉',
         text: mode === 'login' 
-          ? 'تم تسجيل الدخول بنجاح' 
-          : 'حسابك جاهز! لنبدأ رحلة التحول',
+          ? 'Successfully logged in' 
+          : 'Your account is ready! Let\'s start the transformation',
         icon: 'success',
-        confirmButtonText: 'يلا نبدأ',
+        confirmButtonText: 'Let\'s Go',
         confirmButtonColor: '#E91E63',
         iconColor: '#E91E63'
       });
@@ -158,11 +158,11 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                 >
-                  <h2>{mode === 'login' ? 'مرحباً بعودتك!' : 'ابدأي رحلتك!'}</h2>
+                  <h2>{mode === 'login' ? 'Welcome Back!' : 'Start Your Journey!'}</h2>
                   <p>
                     {mode === 'login' 
-                      ? 'جاهزة لتكملي التحدي؟' 
-                      : 'خطوة واحدة نحو نسخة أفضل منك'}
+                      ? 'Ready to continue the challenge?' 
+                      : 'One step towards a better version of yourself'}
                   </p>
                   
                   {/* Progress Rings for Registration */}
@@ -194,11 +194,11 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                 >
                   <div className="stat">
                     <FaFire />
-                    <span>500+ متدربة</span>
+                    <span>500+ Trainees</span>
                   </div>
                   <div className="stat">
                     <FaTrophy />
-                    <span>نتائج مضمونة</span>
+                    <span>Guaranteed Results</span>
                   </div>
                 </motion.div>
               </div>
@@ -210,11 +210,11 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                 className="auth-header"
                 layout
               >
-                <h1>{mode === 'login' ? 'تسجيل الدخول' : 'إنشاء حساب'}</h1>
+                <h1>{mode === 'login' ? 'Login' : 'Create Account'}</h1>
                 <p>
                   {mode === 'login' 
-                    ? 'ادخلي لحسابك وكملي رحلتك' 
-                    : `الخطوة ${step} من 3`}
+                    ? 'Enter your account and continue your journey' 
+                    : `Step ${step} of 3`}
                 </p>
               </motion.div>
 
@@ -235,7 +235,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           <input
                             type="email"
                             name="email"
-                            placeholder="البريد الإلكتروني"
+                            placeholder="Email"
                             value={formData.email}
                             onChange={handleChange}
                             required
@@ -249,7 +249,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           <input
                             type="password"
                             name="password"
-                            placeholder="كلمة المرور"
+                            placeholder="Password"
                             value={formData.password}
                             onChange={handleChange}
                             required
@@ -260,9 +260,9 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                       <div className="form-options">
                         <label className="remember-me">
                           <input type="checkbox" />
-                          <span>تذكرني</span>
+                          <span>Remember me</span>
                         </label>
-                        <a href="#" className="forgot-password">نسيت كلمة المرور؟</a>
+                        <a href="#" className="forgot-password">Forgot password?</a>
                       </div>
 
                       <motion.button
@@ -279,7 +279,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                           />
                         ) : (
-                          'دخول'
+                          'Login'
                         )}
                       </motion.button>
                     </motion.div>
@@ -299,7 +299,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           <input
                             type="text"
                             name="name"
-                            placeholder="الاسم الكامل"
+                            placeholder="Full Name"
                             value={formData.name}
                             onChange={handleChange}
                             required
@@ -313,7 +313,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           <input
                             type="email"
                             name="email"
-                            placeholder="البريد الإلكتروني"
+                            placeholder="Email"
                             value={formData.email}
                             onChange={handleChange}
                             required
@@ -328,7 +328,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        التالي
+                        Next
                       </motion.button>
                     </motion.div>
                   )}
@@ -347,7 +347,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           <input
                             type="password"
                             name="password"
-                            placeholder="كلمة المرور"
+                            placeholder="Password"
                             value={formData.password}
                             onChange={handleChange}
                             required
@@ -361,7 +361,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           <input
                             type="password"
                             name="confirmPassword"
-                            placeholder="تأكيد كلمة المرور"
+                            placeholder="Confirm Password"
                             value={formData.confirmPassword}
                             onChange={handleChange}
                             required
@@ -377,7 +377,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          رجوع
+                          Back
                         </motion.button>
                         <motion.button
                           type="button"
@@ -386,7 +386,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          التالي
+                          Next
                         </motion.button>
                       </div>
                     </motion.div>
@@ -401,13 +401,13 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                       exit={{ opacity: 0, x: -50 }}
                     >
                       <div className="goals-selection">
-                        <h3>شو هدفك؟</h3>
+                        <h3>What's your goal?</h3>
                         <div className="goals-grid">
                           {[
-                            { icon: FaFire, text: 'خسارة وزن', color: '#E91E63' },
-                            { icon: FaDumbbell, text: 'بناء عضلات', color: '#9C27B0' },
-                            { icon: FaHeart, text: 'لياقة عامة', color: '#2196F3' },
-                            { icon: FaTrophy, text: 'تحدي نفسي', color: '#FF9800' }
+                            { icon: FaFire, text: 'Weight Loss', color: '#E91E63' },
+                            { icon: FaDumbbell, text: 'Build Muscle', color: '#9C27B0' },
+                            { icon: FaHeart, text: 'General Fitness', color: '#2196F3' },
+                            { icon: FaTrophy, text: 'Challenge Myself', color: '#FF9800' }
                           ].map((goal, i) => (
                             <motion.div
                               key={i}
@@ -432,7 +432,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          رجوع
+                          Back
                         </motion.button>
                         <motion.button
                           type="submit"
@@ -448,7 +448,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                             />
                           ) : (
-                            'ابدأ الآن!'
+                            'Start Now!'
                           )}
                         </motion.button>
                       </div>
@@ -465,9 +465,9 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                 transition={{ delay: 0.3 }}
               >
                 <p>
-                  {mode === 'login' ? 'ما عندك حساب؟' : 'عندك حساب؟'}
+                  {mode === 'login' ? 'Don\'t have an account?' : 'Already have an account?'}
                   <button onClick={switchMode}>
-                    {mode === 'login' ? 'سجلي الآن' : 'سجلي دخول'}
+                    {mode === 'login' ? 'Register Now' : 'Login'}
                   </button>
                 </p>
               </motion.div>
@@ -475,7 +475,7 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
               {/* Social Login */}
               <div className="social-login">
                 <div className="divider">
-                  <span>أو</span>
+                  <span>OR</span>
                 </div>
                 <div className="social-buttons">
                   <motion.button

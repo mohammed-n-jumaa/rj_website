@@ -51,18 +51,18 @@ const Certifications = () => {
   }
 ];
 
-  // حساب عدد النسخ المطلوبة بناءً على عرض الشاشة
+  // Calculate required copies based on screen width
   const calculateCopies = () => {
-    if (typeof window === 'undefined') return 4; // قيمة افتراضية
+    if (typeof window === 'undefined') return 4; // default value
     
     const cardWidth = window.innerWidth <= 768 ? 240 : 280;
     const gap = window.innerWidth <= 768 ? 1.5 : 2;
-    const totalCardWidth = cardWidth + (gap * 16); // تحويل rem إلى px (1rem = 16px)
+    const totalCardWidth = cardWidth + (gap * 16); // convert rem to px (1rem = 16px)
     
     const cardsPerScreen = Math.ceil(window.innerWidth / totalCardWidth);
     const copiesNeeded = Math.ceil(cardsPerScreen / certifications.length) + 3;
     
-    return Math.max(copiesNeeded, 4); // الحد الأدنى 4 نسخ
+    return Math.max(copiesNeeded, 4); // minimum 4 copies
   };
 
   const [copies, setCopies] = useState(calculateCopies());
@@ -73,7 +73,7 @@ const Certifications = () => {
       setCopies(calculateCopies());
     };
 
-    handleResize(); // استدعاء فوري للتهيئة
+    handleResize(); // immediate call for initialization
     window.addEventListener('resize', handleResize);
     
     return () => {
@@ -81,7 +81,7 @@ const Certifications = () => {
     };
   }, []);
 
-  // إنشاء مصفوفة مكررة للتغطية الكاملة
+  // Create duplicated array for full coverage
   const createInfiniteItems = () => {
     let infiniteItems = [];
     for (let i = 0; i < copies; i++) {
@@ -93,12 +93,12 @@ const Certifications = () => {
   const infiniteItems = createInfiniteItems();
 
   const handleCardClick = (issuer) => {
-    console.log(`تم النقر على شهادة: ${issuer}`);
-    // يمكنك إضافة سلوك إضافي هنا، مثل فتح نافذة منبثقة
+    console.log(`Clicked on certification: ${issuer}`);
+    // You can add additional behavior here, such as opening a modal
   };
 
   return (
-    <section className="certifications" aria-label="الشهادات المعتمدة">
+    <section className="certifications" aria-label="Certified Credentials">
       <div className="certifications-slider">
         <div 
           className="slider-track" 
@@ -117,7 +117,7 @@ const Certifications = () => {
                   handleCardClick(cert.issuer);
                 }
               }}
-              aria-label={`شهادة معتمدة من ${cert.issuer}`}
+              aria-label={`Certified by ${cert.issuer}`}
             >
               <div 
                 className="cert-icon"
@@ -128,7 +128,7 @@ const Certifications = () => {
                 {cert.icon}
               </div>
               <div className="cert-info">
-                <p className="cert-label">موثوق من قبل</p>
+                <p className="cert-label">Trusted by</p>
                 <h4>{cert.issuer}</h4>
               </div>
             </div>

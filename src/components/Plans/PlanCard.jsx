@@ -14,7 +14,7 @@ const PlanCard = ({ plan, onSelect, delay }) => {
     >
       {popular && (
         <div className="popular-badge">
-          <FaCrown /> الأكثر شعبية
+          <FaCrown /> Most Popular
         </div>
       )}
 
@@ -55,7 +55,7 @@ const PlanCard = ({ plan, onSelect, delay }) => {
         whileTap={{ scale: 0.98 }}
       >
         <FaPaypal />
-        اشتراك عبر PayPal
+        Subscribe via PayPal
       </motion.button>
 
     </motion.div>

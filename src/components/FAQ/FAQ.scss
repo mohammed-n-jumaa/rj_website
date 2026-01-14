@@ -1,19 +1,20 @@
 @import '../../styles/variables.scss';
 
 // ===================================
-// FAQ Journey - خريطة الرحلة
+// FAQ Journey - Journey Map
 // ===================================
 .faq-journey {
   position: relative;
   min-height: 100vh;
   padding: 5rem 2rem 3rem;
-  background: $background-color; // خلفية بيضاء
-  overflow-x: hidden; // منع السكرول الأفقي
+  background: $background-color;
+  overflow-x: hidden;
+  direction: ltr;
   
-  // خلفية متدرجة في الأعلى فقط - نفس لون الفوتر
+  // Gradient background at the top only - same color as footer
   &::before {
     content: '';
-    position: absolute; // ثابتة في الأعلى، لا تتحرك مع السكرول
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -42,7 +43,7 @@
   }
   
   @media (max-width: $breakpoint-mobile) {
-    padding: 6.5rem 0.5rem 2rem; // زيادة padding-top للموبايل
+    padding: 6.5rem 0.5rem 2rem;
   }
 }
 
@@ -69,6 +70,7 @@
   background-clip: text;
   margin-bottom: 1rem;
   letter-spacing: -1px;
+  font-family: 'Poppins', sans-serif;
   
   @media (max-width: $breakpoint-tablet) {
     font-size: 2.8rem;
@@ -83,6 +85,7 @@
   font-size: 1.3rem;
   color: rgba(28, 28, 28, 0.7);
   font-weight: 400;
+  font-family: 'Poppins', sans-serif;
   
   @media (max-width: $breakpoint-mobile) {
     font-size: 1.1rem;
@@ -90,7 +93,7 @@
 }
 
 // ===================================
-// SVG Path - المسار
+// SVG Path
 // ===================================
 .journey-path {
   position: absolute;
@@ -119,8 +122,8 @@
 .journey-nodes {
   position: relative;
   width: 100%;
-  height: 200vh; // زيادة الارتفاع لضمان عدم ظهور أسئلة تحت الفورم
-  margin: 3rem 0 5rem; // margin-bottom إضافي
+  height: 200vh;
+  margin: 3rem 0 5rem;
   
   @media (max-width: $breakpoint-tablet) {
     height: 240vh;
@@ -128,7 +131,7 @@
   }
   
   @media (max-width: $breakpoint-mobile) {
-    height: 350vh; // ارتفاع كبير للموبايل بسبب الأجوبة تحت النقاط
+    height: 350vh;
     margin: 2rem 0 3rem;
   }
 }
@@ -154,7 +157,7 @@
 }
 
 // ===================================
-// Node Point (الدائرة)
+// Node Point
 // ===================================
 .node-point {
   width: 60px;
@@ -197,6 +200,7 @@
   white-space: nowrap;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: 2px solid rgba(233, 30, 99, 0.2);
+  font-family: 'Poppins', sans-serif;
   
   @media (max-width: $breakpoint-mobile) {
     font-size: 0.9rem;
@@ -213,7 +217,7 @@
 .node-answer {
   position: absolute;
   top: -20px;
-  right: 80px;
+  left: 80px;
   background: linear-gradient(135deg, 
     rgba(233, 30, 99, 0.95), 
     rgba(194, 24, 91, 0.95)
@@ -228,19 +232,18 @@
   z-index: 10;
   
   @media (max-width: $breakpoint-tablet) {
-    right: auto;
-    left: 80px;
+    left: auto;
+    right: 80px;
     min-width: 180px;
     max-width: 250px;
     padding: 0.9rem 1.2rem;
   }
   
   @media (max-width: $breakpoint-mobile) {
-    // كل الأجوبة في المنتصف تحت النقطة
     right: auto !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    top: 145px !important; // تحت السؤال
+    top: 145px !important;
     min-width: 180px !important;
     max-width: 220px !important;
     padding: 0.9rem 1.2rem !important;
@@ -251,6 +254,7 @@
     margin: 0;
     font-size: 1rem;
     line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 0.88rem;
@@ -261,24 +265,23 @@
 
 .answer-arrow {
   position: absolute;
-  left: -10px;
+  right: -10px;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-right: 10px solid rgba(233, 30, 99, 0.95);
+  border-left: 10px solid rgba(233, 30, 99, 0.95);
   
   @media (max-width: $breakpoint-tablet) {
-    left: auto;
-    right: -10px;
-    border-right: none;
-    border-left: 10px solid rgba(233, 30, 99, 0.95);
+    right: auto;
+    left: -10px;
+    border-left: none;
+    border-right: 10px solid rgba(233, 30, 99, 0.95);
   }
   
   @media (max-width: $breakpoint-mobile) {
-    // السهم من الأعلى دائماً
     left: 50% !important;
     right: auto !important;
     top: -10px !important;
@@ -318,6 +321,7 @@
   p {
     margin: 0.3rem 0;
     font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 0.82rem;
@@ -386,6 +390,7 @@
     font-weight: 800;
     color: $secondary-color;
     margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 1.8rem;
@@ -395,6 +400,7 @@
   p {
     font-size: 1.1rem;
     color: rgba(28, 28, 28, 0.6);
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 1rem;
@@ -412,7 +418,7 @@
     border: 2px solid rgba(233, 30, 99, 0.2);
     border-radius: 15px;
     font-size: 1rem;
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.8);
     
@@ -439,6 +445,7 @@
   font-size: 0.9rem;
   color: rgba(28, 28, 28, 0.5);
   margin-bottom: 1.5rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .submit-button {
@@ -452,7 +459,7 @@
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Poppins', sans-serif;
   transition: all 0.3s ease;
   
   &:hover {
@@ -500,7 +507,6 @@ html {
 @media (max-width: $breakpoint-tablet) {
   .journey-nodes {
     .journey-node {
-      // تعديل المواقع للتابلت
       &[style*="left: 75%"],
       &[style*="left: 70%"],
       &[style*="left: 65%"] {
@@ -518,7 +524,6 @@ html {
 
 @media (max-width: $breakpoint-mobile) {
   .journey-nodes {
-    // تعديل مواقع النقاط للموبايل
     .journey-node {
       &[style*="left: 75%"],
       &[style*="left: 70%"],
@@ -542,7 +547,6 @@ html {
       }
     }
     
-    // تصغير حجم العناصر
     .node-point {
       width: 45px !important;
       height: 45px !important;
@@ -582,7 +586,6 @@ html {
     }
   }
   
-  // تحسين الفورم للموبايل
   .question-form {
     padding: 2rem 1.2rem !important;
     margin: 0 0.5rem;
@@ -605,7 +608,6 @@ html {
     }
   }
   
-  // تحسين العنوان للموبايل
   .journey-header {
     padding: 0 0.5rem;
     
@@ -619,7 +621,6 @@ html {
   }
 }
 
-// Extra small devices
 @media (max-width: 375px) {
   .journey-nodes {
     height: 280vh !important;

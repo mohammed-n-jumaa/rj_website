@@ -10,8 +10,8 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const bankDetails = {
-    bankName: 'البنك الأهلي التجاري',
-    accountName: 'رند جرار  ',
+    bankName: 'National Commercial Bank',
+    accountName: 'Rand Jarrar',
     accountNumber: 'SA1234567890123456789012',
     iban: 'SA1234567890123456789012'
   };
@@ -19,25 +19,25 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // التحقق من نوع الملف
+      // Check file type
       if (!file.type.startsWith('image/')) {
         Swal.fire({
-          title: 'خطأ',
-          text: 'يرجى رفع صورة فقط',
+          title: 'Error',
+          text: 'Please upload images only',
           icon: 'error',
-          confirmButtonText: 'حسناً',
+          confirmButtonText: 'OK',
           confirmButtonColor: '#E91E63'
         });
         return;
       }
 
-      // التحقق من حجم الملف (5MB max)
+      // Check file size (5MB max)
       if (file.size > 5 * 1024 * 1024) {
         Swal.fire({
-          title: 'خطأ',
-          text: 'حجم الصورة يجب أن يكون أقل من 5 ميجابايت',
+          title: 'Error',
+          text: 'Image size must be less than 5 MB',
           icon: 'error',
-          confirmButtonText: 'حسناً',
+          confirmButtonText: 'OK',
           confirmButtonColor: '#E91E63'
         });
         return;
@@ -45,7 +45,7 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
 
       setReceiptImage(file);
       
-      // إنشاء معاينة للصورة
+      // Create image preview
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
@@ -60,13 +60,13 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
   };
 
   const handleSubmit = async () => {
-    // التحقق من البيانات
+    // Validate data
     if (!transferNumber.trim()) {
       Swal.fire({
-        title: 'تنبيه',
-        text: 'يرجى إدخال رقم التحويل',
+        title: 'Warning',
+        text: 'Please enter the transfer number',
         icon: 'warning',
-        confirmButtonText: 'حسناً',
+        confirmButtonText: 'OK',
         confirmButtonColor: '#E91E63'
       });
       return;
@@ -74,10 +74,10 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
 
     if (!receiptImage) {
       Swal.fire({
-        title: 'تنبيه',
-        text: 'يرجى رفع صورة الإيصال',
+        title: 'Warning',
+        text: 'Please upload receipt image',
         icon: 'warning',
-        confirmButtonText: 'حسناً',
+        confirmButtonText: 'OK',
         confirmButtonColor: '#E91E63'
       });
       return;
@@ -86,7 +86,7 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
     setIsSubmitting(true);
 
     try {
-      // في المستقبل: رفع البيانات إلى Laravel API
+      // In the future: Upload data to Laravel API
       // const formData = new FormData();
       // formData.append('transfer_number', transferNumber);
       // formData.append('receipt', receiptImage);
@@ -96,21 +96,21 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
       //   headers: { 'Content-Type': 'multipart/form-data' }
       // });
 
-      // محاكاة عملية الرفع
+      // Simulating upload process
       setTimeout(() => {
         setIsSubmitting(false);
         
         Swal.fire({
-          title: 'تم الإرسال بنجاح! 🎉',
+          title: 'Submitted Successfully! 🎉',
           html: `
-            <p>تم استلام طلب التجديد الخاص بك</p>
-            <p><strong>رقم التحويل:</strong> ${transferNumber}</p>
+            <p>Your renewal request has been received</p>
+            <p><strong>Transfer Number:</strong> ${transferNumber}</p>
             <p style="color: #666; font-size: 0.9rem; margin-top: 1rem;">
-              سيتم مراجعة الطلب والتحقق من التحويل خلال 24 ساعة
+              Your request will be reviewed and the transfer verified within 24 hours
             </p>
           `,
           icon: 'success',
-          confirmButtonText: 'رائع',
+          confirmButtonText: 'Great',
           confirmButtonColor: '#E91E63'
         });
 
@@ -124,10 +124,10 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
       console.error('Bank transfer error:', error);
       
       Swal.fire({
-        title: 'فشل الإرسال',
-        text: 'حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى',
+        title: 'Submission Failed',
+        text: 'An error occurred while sending data. Please try again',
         icon: 'error',
-        confirmButtonText: 'حسناً',
+        confirmButtonText: 'OK',
         confirmButtonColor: '#E91E63'
       });
     }
@@ -136,8 +136,8 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     Swal.fire({
-      title: 'تم النسخ!',
-      text: 'تم نسخ النص إلى الحافظة',
+      title: 'Copied!',
+      text: 'Text copied to clipboard',
       icon: 'success',
       timer: 1500,
       showConfirmButton: false,
@@ -151,52 +151,52 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
       <div className="bank-details-card">
         <div className="card-header">
           <FaUniversity className="bank-icon" />
-          <h3>معلومات الحساب البنكي</h3>
+          <h3>Bank Account Details</h3>
         </div>
 
         <div className="bank-info">
           <div className="info-row">
-            <span className="label">اسم البنك:</span>
+            <span className="label">Bank Name:</span>
             <span className="value">{bankDetails.bankName}</span>
           </div>
           
           <div className="info-row">
-            <span className="label">اسم الحساب:</span>
+            <span className="label">Account Name:</span>
             <span className="value">{bankDetails.accountName}</span>
           </div>
           
           <div className="info-row clickable" onClick={() => copyToClipboard(bankDetails.iban)}>
-            <span className="label">رقم الآيبان:</span>
+            <span className="label">IBAN Number:</span>
             <span className="value copy-value">
               {bankDetails.iban}
-              <span className="copy-hint">انقر للنسخ</span>
+              <span className="copy-hint">Click to copy</span>
             </span>
           </div>
 
           <div className="amount-row">
-            <span className="label">المبلغ المطلوب:</span>
+            <span className="label">Amount Due:</span>
             <span className="amount">${amount}</span>
           </div>
         </div>
 
         <div className="transfer-note">
           <FaCheckCircle />
-          <p>بعد إتمام التحويل، يرجى رفع صورة الإيصال وإدخال رقم التحويل</p>
+          <p>After completing the transfer, please upload receipt image and enter transfer number</p>
         </div>
       </div>
 
       {/* Upload Section */}
       <div className="upload-section">
-        <h4>إثبات التحويل</h4>
+        <h4>Transfer Proof</h4>
 
         {/* Transfer Number */}
         <div className="form-group">
-          <label>رقم التحويل *</label>
+          <label>Transfer Number *</label>
           <input
             type="text"
             value={transferNumber}
             onChange={(e) => setTransferNumber(e.target.value)}
-            placeholder="أدخل رقم التحويل البنكي"
+            placeholder="Enter bank transfer number"
             className="transfer-input"
             disabled={isSubmitting}
           />
@@ -204,7 +204,7 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
 
         {/* Image Upload */}
         <div className="form-group">
-          <label>صورة الإيصال *</label>
+          <label>Receipt Image *</label>
           
           {!imagePreview ? (
             <label className="upload-area">
@@ -216,8 +216,8 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
                 hidden
               />
               <FaUpload className="upload-icon" />
-              <span className="upload-text">اضغط لرفع صورة الإيصال</span>
-              <span className="upload-hint">PNG, JPG, JPEG (حتى 5MB)</span>
+              <span className="upload-text">Click to upload receipt image</span>
+              <span className="upload-hint">PNG, JPG, JPEG (up to 5MB)</span>
             </label>
           ) : (
             <div className="image-preview-container">
@@ -250,7 +250,7 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          إلغاء
+          Cancel
         </motion.button>
 
         <motion.button
@@ -263,12 +263,12 @@ const BankTransferPayment = ({ amount, onSuccess, onCancel }) => {
           {isSubmitting ? (
             <>
               <div className="spinner"></div>
-              <span>جاري الإرسال...</span>
+              <span>Submitting...</span>
             </>
           ) : (
             <>
               <FaCheckCircle />
-              <span>إرسال الطلب</span>
+              <span>Submit Request</span>
             </>
           )}
         </motion.button>

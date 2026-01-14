@@ -9,6 +9,7 @@
   overflow: hidden;
   position: relative;
   width: 100%;
+  direction: ltr;
   
   @media (max-width: $breakpoint-tablet) {
     padding: 1.2rem 0;
@@ -27,7 +28,7 @@
   width: 100%;
   overflow: hidden;
   
-  // إضافة تأثير التدرج على الجوانب
+  // Add gradient effect on the sides
   &::before,
   &::after {
     content: '';
@@ -58,7 +59,7 @@
   gap: 2rem;
   width: fit-content;
   
-  // لضمان عدم وجود فواصل
+  // To ensure no breaks
   will-change: transform;
   backface-visibility: hidden;
   
@@ -79,7 +80,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-50% - 1rem)); // نصف العرض + الفجوة
+    transform: translateX(calc(-50% - 1rem)); // half width + gap
   }
 }
 
@@ -90,7 +91,7 @@
     animation-play-state: paused;
   }
   
-  // لمستخدمي اللمس على الأجهزة المحمولة
+  // For touch users on mobile devices
   @media (hover: none) and (pointer: coarse) {
     &:active {
       animation-play-state: paused;
@@ -114,7 +115,7 @@
   flex-shrink: 0;
   cursor: pointer;
   
-  // ظل خفيف للبطاقة
+  // Subtle shadow for the card
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   
   @media (max-width: $breakpoint-tablet) {
@@ -176,7 +177,7 @@
 // ===================================
 .cert-info {
   flex: 1;
-  min-width: 0; // لمنع تجاوز النص للحدود
+  min-width: 0; // to prevent text overflow
   
   .cert-label {
     font-size: 0.75rem;
@@ -185,6 +186,7 @@
     margin-bottom: 0.2rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 0.7rem;
@@ -197,8 +199,9 @@
     color: $secondary-color;
     line-height: 1.3;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
     
-    // لمنع كسر السطر إذا كان النص طويلاً
+    // To prevent line break if text is too long
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -210,36 +213,6 @@
     @media (max-width: $breakpoint-mobile) {
       font-size: 0.85rem;
     }
-  }
-}
-
-// ===================================
-// RTL Support (إذا كنت بحاجه لدعم اللغة العربية)
-// ===================================
-[dir="rtl"] .certifications-slider {
-  &::before {
-    background: linear-gradient(to left, $background-color 0%, transparent 100%);
-    left: auto;
-    right: 0;
-  }
-  
-  &::after {
-    background: linear-gradient(to right, $background-color 0%, transparent 100%);
-    right: auto;
-    left: 0;
-  }
-}
-
-[dir="rtl"] .slider-track {
-  animation-name: scroll-right;
-}
-
-@keyframes scroll-right {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(50% + 1rem));
   }
 }
 

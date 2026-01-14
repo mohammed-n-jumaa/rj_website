@@ -3,22 +3,17 @@ import { FaUser, FaUtensils, FaDumbbell, FaComments, FaCreditCard } from 'react-
 
 const ProfileTabs = ({ activeTab, setActiveTab }) => {
   const tabs = [
-    { id: 'overview', label: 'نظرة عامة', icon: <FaUser /> },
-    { id: 'nutrition', label: 'التغذية', icon: <FaUtensils /> },
-    { id: 'workout', label: 'التمارين', icon: <FaDumbbell /> },
-    { id: 'chat', label: 'الرسائل', icon: <FaComments />, badge: 2 },
-    { id: 'payment', label: 'الدفع', icon: <FaCreditCard /> }
+    { id: 'overview', label: 'Overview', icon: <FaUser /> },
+    { id: 'nutrition', label: 'Nutrition', icon: <FaUtensils /> },
+    { id: 'workout', label: 'Workout', icon: <FaDumbbell /> },
+    { id: 'chat', label: 'Messages', icon: <FaComments />, badge: 2 },
+    { id: 'payment', label: 'Payment', icon: <FaCreditCard /> }
   ];
 
   return (
-    <motion.div 
-      className="profile-tabs"
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-    >
+    <div className="profile-tabs">
       {tabs.map((tab) => (
-        <motion.button
+        <motion.div
           key={tab.id}
           className={`tab ${activeTab === tab.id ? 'active' : ''}`}
           onClick={() => setActiveTab(tab.id)}
@@ -28,9 +23,9 @@ const ProfileTabs = ({ activeTab, setActiveTab }) => {
           <span className="tab-icon">{tab.icon}</span>
           <span className="tab-label">{tab.label}</span>
           {tab.badge && <span className="tab-badge">{tab.badge}</span>}
-        </motion.button>
+        </motion.div>
       ))}
-    </motion.div>
+    </div>
   );
 };
 

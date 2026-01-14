@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft, FaPlay } from 'react-icons/fa';
+import { FaArrowRight, FaPlay } from 'react-icons/fa';
 import './Hero.scss';
 
 const Hero = () => {
@@ -56,25 +56,25 @@ const Hero = () => {
             variants={itemVariants}
           >
             <span className="badge-dot"></span>
-            <span>برنامج تدريبي مخصص لكِ</span>
+            <span>Personalized Training Program</span>
           </motion.div>
 
           <motion.h1 
             className="hero-title"
             variants={itemVariants}
           >
-            درّبي جسمك بثقة
+            Train Your Body with Confidence
             <br />
-            <span className="highlight">برنامج مصمم خصيصًا لك</span>
+            <span className="highlight">A Program Designed Just for You</span>
           </motion.h1>
 
           <motion.p 
             className="hero-description"
             variants={itemVariants}
           >
-            تدريب وتغذية مبنية على جسمك، هدفك، ونمط حياتك
+            Training and nutrition based on your body, goals, and lifestyle
             <br />
-            ابدئي رحلتك نحو النسخة الأفضل منك
+            Start your journey towards the best version of yourself
           </motion.p>
 
           <motion.div 
@@ -85,8 +85,8 @@ const Hero = () => {
               className="btn btn-primary"
               onClick={() => navigate('/auth')}
             >
-              ابدئي الآن
-              <FaArrowLeft />
+              Start Now
+              <FaArrowRight />
             </button>
 
             <button 
@@ -99,7 +99,7 @@ const Hero = () => {
               }}
             >
               <FaPlay />
-              تعرفي على البرامج
+              Explore Programs
             </button>
           </motion.div>
 
@@ -115,7 +115,7 @@ const Hero = () => {
               >
                 +500
               </motion.h3>
-              <p>متدربة سعيدة</p>
+              <p>Happy Trainees</p>
             </div>
 
             <div className="stat-divider"></div>
@@ -128,7 +128,7 @@ const Hero = () => {
               >
                 +5
               </motion.h3>
-              <p>سنوات خبرة</p>
+              <p>Years Experience</p>
             </div>
 
             <div className="stat-divider"></div>
@@ -141,7 +141,7 @@ const Hero = () => {
               >
                 98%
               </motion.h3>
-              <p>نسبة النجاح</p>
+              <p>Success Rate</p>
             </div>
           </motion.div>
         </motion.div>

@@ -15,6 +15,7 @@
   justify-content: center;
   z-index: 10000;
   padding: 2rem;
+  direction: ltr;
   
   @media (max-width: $breakpoint-mobile) {
     padding: 1rem;
@@ -122,7 +123,7 @@
     background: rgba(233, 30, 99, 0.1);
     border-radius: 50%;
     top: -100px;
-    right: -100px;
+    left: -100px;
     animation: float 15s ease-in-out infinite;
   }
   
@@ -134,7 +135,7 @@
     background: rgba(233, 30, 99, 0.05);
     border-radius: 50%;
     bottom: -80px;
-    left: -80px;
+    right: -80px;
     animation: float 12s ease-in-out infinite reverse;
   }
 }
@@ -196,6 +197,7 @@
     color: white;
     margin-bottom: 1rem;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 1.8rem;
@@ -207,6 +209,7 @@
     color: rgba(255, 255, 255, 0.95);
     margin-bottom: 2rem;
     line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 1rem;
@@ -235,6 +238,7 @@
     font-weight: 700;
     color: white;
     transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       width: 40px;
@@ -274,6 +278,7 @@
     backdrop-filter: blur(10px);
     padding: 0.6rem 1.2rem;
     border-radius: $radius-lg;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 0.85rem;
@@ -320,6 +325,7 @@
     font-weight: 800;
     color: $secondary-color;
     margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-tablet) {
       font-size: 2rem;
@@ -333,6 +339,7 @@
   p {
     color: $text-light;
     font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 0.95rem;
@@ -352,7 +359,7 @@
   
   .input-icon {
     position: absolute;
-    left: 1.2rem;
+    right: 1.2rem;
     top: 50%;
     transform: translateY(-50%);
     color: #E91E63;
@@ -361,12 +368,12 @@
   
   input {
     width: 100%;
-    padding: 1rem 1.2rem 1rem 3.5rem;
+    padding: 1rem 3.5rem 1rem 1.2rem;
     border: 2px solid #f0f0f0;
     border-radius: $radius-lg;
     font-size: 1rem;
     transition: all 0.3s ease;
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: #fafafa;
     
     &:focus {
@@ -410,6 +417,7 @@
     span {
       color: $text-light;
       font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
     }
   }
   
@@ -419,6 +427,7 @@
     font-size: 0.95rem;
     font-weight: 600;
     transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
     
     &:hover {
       color: #C2185B;
@@ -442,7 +451,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -487,7 +496,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Poppins', sans-serif;
   
   &:hover {
     border-color: #E91E63;
@@ -505,6 +514,7 @@
     color: $secondary-color;
     margin-bottom: 1.5rem;
     font-weight: 700;
+    font-family: 'Poppins', sans-serif;
   }
 }
 
@@ -551,6 +561,7 @@
     font-weight: 600;
     color: $text-dark;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
     
     @media (max-width: $breakpoint-mobile) {
       font-size: 0.85rem;
@@ -591,6 +602,7 @@
   p {
     color: $text-light;
     font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
     
     button {
       background: none;
@@ -598,10 +610,10 @@
       color: #E91E63;
       font-weight: 700;
       cursor: pointer;
-      margin-right: 0.5rem;
+      margin-left: 0.5rem;
       font-size: 0.95rem;
       transition: all 0.3s ease;
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'Poppins', sans-serif;
       
       &:hover {
         color: #C2185B;
@@ -645,6 +657,7 @@
       padding: 0 1rem;
       color: $text-light;
       font-size: 0.9rem;
+      font-family: 'Poppins', sans-serif;
     }
   }
 }
@@ -668,7 +681,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Poppins', sans-serif;
   
   svg {
     width: 20px;

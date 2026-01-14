@@ -3,10 +3,10 @@ import { FaFire, FaDumbbell, FaAppleAlt, FaBolt } from 'react-icons/fa';
 
 const MacrosSummary = ({ macros }) => {
   const macroCards = [
-    { icon: FaFire, label: 'سعرة حرارية', value: macros.totalCalories, type: 'calories' },
-    { icon: FaDumbbell, label: 'بروتين', value: `${macros.protein}g`, type: 'protein' },
-    { icon: FaAppleAlt, label: 'كربوهيدرات', value: `${macros.carbs}g`, type: 'carbs' },
-    { icon: FaBolt, label: 'دهون', value: `${macros.fats}g`, type: 'fats' }
+    { icon: FaFire, label: 'Calories', value: macros.totalCalories, type: 'calories' },
+    { icon: FaDumbbell, label: 'Protein', value: `${macros.protein}g`, type: 'protein' },
+    { icon: FaAppleAlt, label: 'Carbs', value: `${macros.carbs}g`, type: 'carbs' },
+    { icon: FaBolt, label: 'Fats', value: `${macros.fats}g`, type: 'fats' }
   ];
 
   return (
@@ -23,8 +23,8 @@ const MacrosSummary = ({ macros }) => {
             <macro.icon />
           </div>
           <div className="macro-info">
-            <span className="macro-value">{macro.value}</span>
-            <span className="macro-label">{macro.label}</span>
+            <div className="macro-value">{macro.value}</div>
+            <div className="macro-label">{macro.label}</div>
           </div>
         </motion.div>
       ))}

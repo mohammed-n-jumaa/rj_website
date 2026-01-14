@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaPaypal, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
+import { FaPaypal, FaCheckCircle, FaExclamationTriangle, FaLock } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import './PayPalPayment.scss';
 
 const PayPalPayment = ({ amount, onSuccess, onCancel }) => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -11,25 +10,25 @@ const PayPalPayment = ({ amount, onSuccess, onCancel }) => {
     setIsProcessing(true);
 
     try {
-      // في المستقبل: إنشاء طلب دفع PayPal عبر Laravel API
+      // In the future: Create PayPal payment via Laravel API
       // const response = await axios.post('/api/paypal/create-payment', {
       //   amount: amount,
       //   currency: 'USD',
-      //   description: 'تجديد اشتراك برنامج التدريب'
+      //   description: 'Training program subscription renewal'
       // });
       
       // const paypalUrl = response.data.approval_url;
       // window.location.href = paypalUrl;
 
-      // محاكاة عملية الدفع
+      // Simulating payment process
       setTimeout(() => {
         setIsProcessing(false);
         
         Swal.fire({
-          title: 'نجح الدفع! 🎉',
-          text: 'تم تجديد اشتراكك بنجاح',
+          title: 'Payment Successful! 🎉',
+          text: 'Your subscription has been renewed successfully',
           icon: 'success',
-          confirmButtonText: 'رائع',
+          confirmButtonText: 'Great',
           confirmButtonColor: '#0070ba',
           iconColor: '#0070ba'
         });
@@ -44,10 +43,10 @@ const PayPalPayment = ({ amount, onSuccess, onCancel }) => {
       console.error('PayPal payment error:', error);
       
       Swal.fire({
-        title: 'فشل الدفع',
-        text: 'حدث خطأ أثناء معالجة الدفع. يرجى المحاولة مرة أخرى',
+        title: 'Payment Failed',
+        text: 'An error occurred while processing payment. Please try again',
         icon: 'error',
-        confirmButtonText: 'حسناً',
+        confirmButtonText: 'OK',
         confirmButtonColor: '#E91E63'
       });
     }
@@ -57,13 +56,15 @@ const PayPalPayment = ({ amount, onSuccess, onCancel }) => {
     <div className="paypal-payment">
       <div className="payment-info">
         <div className="amount-display">
-          <span className="amount-label">المبلغ المطلوب:</span>
+          <span className="amount-label">Amount Due:</span>
           <span className="amount-value">${amount}</span>
         </div>
-        
+
         <div className="payment-note">
           <FaExclamationTriangle />
-          <p>سيتم تحويلك إلى صفحة PayPal الآمنة لإتمام عملية الدفع</p>
+          <p>
+            You will be redirected to PayPal's secure page to complete the payment
+          </p>
         </div>
       </div>
 
@@ -77,19 +78,19 @@ const PayPalPayment = ({ amount, onSuccess, onCancel }) => {
         {isProcessing ? (
           <>
             <div className="spinner"></div>
-            <span>جاري المعالجة...</span>
+            Processing...
           </>
         ) : (
           <>
             <FaPaypal className="paypal-icon" />
-            <span>الدفع عبر PayPal</span>
+            Pay with PayPal
           </>
         )}
       </motion.button>
 
       <div className="payment-security">
-        <FaCheckCircle />
-        <p>الدفع آمن ومحمي بواسطة PayPal</p>
+        <FaLock />
+        <span>Secure payment protected by PayPal</span>
       </div>
     </div>
   );

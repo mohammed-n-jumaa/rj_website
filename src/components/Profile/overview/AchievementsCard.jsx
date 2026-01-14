@@ -3,32 +3,34 @@ import { FaTrophy, FaFire, FaBolt } from 'react-icons/fa';
 
 const AchievementsCard = ({ delay }) => {
   const achievements = [
-    { icon: FaTrophy, text: 'أسبوع كامل', unlocked: true },
-    { icon: FaFire, text: '5 أيام متتالية', unlocked: true },
-    { icon: FaBolt, text: 'شهر كامل', unlocked: false },
-    { icon: FaTrophy, text: 'الهدف المثالي', unlocked: false }
+    { icon: FaTrophy, text: 'Full Week', unlocked: true },
+    { icon: FaFire, text: '5 Day Streak', unlocked: true },
+    { icon: FaBolt, text: 'Full Month', unlocked: false },
+    { icon: FaTrophy, text: 'Perfect Goal', unlocked: false }
   ];
 
   return (
-    <motion.div 
+    <motion.div
       className="achievements-card"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay }}
     >
       <div className="card-header">
-        <h3>الإنجازات</h3>
+        <h3>Achievements</h3>
         <FaTrophy className="header-icon" />
       </div>
+
       <div className="achievements-grid">
         {achievements.map((achievement, index) => (
-          <div 
-            key={index} 
+          <motion.div
+            key={index}
             className={`achievement ${achievement.unlocked ? 'unlocked' : 'locked'}`}
+            whileHover={achievement.unlocked ? { scale: 1.05 } : {}}
           >
             <achievement.icon />
-            <span>{achievement.text}</span>
-          </div>
+            {achievement.text}
+          </motion.div>
         ))}
       </div>
     </motion.div>

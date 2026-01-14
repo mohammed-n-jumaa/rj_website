@@ -27,8 +27,8 @@ const ProfileHeader = ({ userData }) => {
             <h1>{userData.name}</h1>
             <p className="program-name">{userData.program}</p>
             <div className="stats-mini">
-              <span><FaFire /> {userData.progress}% مكتمل</span>
-              <span><FaCalendarAlt /> {userData.daysLeft} يوم متبقي</span>
+              <span><FaFire /> {userData.progress}% Complete</span>
+              <span><FaCalendarAlt /> {userData.daysLeft} days left</span>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@ const ProfileHeader = ({ userData }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <FaEdit /> تعديل الملف
+            <FaEdit /> Edit Profile
           </motion.button>
           <motion.button 
             className="action-btn notification"
@@ -54,7 +54,7 @@ const ProfileHeader = ({ userData }) => {
 
       <div className="progress-container">
         <div className="progress-info">
-          <span>تقدم البرنامج</span>
+          <span>Program Progress</span>
           <span>{userData.progress}%</span>
         </div>
         <div className="progress-bar">

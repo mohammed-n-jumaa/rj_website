@@ -10,12 +10,12 @@ const ExercisesList = ({ exercises, dayIndex }) => {
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {exercises.map((exercise, exerciseIndex) => (
+      {exercises.map((exercise, index) => (
         <ExerciseItem
-          key={exerciseIndex}
+          key={index}
           exercise={exercise}
           dayIndex={dayIndex}
-          exerciseIndex={exerciseIndex}
+          exerciseIndex={index}
         />
       ))}
     </motion.div>

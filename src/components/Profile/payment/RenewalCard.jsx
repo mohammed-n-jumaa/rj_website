@@ -11,7 +11,7 @@ const RenewalCard = ({ userData, delay }) => {
   const handleRenewalSuccess = () => {
     setShowPayment(false);
     setPaymentMethod(null);
-    // في المستقبل: تحديث بيانات المستخدم من Laravel API
+    // In the future: Update user data from Laravel API
     console.log('Renewal successful!');
   };
 
@@ -38,7 +38,7 @@ const RenewalCard = ({ userData, delay }) => {
       transition={{ delay }}
     >
       <div className="card-header">
-        <h3>تجديد الاشتراك</h3>
+        <h3>Renew Subscription</h3>
         <FaBell className={`header-icon ${isExpiringSoon ? 'warning' : ''}`} />
       </div>
       
@@ -52,33 +52,33 @@ const RenewalCard = ({ userData, delay }) => {
             exit={{ opacity: 0 }}
           >
             <div className="renewal-info">
-              <p>سينتهي اشتراكك في <strong>{userData.endDate}</strong></p>
+              <p>Your subscription will expire on <strong>{userData.endDate}</strong></p>
               <p className="days-remaining">
-                متبقي <strong className={isExpiringSoon ? 'warning' : ''}>{daysLeft}</strong> يوم
+                <strong className={isExpiringSoon ? 'warning' : ''}>{daysLeft}</strong> days remaining
               </p>
               <p className="reminder">
-                💡 جددي اشتراكك الآن للحصول على خصم <strong>10%</strong>
+                💡 Renew your subscription now to get <strong>10%</strong> discount
               </p>
             </div>
 
             <div className="renewal-pricing">
               <div className="price-item">
-                <span>السعر الأصلي:</span>
+                <span>Original Price:</span>
                 <span className="original-price">${userData.price}</span>
               </div>
               <div className="price-item discount">
-                <span>الخصم:</span>
+                <span>Discount:</span>
                 <span className="discount-amount">-${(userData.price * 0.1).toFixed(2)}</span>
               </div>
               <div className="price-item total">
-                <span>المجموع:</span>
+                <span>Total:</span>
                 <span className="total-price">${(userData.price * 0.9).toFixed(2)}</span>
               </div>
             </div>
 
             {/* Payment Method Selection */}
             <div className="payment-methods">
-              <h4>اختاري طريقة الدفع:</h4>
+              <h4>Choose Payment Method:</h4>
               
               <div className="methods-grid">
                 <motion.button
@@ -90,7 +90,7 @@ const RenewalCard = ({ userData, delay }) => {
                   <FaPaypal className="method-icon" />
                   <div className="method-info">
                     <span className="method-name">PayPal</span>
-                    <span className="method-desc">دفع فوري وآمن</span>
+                    <span className="method-desc">Instant & secure payment</span>
                   </div>
                 </motion.button>
 
@@ -102,14 +102,12 @@ const RenewalCard = ({ userData, delay }) => {
                 >
                   <FaUniversity className="method-icon" />
                   <div className="method-info">
-                    <span className="method-name">تحويل بنكي</span>
-                    <span className="method-desc">خلال 24 ساعة</span>
+                    <span className="method-name">Bank Transfer</span>
+                    <span className="method-desc">Within 24 hours</span>
                   </div>
                 </motion.button>
               </div>
             </div>
-
-           
           </motion.div>
         ) : (
           <motion.div

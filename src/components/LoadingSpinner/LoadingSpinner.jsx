@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import './LoadingSpinner.scss';
 
-const LoadingSpinner = ({ fullScreen = true, message = 'جاري التحميل...' }) => {
+const LoadingSpinner = ({ fullScreen = true, message = 'Loading...' }) => {
   return (
     <motion.div 
       className={`loading-spinner ${fullScreen ? 'fullscreen' : ''}`}

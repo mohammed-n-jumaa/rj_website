@@ -31,26 +31,26 @@ const About = () => {
     {
       id: 1,
       icon: <FaUserFriends />,
-      title: 'تدريب شخصي أونلاين',
-      description: 'جلسات تدريب مباشرة ومتابعة يومية'
+      title: 'Online Personal Training',
+      description: 'Live training sessions and daily follow-up'
     },
     {
       id: 2,
       icon: <FaAppleAlt />,
-      title: 'أنظمة غذائية مخصصة',
-      description: 'خطط تغذية مصممة خصيصاً لك'
+      title: 'Custom Nutrition Plans',
+      description: 'Nutrition plans designed specifically for you'
     },
     {
       id: 3,
       icon: <FaDumbbell />,
-      title: 'تنشيف، نحت، زيادة عضل',
-      description: 'برامج شاملة لتحقيق أهدافك'
+      title: 'Cutting, Sculpting, Bulking',
+      description: 'Comprehensive programs to achieve your goals'
     },
     {
       id: 4,
       icon: <FaChartLine />,
-      title: 'متابعة مستمرة',
-      description: 'دعم ومتابعة على مدار الأسبوع'
+      title: 'Continuous Monitoring',
+      description: 'Support and follow-up throughout the week'
     }
   ];
 
@@ -78,7 +78,7 @@ const About = () => {
   };
 
   const profileVariants = {
-    hidden: { opacity: 0, x: -30 },
+    hidden: { opacity: 0, x: 30 },
     visible: {
       opacity: 1,
       x: 0,
@@ -99,52 +99,23 @@ const About = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {/* Left Column - Trainer Profile */}
-          <motion.div
-            className="trainer-profile"
-            variants={isTablet ? itemVariants : profileVariants}
-          >
-            <div className="profile-image-wrapper">
-              <img
-                src="/images/trainer-profile.jpg"
-                alt="رند جرار - مدربة لياقة بدنية"
-                className="profile-image"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop';
-                }}
-              />
-              <div className="profile-badge">
-                <FaCheckCircle />
-                <span>مدربة معتمدة</span>
-              </div>
-            </div>
-
-            <div className="profile-info">
-              <h3 className="trainer-name">رند جرار</h3>
-              <p className="trainer-philosophy">
-                رحلتك للياقة تبدأ من الداخل، أساعدك على بناء نسخة أقوى وأكثر ثقة منك
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Right Column - About & Services */}
+          {/* Left Column - About & Services */}
           <motion.div
             className="about-details"
             variants={itemVariants}
           >
             <div className="section-header">
-              <span className="section-tag">من أنا</span>
-              <h3 className="section-title" style={{ color: "#1C1C1C" }}> عن المدربة</h3>
+              <span className="section-tag">Who I Am</span>
+              <h3 className="section-title" style={{ color: "#1C1C1C" }}>About the Coach</h3>
             </div>
             <div className="experience-text">
               <p>
-                <strong>مدربة لياقة بدنية معتمدة دولياً</strong> مع أكثر من <strong>5 سنوات</strong> من الخبرة في تحويل حياة النساء.
-                أؤمن بأن كل جسم فريد من نوعه، ولهذا أصمم برامج تدريب وتغذية مخصصة تناسب احتياجاتك وأهدافك الشخصية.
+                <strong>Internationally certified fitness coach</strong> with over <strong>5 years</strong> of experience transforming women's lives.
+                I believe that every body is unique, which is why I design personalized training and nutrition programs that suit your needs and personal goals.
               </p>
               <p>
-                ساعدت أكثر من <strong>500 متدربة</strong> على تحقيق أهدافهن في اللياقة والصحة، من خلال برامج شاملة
-                تجمع بين التدريب الفعال، التغذية السليمة، والدعم النفسي المستمر.
+                I've helped over <strong>500 trainees</strong> achieve their fitness and health goals through comprehensive programs
+                that combine effective training, proper nutrition, and continuous psychological support.
               </p>
             </div>
 
@@ -178,8 +149,37 @@ const About = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate('/auth')}
               >
-                ابدئي رحلتك الآن
+                Start Your Journey Now
               </motion.button>
+            </div>
+          </motion.div>
+
+          {/* Right Column - Trainer Profile */}
+          <motion.div
+            className="trainer-profile"
+            variants={isTablet ? itemVariants : profileVariants}
+          >
+            <div className="profile-image-wrapper">
+              <img
+                src="/images/trainer-profile.jpg"
+                alt="Rand Jarar - Fitness Coach"
+                className="profile-image"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop';
+                }}
+              />
+              <div className="profile-badge">
+                <FaCheckCircle />
+                <span>Certified Coach</span>
+              </div>
+            </div>
+
+            <div className="profile-info">
+              <h3 className="trainer-name">Rand Jarar</h3>
+              <p className="trainer-philosophy">
+                Your fitness journey starts from within, I help you build a stronger and more confident version of yourself
+              </p>
             </div>
           </motion.div>
         </motion.div>

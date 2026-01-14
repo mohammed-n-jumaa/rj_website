@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft, FaDumbbell, FaFire, FaStar, FaBolt } from 'react-icons/fa';
+import { FaArrowRight, FaDumbbell, FaFire, FaStar, FaBolt } from 'react-icons/fa';
 import './CTA.scss';
 
 const CTA = () => {
@@ -112,7 +112,7 @@ const CTA = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                جاهزة
+                Ready
               </motion.span>
               {' '}
               <motion.span
@@ -122,7 +122,7 @@ const CTA = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                تبدأي
+                to Start
               </motion.span>
               {' '}
               <motion.span
@@ -132,7 +132,7 @@ const CTA = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                التغيير؟
+                Your Transformation?
               </motion.span>
             </motion.h2>
 
@@ -154,7 +154,7 @@ const CTA = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.7 }}
           >
-            انضمي لأكثر من 500 متدربة حققن أهدافهن في اللياقة والصحة
+            Join over 500 trainees who have achieved their fitness and health goals
           </motion.p>
 
           {/* Animated Button with Pulse Effect */}
@@ -185,7 +185,7 @@ const CTA = () => {
                   ease: "easeInOut"
                 }}
               >
-                احجزي الآن
+                Book Now
               </motion.span>
               <motion.div
                 className="button-icon"
@@ -198,7 +198,7 @@ const CTA = () => {
                   ease: "easeInOut"
                 }}
               >
-                <FaArrowLeft />
+                <FaArrowRight />
               </motion.div>
             </motion.button>
 
@@ -235,9 +235,9 @@ const CTA = () => {
             }}
           >
             {[
-              { icon: <FaDumbbell />, text: 'برامج مخصصة' },
-              { icon: <FaFire />, text: 'نتائج مضمونة' },
-              { icon: <FaStar />, text: 'متابعة يومية' }
+              { icon: <FaDumbbell />, text: 'Customized Programs' },
+              { icon: <FaFire />, text: 'Guaranteed Results' },
+              { icon: <FaStar />, text: 'Daily Follow-up' }
             ].map((feature, index) => (
               <motion.div
                 key={index}

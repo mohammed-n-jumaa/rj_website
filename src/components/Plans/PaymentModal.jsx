@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaPaypal, FaUniversity, FaCheckCircle, FaExclamationTriangle, FaArrowRight } from 'react-icons/fa';
+import { FaTimes, FaPaypal, FaUniversity, FaCheckCircle, FaExclamationTriangle, FaArrowLeft } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import BankTransferPayment from './BankTransferPayment';
 
@@ -23,7 +23,7 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
     setStep('processing');
 
     try {
-      // هنا سيتم إنشاء طلب PayPal عبر Laravel API
+      // Here PayPal order will be created via Laravel API
       // const response = await axios.post('/api/paypal/create-payment', {
       //   plan_id: plan.id,
       //   amount: finalPrice,
@@ -31,16 +31,16 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
       // });
       // window.location.href = response.data.approval_url;
 
-      // محاكاة عملية الدفع
+      // Simulate payment process
       setTimeout(() => {
         setStep('success');
         
         setTimeout(() => {
           Swal.fire({
-            title: 'مرحباً بك! 🎉',
-            text: 'تم تفعيل اشتراكك بنجاح',
+            title: 'Welcome! 🎉',
+            text: 'Your subscription has been activated successfully',
             icon: 'success',
-            confirmButtonText: 'ابدأ الآن',
+            confirmButtonText: 'Start Now',
             confirmButtonColor: '#E91E63',
             iconColor: '#E91E63'
           }).then(() => {
@@ -54,10 +54,10 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
       setStep('paypal-confirm');
       
       Swal.fire({
-        title: 'فشل الدفع',
-        text: 'حدث خطأ أثناء معالجة الدفع. يرجى المحاولة مرة أخرى',
+        title: 'Payment Failed',
+        text: 'An error occurred while processing payment. Please try again',
         icon: 'error',
-        confirmButtonText: 'حسناً',
+        confirmButtonText: 'OK',
         confirmButtonColor: '#E91E63'
       });
     }
@@ -68,15 +68,15 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
     
     setTimeout(() => {
       Swal.fire({
-        title: 'تم الإرسال بنجاح! 🎉',
+        title: 'Sent Successfully! 🎉',
         html: `
-          <p>تم استلام طلب الاشتراك الخاص بك</p>
+          <p>Your subscription request has been received</p>
           <p style="color: #666; font-size: 0.9rem; margin-top: 1rem;">
-            سيتم مراجعة التحويل وتفعيل اشتراكك خلال 24 ساعة
+            The transfer will be reviewed and your subscription activated within 24 hours
           </p>
         `,
         icon: 'success',
-        confirmButtonText: 'رائع',
+        confirmButtonText: 'Great',
         confirmButtonColor: '#E91E63'
       }).then(() => {
         onSuccess();
@@ -114,7 +114,7 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
           {step === 'method' && (
             <>
               <div className="modal-header">
-                <h2>اختيار طريقة الدفع</h2>
+                <h2>Choose Payment Method</h2>
                 <button className="close-button" onClick={onClose}>
                   <FaTimes />
                 </button>
@@ -132,7 +132,7 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
 
                   <div className="pricing-details">
                     <div className="price-row">
-                      <span>السعر الأصلي:</span>
+                      <span>Original Price:</span>
                       <span className={discount > 0 ? 'original-price' : 'price'}>
                         ${plan.price}
                       </span>
@@ -141,11 +141,11 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                     {discount > 0 && (
                       <>
                         <div className="price-row discount-row">
-                          <span>الخصم ({(discount * 100)}%):</span>
+                          <span>Discount ({(discount * 100)}%):</span>
                           <span className="discount">-${(plan.price * discount).toFixed(2)}</span>
                         </div>
                         <div className="price-row total-row">
-                          <span>المجموع:</span>
+                          <span>Total:</span>
                           <span className="final-price">${finalPrice}</span>
                         </div>
                       </>
@@ -153,14 +153,14 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
 
                     <div className="duration-info">
                       <FaCheckCircle />
-                      <span>صالح لمدة {plan.duration}</span>
+                      <span>Valid for {plan.duration}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Payment Methods */}
                 <div className="payment-methods-selection">
-                  <h3>اختاري طريقة الدفع:</h3>
+                  <h3>Choose your payment method:</h3>
                   
                   <div className="methods-grid">
                     <motion.button
@@ -171,8 +171,8 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                     >
                       <FaPaypal className="method-icon" />
                       <h4>PayPal</h4>
-                      <p>دفع فوري وآمن</p>
-                      <span className="method-badge">موصى به</span>
+                      <p>Instant and secure payment</p>
+                      <span className="method-badge">Recommended</span>
                     </motion.button>
 
                     <motion.button
@@ -182,9 +182,9 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                       whileTap={{ scale: 0.97 }}
                     >
                       <FaUniversity className="method-icon" />
-                      <h4>تحويل بنكي</h4>
-                      <p>التفعيل خلال 24 ساعة</p>
-                      <span className="method-badge">متاح</span>
+                      <h4>Bank Transfer</h4>
+                      <p>Activation within 24 hours</p>
+                      <span className="method-badge">Available</span>
                     </motion.button>
                   </div>
                 </div>
@@ -198,9 +198,9 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
               <div className="modal-header">
                 <div className="header-with-back">
                   <button className="back-button" onClick={handleBack}>
-                    <FaArrowRight />
+                    <FaArrowLeft />
                   </button>
-                  <h2>تأكيد الدفع - PayPal</h2>
+                  <h2>Payment Confirmation - PayPal</h2>
                 </div>
                 <button className="close-button" onClick={onClose}>
                   <FaTimes />
@@ -219,7 +219,7 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
 
                   <div className="pricing-details">
                     <div className="price-row total-row">
-                      <span>المجموع:</span>
+                      <span>Total:</span>
                       <span className="final-price">${finalPrice}</span>
                     </div>
                   </div>
@@ -228,11 +228,11 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                 <div className="payment-info">
                   <div className="info-item">
                     <FaExclamationTriangle />
-                    <p>سيتم تحويلك إلى صفحة PayPal الآمنة</p>
+                    <p>You will be redirected to PayPal's secure page</p>
                   </div>
                   <div className="info-item">
                     <FaCheckCircle />
-                    <p>جميع المعاملات مشفرة ومحمية</p>
+                    <p>All transactions are encrypted and protected</p>
                   </div>
                 </div>
               </div>
@@ -242,7 +242,7 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                   className="cancel-button"
                   onClick={handleBack}
                 >
-                  رجوع
+                  Back
                 </button>
                 <button 
                   className="paypal-button"
@@ -250,7 +250,7 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                   disabled={isProcessing}
                 >
                   <FaPaypal />
-                  الدفع عبر PayPal
+                  Pay with PayPal
                 </button>
               </div>
             </>
@@ -262,9 +262,9 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
               <div className="modal-header">
                 <div className="header-with-back">
                   <button className="back-button" onClick={handleBack}>
-                    <FaArrowRight />
+                    <FaArrowLeft />
                   </button>
-                  <h2>التحويل البنكي</h2>
+                  <h2>Bank Transfer</h2>
                 </div>
                 <button className="close-button" onClick={onClose}>
                   <FaTimes />
@@ -286,8 +286,8 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
           {step === 'processing' && (
             <div className="processing-state">
               <div className="spinner-large"></div>
-              <h3>جاري معالجة الدفع...</h3>
-              <p>يرجى الانتظار ولا تغلق هذه النافذة</p>
+              <h3>Processing payment...</h3>
+              <p>Please wait and do not close this window</p>
             </div>
           )}
 
@@ -302,8 +302,8 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
               >
                 <FaCheckCircle />
               </motion.div>
-              <h3>تم بنجاح!</h3>
-              <p>جاري تفعيل اشتراكك...</p>
+              <h3>Success!</h3>
+              <p>Activating your subscription...</p>
             </div>
           )}
         </motion.div>

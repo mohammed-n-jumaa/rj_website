@@ -25,10 +25,10 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: 'الرئيسية', href: '#home' },
-    { name: 'عن المدربة', href: '#about' },
-    { name: 'البرامج', href: '#programs' },
-    { name: 'آراء المتدربات', href: '#testimonials' }
+    { name: 'Home', href: '#home' },
+    { name: 'About Coach', href: '#about' },
+    { name: 'Programs', href: '#programs' },
+    { name: 'Testimonials', href: '#testimonials' }
   ];
 
   const legalLinks = [
@@ -54,9 +54,9 @@ const Footer = () => {
               <span className="logo-text">RAND JARAR</span>
             </div>
             <p className="brand-description">
-              مدربة لياقة بدنية معتمدة دولياً
+              Internationally Certified Fitness Coach
               <br />
-              نساعدك على تحقيق أهدافك بطريقة صحية ومستدامة
+              Helping you achieve your goals in a healthy and sustainable way
             </p>
           </motion.div>
 
@@ -68,7 +68,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h4 className="footer-title">روابط سريعة</h4>
+            <h4 className="footer-title">Quick Links</h4>
             <ul className="links-list">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -86,7 +86,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h4 className="footer-title">تابعينا</h4>
+            <h4 className="footer-title">Follow Us</h4>
             <div className="social-links">
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -130,7 +130,7 @@ const Footer = () => {
           </div>
           
           <p className="footer-copyright">
-            © {currentYear} Rand Jarar. All rights reserved. Made with <FaHeart className="heart-icon" /> by Your Team
+            © {currentYear} Rand Jarar. All rights reserved. 
           </p>
         </motion.div>
       </div>

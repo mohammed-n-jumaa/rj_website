@@ -7,29 +7,28 @@ const DayCard = ({ day, dayIndex, isExpanded, onToggle }) => {
 
   return (
     <motion.div
-      className={`day-card ${isExpanded ? 'expanded' : ''} ${isRestDay ? 'rest-day' : ''}`}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: dayIndex * 0.05 }}
+      className={`day-card ${isRestDay ? 'rest-day' : ''} ${isExpanded ? 'expanded' : ''}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: dayIndex * 0.1 }}
     >
       <div className="day-header" onClick={onToggle}>
         <div className="day-info">
           <h3>{day.day}</h3>
           <p>{day.title}</p>
         </div>
+
         <div className="day-stats">
           {!isRestDay ? (
             <>
-              <span className="exercise-count">{day.exercises.length} تمارين</span>
-              <motion.div
+              <span className="exercise-count">{day.exercises.length} exercises</span>
+              <FaChevronDown
                 className="expand-icon"
-                animate={{ rotate: isExpanded ? 180 : 0 }}
-              >
-                <FaChevronDown />
-              </motion.div>
+                style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+              />
             </>
           ) : (
-            <span className="rest-label">راحة</span>
+            <span className="rest-label">Rest</span>
           )}
         </div>
       </div>

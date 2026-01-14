@@ -11,50 +11,50 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'سارة أحمد',
-      profession: 'مهندسة معمارية',
+      name: 'Sarah Ahmed',
+      profession: 'Architect',
       image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
-      feedback: 'تجربة رائعة! نزلت 12 كيلو في 3 شهور مع برنامج رند المخصص. الدعم والمتابعة المستمرة كانت رائعة',
+      feedback: 'Amazing experience! Lost 12 kg in 3 months with Rand\'s personalized program. The support and continuous follow-up were outstanding',
       rating: 5
     },
     {
       id: 2,
-      name: 'ليلى محمود',
-      profession: 'طبيبة',
+      name: 'Layla Mahmoud',
+      profession: 'Doctor',
       image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
-      feedback: 'أفضل مدربة تعاملت معها! برنامج التنشيف كان فعال جداً والنتائج ظهرت بسرعة. شكراً رند',
+      feedback: 'Best trainer I\'ve ever worked with! The cutting program was very effective and results showed quickly. Thank you Rand',
       rating: 5
     },
     {
       id: 3,
-      name: 'نور الدين',
-      profession: 'مصممة جرافيك',
+      name: 'Nour Aldin',
+      profession: 'Graphic Designer',
       image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop',
-      feedback: 'التدريب الأونلاين كان مريح جداً بالنسبة لي. رند محترفة وتفهم احتياجاتك تماماً',
+      feedback: 'Online training was so convenient for me. Rand is professional and understands your needs perfectly',
       rating: 5
     },
     {
       id: 4,
-      name: 'مريم خالد',
-      profession: 'مديرة تسويق',
+      name: 'Mariam Khaled',
+      profession: 'Marketing Manager',
       image: 'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=400&h=400&fit=crop',
-      feedback: 'برنامج التغذية كان مناسب تماماً لنمط حياتي المشغول. خسرت وزن وكسبت طاقة وثقة',
+      feedback: 'The nutrition program was perfectly suited to my busy lifestyle. Lost weight and gained energy and confidence',
       rating: 5
     },
     {
       id: 5,
-      name: 'دانا سعيد',
-      profession: 'صيدلانية',
+      name: 'Dana Saeed',
+      profession: 'Pharmacist',
       image: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=400&h=400&fit=crop',
-      feedback: 'المتابعة المستمرة والتحفيز اللي بتقدمه رند ما له مثيل! شكراً على كل شي',
+      feedback: 'The continuous follow-up and motivation that Rand provides is unmatched! Thank you for everything',
       rating: 5
     },
     {
       id: 6,
-      name: 'ريم عبدالله',
-      profession: 'معلمة',
+      name: 'Reem Abdullah',
+      profession: 'Teacher',
       image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop',
-      feedback: 'تغيرت حياتي بعد ما بديت مع رند! مش بس الجسم، حتى صحتي النفسية تحسنت كثير',
+      feedback: 'My life changed after I started with Rand! Not just my body, even my mental health improved significantly',
       rating: 5
     }
   ];
@@ -126,10 +126,10 @@ const Testimonials = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-tag">آراء المتدربات</span>
-          <h2 className="section-title">قصص نجاح ملهمة</h2>
+          <span className="section-tag">Client Reviews</span>
+          <h2 className="section-title">Inspiring Success Stories</h2>
           <p className="section-description">
-            استمعي لتجارب متدرباتنا وكيف غيّرت حياتهن للأفضل
+            Listen to our clients' experiences and how they changed their lives for the better
           </p>
         </motion.div>
 
@@ -139,7 +139,7 @@ const Testimonials = () => {
             onClick={handlePrev}
             aria-label="Previous testimonials"
           >
-            <FaChevronRight />
+            <FaChevronLeft />
           </button>
 
           <div className="testimonials-track">
@@ -200,7 +200,7 @@ const Testimonials = () => {
             onClick={handleNext}
             aria-label="Next testimonials"
           >
-            <FaChevronLeft />
+            <FaChevronRight />
           </button>
         </div>
 
