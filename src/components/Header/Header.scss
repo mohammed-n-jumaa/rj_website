@@ -182,7 +182,7 @@
     width: 320px;
     max-width: 85%;
     height: 100vh;
-    background: linear-gradient(135deg, #3a1f3d 0%, #2d1b2e 50%, #1f1520 100%);
+    background: linear-gradient(135deg, #1C1C1C 0%, #2a2a2a 50%, #1C1C1C 100%); /* تغيير من البنفسجي للأسود/الرمادي */
     flex-direction: column;
     justify-content: center;
     gap: 0.3rem;
@@ -202,7 +202,7 @@
       left: 0;
       right: 0;
       height: 120px;
-      background: linear-gradient(180deg, rgba(233, 30, 99, 0.12) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(253, 184, 19, 0.12) 0%, transparent 100%); /* تغيير للأصفر الشفاف */
       pointer-events: none;
     }
   }
@@ -252,7 +252,7 @@
     border-radius: $radius-lg;
     
     &:hover {
-      background: rgba(233, 30, 99, 0.12);
+      background: rgba(253, 184, 19, 0.12); /* تغيير للأصفر الشفاف */
       color: $text-white;
     }
     
@@ -272,7 +272,7 @@
     height: 1px;
     background: linear-gradient(90deg, 
       transparent 0%, 
-      rgba(233, 30, 99, 0.3) 50%, 
+      rgba(253, 184, 19, 0.3) 50%, /* تغيير للأصفر الشفاف */
       transparent 100%
     );
     margin: 1rem 0;
@@ -367,9 +367,9 @@
   height: 44px;
   min-width: 44px;
   padding: 0;
-  background: rgba(233, 30, 99, 0.15);
+  background: rgba(253, 184, 19, 0.15); /* تغيير للأصفر الشفاف */
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(233, 30, 99, 0.35);
+  border: 2px solid rgba(253, 184, 19, 0.35); /* تغيير للأصفر الشفاف */
   border-radius: 50%;
   cursor: pointer;
   transition: all $transition-normal;
@@ -381,10 +381,10 @@
   }
   
   &:hover {
-    background: rgba(233, 30, 99, 0.25);
+    background: rgba(253, 184, 19, 0.25); /* تغيير للأصفر الشفاف */
     border-color: $primary-color;
     transform: scale(1.08);
-    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+    box-shadow: 0 4px 15px rgba(253, 184, 19, 0.3); /* تغيير للأصفر الشفاف */
   }
   
   &:active {
@@ -515,8 +515,8 @@
     width: 100%;
     padding: 1rem 2.5rem;
     font-size: 1.05rem;
-    background: rgba(233, 30, 99, 0.12);
-    border: 2px solid rgba(233, 30, 99, 0.35);
+    background: rgba(253, 184, 19, 0.12); /* تغيير للأصفر الشفاف */
+    border: 2px solid rgba(253, 184, 19, 0.35); /* تغيير للأصفر الشفاف */
     border-radius: $radius-xl;
     color: rgba(255, 255, 255, 0.95);
     font-family: 'Poppins', 'Tajawal', sans-serif;
@@ -531,11 +531,11 @@
     }
     
     &:hover {
-      background: rgba(233, 30, 99, 0.2);
+      background: rgba(253, 184, 19, 0.2); /* تغيير للأصفر الشفاف */
       border-color: $primary-color;
       color: $text-white;
       transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.25);
+      box-shadow: 0 4px 15px rgba(253, 184, 19, 0.25); /* تغيير للأصفر الشفاف */
     }
     
     &:active {
@@ -550,20 +550,20 @@
 .cta-button {
   padding: 0.9rem 2rem;
   background: $gradient-primary;
-  color: $text-white;
+  color: $secondary-color; /* تغيير للون الأسود ليكون مقروءاً */
   border: none;
   border-radius: $radius-xl;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all $transition-normal;
-  box-shadow: $shadow-pink;
+  box-shadow: 0 4px 20px rgba(253, 184, 19, 0.25); /* تغيير للأصفر الشفاف */
   font-family: 'Poppins', 'Tajawal', sans-serif;
   white-space: nowrap;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 28px rgba(233, 30, 99, 0.35);
+    box-shadow: 0 6px 28px rgba(253, 184, 19, 0.35); /* تغيير للأصفر الشفاف */
   }
   
   @media (max-width: $breakpoint-tablet) {

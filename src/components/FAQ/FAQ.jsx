@@ -12,59 +12,59 @@ const FAQ = () => {
   const faqData = [
     {
       id: 1,
-      question: 'Where do I start?',
-      answer: 'The beginning is not your strength, it\'s your decision. Simply choose your plan, and we\'ll guide you through every step of your transformation journey.',
+      question: 'I\'m a beginner, does the program suit me?',
+      answer: 'Of course, our programs progress from zero to professional level.',
       icon: '🚀',
-      category: 'Getting Started'
+      category: 'General Questions'
     },
     {
       id: 2,
-      question: 'I\'m afraid I won\'t continue...',
-      answer: 'Most trainees started with the same feeling. Our supportive community and personalized approach ensure you stay motivated throughout your journey.',
-      icon: '💪',
-      category: 'Motivation'
+      question: 'Do I need to train at the gym?',
+      answer: 'No, we provide home workout plans (bodyweight) and gym plans as well.',
+      icon: '🏋️',
+      category: 'General Questions'
     },
     {
       id: 3,
-      question: 'What about my privacy?',
-      answer: 'Your privacy is a red line. All your personal information and training data are encrypted and protected with the highest security standards.',
-      icon: '🔒',
-      category: 'Privacy & Security'
+      question: 'Is the diet restrictive?',
+      answer: 'Not at all, our system is flexible and based on calorie counting with the foods you love.',
+      icon: '🥗',
+      category: 'Nutrition'
     },
     {
       id: 4,
-      question: 'I have limited time',
-      answer: '30 minutes is enough when done right. Our efficient workout programs are designed to maximize results in minimal time.',
-      icon: '⏱️',
-      category: 'Time Management'
+      question: 'Are there vegetarian options?',
+      answer: 'Yes, plans are available for all types of dietary preferences and allergies.',
+      icon: '🌱',
+      category: 'Nutrition'
     },
     {
       id: 5,
-      question: 'When will I see results?',
-      answer: 'The difference starts before it shows. You\'ll feel changes in energy and strength within the first week, with visible results in 3-4 weeks.',
+      question: 'When will results appear?',
+      answer: 'With commitment, you will notice a real difference within 4 to 8 weeks.',
       icon: '📈',
-      category: 'Results'
+      category: 'Results & Follow-up'
     },
     {
       id: 6,
-      question: 'Is it online training?',
-      answer: 'Yes! From your home and at your time. Access all workouts, nutrition plans, and coaching through our app anytime, anywhere.',
-      icon: '🌐',
-      category: 'Training Format'
+      question: 'Is there personal follow-up?',
+      answer: 'Yes, depending on your plan you can communicate directly with the coach.',
+      icon: '💬',
+      category: 'Results & Follow-up'
     },
     {
       id: 7,
-      question: 'Do I need equipment?',
-      answer: 'No, your body and motivation are enough. We offer both equipment-free and gym-based programs to suit your preferences.',
-      icon: '🏋️',
-      category: 'Equipment'
+      question: 'How do I access the program?',
+      answer: 'Through your phone or computer anytime and from anywhere.',
+      icon: '🌐',
+      category: 'Subscription'
     },
     {
       id: 8,
-      question: 'What about diet?',
-      answer: 'Flexible with no deprivation. Our nutrition plans are customized to your lifestyle, preferences, and goals - no extreme restrictions.',
-      icon: '🥗',
-      category: 'Nutrition'
+      question: 'Can I cancel my subscription?',
+      answer: 'Yes, you can cancel or modify your subscription easily with one click.',
+      icon: '✅',
+      category: 'Subscription'
     }
   ];
 
@@ -85,13 +85,13 @@ const FAQ = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    Swal.fire({
+        Swal.fire({
       title: 'Thank you! 💕',
       text: 'Your question will be answered soon',
       icon: 'success',
       confirmButtonText: 'OK',
-      confirmButtonColor: '#E91E63',
-      iconColor: '#E91E63',
+      confirmButtonColor: '#FDB813',
+      iconColor: '#FDB813',
       background: '#fff',
       customClass: {
         popup: 'faq-swal-popup',

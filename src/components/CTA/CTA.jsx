@@ -170,7 +170,7 @@ const CTA = () => {
               onClick={() => navigate('/auth')}
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 15px 40px rgba(233, 30, 99, 0.5)"
+                boxShadow: "0 15px 40px rgba(253, 184, 19, 0.5)"
               }}
               whileTap={{ scale: 0.95 }}
             >

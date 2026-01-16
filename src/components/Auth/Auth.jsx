@@ -48,8 +48,8 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
           : 'Your account is ready! Let\'s start the transformation',
         icon: 'success',
         confirmButtonText: 'Let\'s Go',
-        confirmButtonColor: '#E91E63',
-        iconColor: '#E91E63'
+        confirmButtonColor: '#FDB813',
+        iconColor: '#FDB813'
       });
       
       onClose();
@@ -129,10 +129,11 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
               animate={{
                 background: mode === 'login' 
                   ? 'linear-gradient(135deg, #3a1f3d 0%, #2d1b2e 50%, #1f1520 100%)'
-                  : 'linear-gradient(135deg, #E91E63 0%, #9C27B0 100%)'
+                  : 'linear-gradient(135deg, #2c2416 0%, #3d2f1a 35%, #4a3a1f 70%, #5a4a2a 100%)'
               }}
               transition={{ duration: 0.5 }}
             >
+              <div className="animated-circle-2"></div>
               <div className="visual-content">
                 <motion.div
                   className="visual-circle"
@@ -404,8 +405,8 @@ const Auth = ({ isOpen, onClose, initialMode = 'login' }) => {
                         <h3>What's your goal?</h3>
                         <div className="goals-grid">
                           {[
-                            { icon: FaFire, text: 'Weight Loss', color: '#E91E63' },
-                            { icon: FaDumbbell, text: 'Build Muscle', color: '#9C27B0' },
+                            { icon: FaFire, text: 'Weight Loss', color: '#FDB813' },
+                            { icon: FaDumbbell, text: 'Build Muscle', color: '#F9A825' },
                             { icon: FaHeart, text: 'General Fitness', color: '#2196F3' },
                             { icon: FaTrophy, text: 'Challenge Myself', color: '#FF9800' }
                           ].map((goal, i) => (

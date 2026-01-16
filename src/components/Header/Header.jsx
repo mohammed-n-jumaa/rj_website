@@ -10,7 +10,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
-  const [currentLang, setCurrentLang] = useState('en'); // 'ar' or 'en'
+  const [currentLang, setCurrentLang] = useState('en'); 
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,7 +23,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Prevent scrolling when menu is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
@@ -44,25 +43,18 @@ const Header = () => {
     }
   };
 
-  // Language toggle function - will connect to Laravel API in the future
   const handleLanguageToggle = () => {
     const newLang = currentLang === 'en' ? 'ar' : 'en';
     setCurrentLang(newLang);
-    
-    // In the future, will send request to API
-    // axios.post('/api/change-language', { language: newLang })
-    
     console.log(`Language changed to: ${newLang}`);
     setMenuOpen(false);
   };
 
-  // Page links
   const pageLinks = [
     { name: 'Home', path: '/' },
     { name: 'FAQ', path: '/faq' }
   ];
 
-  // Section links (for homepage only)
   const sectionLinks = [
     { name: 'About Coach', href: '#about' },
     { name: 'Testimonials', href: '#testimonials' }
@@ -72,12 +64,10 @@ const Header = () => {
 
   return (
     <>
-      {/* Auth Modal */}
       <AnimatePresence>
         <Auth isOpen={showAuth} onClose={() => setShowAuth(false)} />
       </AnimatePresence>
 
-      {/* Menu Overlay */}
       {menuOpen && (
         <motion.div 
           className="menu-overlay"
@@ -95,31 +85,29 @@ const Header = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="header-container">
-          {/* Logo - Always Centered on Mobile */}
+          {/* تم تحديث رابط الشعار هنا */}
           <Link to="/" className="logo-link">
             <motion.div 
               className="logo"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <img src="https://i.ibb.co/QjtFVCQq/logo.png" alt="Rand Jarar Fitness" className="logo-image" />
+              <img 
+                src="https://i.ibb.co/FLsmS14y/logo2.png" 
+                alt="Rand Jarar Fitness Logo" 
+                className="logo-image" 
+              />
             </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className={`nav desktop-nav`}>
-            {/* Page links */}
-            {pageLinks.map((link, index) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className="nav-link"
-              >
+            {pageLinks.map((link) => (
+              <Link key={link.name} to={link.path} className="nav-link">
                 {link.name}
               </Link>
             ))}
 
-            {/* Section links (only on homepage) */}
             {isHomePage && sectionLinks.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -135,7 +123,6 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Mobile Left Side: Menu Toggle */}
           <div className="mobile-left">
             <button 
               className={`menu-toggle ${menuOpen ? 'open' : ''}`}
@@ -148,28 +135,23 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Mobile Right Side: Language Button */}
           <div className="mobile-right">
             <motion.button
               className="language-button-mobile"
               onClick={handleLanguageToggle}
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              title={currentLang === 'en' ? 'Switch to Arabic' : 'التبديل للإنجليزية'}
             >
               <FaGlobe className="language-icon" />
             </motion.button>
           </div>
 
-          {/* Desktop Actions */}
           <div className="header-actions">
-            {/* Language button for large screens */}
             <motion.button
               className="language-button desktop-only"
               onClick={handleLanguageToggle}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              title={currentLang === 'en' ? 'Switch to Arabic' : 'التبديل للإنجليزية'}
             >
               <FaGlobe className="language-icon" />
               <span className="language-text">
@@ -177,7 +159,6 @@ const Header = () => {
               </span>
             </motion.button>
 
-            {/* Login button for large screens */}
             <motion.button
               className="login-button desktop-only"
               onClick={handleLoginClick}
@@ -200,10 +181,8 @@ const Header = () => {
         </div>
       </motion.header>
 
-      {/* Mobile Menu Sidebar */}
       <nav className={`nav mobile-nav ${menuOpen ? 'open' : ''}`}>
-        {/* Page links */}
-        {pageLinks.map((link, index) => (
+        {pageLinks.map((link) => (
           <Link
             key={link.name}
             to={link.path}
@@ -214,8 +193,7 @@ const Header = () => {
           </Link>
         ))}
 
-        {/* Section links (only on homepage) */}
-        {isHomePage && sectionLinks.map((link, index) => (
+        {isHomePage && sectionLinks.map((link) => (
           <motion.a
             key={link.name}
             href={link.href}
@@ -226,10 +204,8 @@ const Header = () => {
           </motion.a>
         ))}
 
-        {/* Divider */}
         <div className="nav-divider"></div>
 
-        {/* Login button in menu */}
         <motion.button
           className="login-button mobile-menu"
           onClick={() => {

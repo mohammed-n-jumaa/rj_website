@@ -18,15 +18,15 @@ const Plans = () => {
   const plans = [
     {
       id: 'nutrition',
-      name: 'Nutrition Only Plan',
-      subtitle: 'Food & Diet Focus',
-      price: 39,
+      name: 'Nutrition Plan',
+      subtitle: 'Your Diet Under Control',
+      price: 49,
       duration: '1 Month',
       popular: false,
       features: [
-        'Flexible nutrition plan tailored to your goal',
+        'Your diet under control',
+        'Accurate calorie and macro calculations',
         'Food exchange list to prevent boredom',
-        'Macros and calories calculation',
         'Monthly nutrition updates'
       ],
       color: 'green',
@@ -35,11 +35,13 @@ const Plans = () => {
     {
       id: 'basic',
       name: 'Basic Plan',
-      subtitle: 'Self-Guided',
-      price: 49,
+      subtitle: 'Perfect for Independent Start',
+      price: 39,
       duration: '1 Month',
       popular: false,
       features: [
+        'Ideal choice for independent beginning',
+        'Clear roadmap for those who need structure',
         'Customized workout plan (Gym or Home)',
         'Calculated nutrition plan (Macros/Calories)',
         'Monthly plan updates'
@@ -50,14 +52,16 @@ const Plans = () => {
     {
       id: 'elite',
       name: 'Elite Plan',
-      subtitle: 'Weekly Follow-up',
-      price: 99,
+      subtitle: 'Commitment & Follow-up',
+      price: 79,
       duration: '1 Month',
       popular: true,
-      badge: 'Best Seller',
+      badge: 'Most Popular',
       features: [
         'Everything in Basic Plan',
-        'Weekly progress check-ins and adjustments',
+        'Guaranteed results with commitment and follow-up',
+        'Regular adjustments for optimal progress',
+        'Weekly progress check-ins',
         'Chat support for your questions',
         'Supplements guidance'
       ],
@@ -66,15 +70,15 @@ const Plans = () => {
     },
     {
       id: 'vip',
-      name: 'VIP Ultimate Plan',
-      subtitle: 'Ultimate Support',
+      name: 'VIP Plan',
+      subtitle: 'Complete Personal Training Experience',
       price: 149,
       duration: '1 Month',
       popular: false,
       features: [
         'Everything in Elite Plan',
-        'Daily direct support and priority replies',
-        'Exercise form correction via video',
+        'Direct daily support',
+        'Priority communication',
         'One-on-one monthly consulting session'
       ],
       color: 'gold',

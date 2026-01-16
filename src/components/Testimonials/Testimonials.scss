@@ -6,7 +6,7 @@
 .testimonials {
   position: relative;
   padding: 3rem 0;
-  background: linear-gradient(135deg, #3a1f3d 0%, #2d1b2e 50%, #1f1520 100%);
+  background: linear-gradient(135deg, #1C1C1C 0%, #2a2a2a 50%, #1C1C1C 100%); /* تغيير من البنفسجي للأسود/الرمادي */
   overflow: hidden;
   direction: ltr;
   
@@ -45,8 +45,8 @@
   .section-tag {
     display: inline-block;
     padding: 0.5rem 1.2rem;
-    background: rgba(233, 30, 99, 0.2);
-    color: $primary-color;
+    background: rgba(253, 184, 19, 0.2); /* تغيير للأصفر الشفاف */
+    color: $primary-color; /* استخدام متغير اللون الأساسي */
     border-radius: $radius-lg;
     font-weight: 600;
     font-size: 0.9rem;
@@ -131,15 +131,15 @@
   backdrop-filter: blur(10px);
   border-radius: $radius-xl;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(233, 30, 99, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(253, 184, 19, 0.2); /* تغيير للأصفر الشفاف */
+  border: 1px solid rgba(253, 184, 19, 0.1); /* تغيير للأصفر الشفاف */
   position: relative;
   transition: all $transition-normal;
   
   &:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 45px rgba(233, 30, 99, 0.35);
-    border-color: rgba(233, 30, 99, 0.4);
+    box-shadow: 0 15px 45px rgba(253, 184, 19, 0.35); /* تغيير للأصفر الشفاف */
+    border-color: rgba(253, 184, 19, 0.4); /* تغيير للأصفر الشفاف */
     background: rgba(255, 255, 255, 1);
   }
   
@@ -152,7 +152,7 @@
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
-  color: rgba(233, 30, 99, 0.15);
+  color: rgba(253, 184, 19, 0.15); /* تغيير للأصفر الشفاف */
   font-size: 2.5rem;
   
   @media (max-width: $breakpoint-mobile) {
@@ -177,7 +177,7 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(233, 30, 99, 0.2);
+  border: 3px solid rgba(253, 184, 19, 0.2); /* تغيير للأصفر الشفاف */
   flex-shrink: 0;
   
   @media (max-width: $breakpoint-mobile) {
@@ -224,7 +224,7 @@
   margin-bottom: 1.2rem;
   
   .star {
-    color: #FFC107;
+    color: $primary-color; /* استخدام اللون الذهبي بدلاً من الأصفر العادي */
     font-size: 1rem;
     
     @media (max-width: $breakpoint-mobile) {
@@ -261,7 +261,7 @@
   height: 50px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(253, 184, 19, 0.3); /* تغيير للأصفر الشفاف */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -275,10 +275,10 @@
   
   &:hover {
     background: $primary-color;
-    color: $text-white;
+    color: $secondary-color; /* تغيير للون داكن ليكون مقروءاً */
     border-color: $primary-color;
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+    box-shadow: 0 6px 20px rgba(253, 184, 19, 0.4); /* تغيير للأصفر */
   }
   
   &:active {
@@ -324,22 +324,22 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(253, 184, 19, 0.3); /* تغيير للأصفر الشفاف */
     border: none;
     cursor: pointer;
     transition: all $transition-normal;
     padding: 0;
     
     &:hover {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(253, 184, 19, 0.5); /* تغيير للأصفر الشفاف */
       transform: scale(1.2);
     }
     
     &.active {
-      background: $primary-color;
+      background: $primary-color; /* استخدام اللون الأساسي */
       width: 30px;
       border-radius: 6px;
-      box-shadow: 0 0 15px rgba(233, 30, 99, 0.6);
+      box-shadow: 0 0 15px rgba(253, 184, 19, 0.6); /* تغيير للأصفر */
     }
     
     @media (max-width: $breakpoint-mobile) {
@@ -375,7 +375,7 @@
 .shape-1 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(233, 30, 99, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(253, 184, 19, 0.25) 0%, transparent 70%);
   top: -150px;
   right: -150px;
   animation: float 20s ease-in-out infinite;
@@ -391,7 +391,7 @@
 .shape-2 {
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(233, 30, 99, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(253, 184, 19, 0.2) 0%, transparent 70%);
   bottom: -200px;
   left: -200px;
   animation: float 25s ease-in-out infinite reverse;

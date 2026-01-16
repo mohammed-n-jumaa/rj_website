@@ -17,37 +17,37 @@ const Certifications = () => {
     id: 1,
     icon: <FaCertificate />,
     issuer: 'NASM – National Academy of Sports Medicine (USA)',
-    color: '#E91E63'
+    color: '#FDB813'
   },
   {
     id: 2,
     icon: <FaTrophy />,
     issuer: 'ISSA – International Sports Sciences Association',
-    color: '#E91E63'
+    color: '#FDB813'
   },
   {
     id: 3,
     icon: <FaMedal />,
     issuer: 'ACE – American Council on Exercise',
-    color: '#E91E63'
+    color: '#FDB813'
   },
   {
     id: 4,
     icon: <FaAward />,
     issuer: 'NSCA – National Strength & Conditioning Association',
-    color: '#E91E63'
+    color: '#FDB813'
   },
   {
     id: 5,
     icon: <FaUserGraduate />,
     issuer: 'CrossFit Level 1 Trainer (International)',
-    color: '#E91E63'
+    color: '#FDB813'
   },
   {
     id: 6,
     icon: <FaGlobeAmericas />,
     issuer: 'Yoga Alliance – RYT Certified',
-    color: '#E91E63'
+    color: '#FDB813'
   }
 ];
 

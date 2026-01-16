@@ -71,24 +71,24 @@ function App() {
         }
         
         ::-webkit-scrollbar-track {
-          background: rgba(233, 30, 99, 0.05);
+          background: rgba(253, 184, 19, 0.05); /* تغيير من الوردي للأصفر */
           border-radius: 10px;
         }
         
         ::-webkit-scrollbar-thumb {
-          background: linear-gradient(135deg, #E91E63, #FF4081);
+          background: linear-gradient(135deg, #FDB813, #F9A825); /* تغيير للأصفر الذهبي */
           border-radius: 10px;
           transition: background 0.3s;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(135deg, #D81B60, #F50057);
+          background: linear-gradient(135deg, #F9A825, #F57F17); /* تغيير للأصفر الذهبي */
         }
         
         .cursor-dot {
           width: 8px;
           height: 8px;
-          background: #E91E63;
+          background: #FDB813; /* تغيير من #E91E63 للأصفر الذهبي */
           border-radius: 50%;
           position: fixed;
           pointer-events: none;
@@ -99,7 +99,7 @@ function App() {
         .cursor-ring {
           width: 40px;
           height: 40px;
-          border: 2px solid rgba(233, 30, 99, 0.3);
+          border: 2px solid rgba(253, 184, 19, 0.3); /* تغيير من الوردي للأصفر */
           border-radius: 50%;
           position: fixed;
           pointer-events: none;
@@ -138,13 +138,13 @@ function App() {
           el.addEventListener('mouseenter', () => {
             cursorDot.style.transform = 'scale(2)';
             cursorRing.style.transform = 'scale(1.5)';
-            cursorRing.style.borderColor = '#E91E63';
+            cursorRing.style.borderColor = '#FDB813'; /* تغيير من #E91E63 للأصفر الذهبي */
           });
 
           el.addEventListener('mouseleave', () => {
             cursorDot.style.transform = 'scale(1)';
             cursorRing.style.transform = 'scale(1)';
-            cursorRing.style.borderColor = 'rgba(233, 30, 99, 0.3)';
+            cursorRing.style.borderColor = 'rgba(253, 184, 19, 0.3)'; /* تغيير من الوردي للأصفر */
           });
         });
 
