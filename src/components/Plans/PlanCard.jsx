@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { FaCheck, FaCrown, FaPaypal } from 'react-icons/fa';
 
 const PlanCard = ({ plan, onSelect, delay }) => {
-  const { id, name, subtitle, price, duration, popular, features, color, icon } = plan;
+  const { id, name, subtitle, price, duration, popular, badge, features, color, icon } = plan;
 
   return (
     <motion.div 
@@ -12,9 +12,9 @@ const PlanCard = ({ plan, onSelect, delay }) => {
       transition={{ delay }}
       whileHover={{ y: -10 }}
     >
-      {popular && (
+      {popular && badge && (
         <div className="popular-badge">
-          <FaCrown /> Most Popular
+          <FaCrown /> {badge}
         </div>
       )}
 

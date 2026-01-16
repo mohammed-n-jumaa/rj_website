@@ -1,73 +1,77 @@
 import { motion } from 'framer-motion';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 
-const FeaturesComparison = () => {
+const FeaturesComparison = ({ plans }) => {
   const allFeatures = [
     {
-      name: 'Custom workout program',
-      starter: true,
-      commitment: true,
-      elite: true
+      name: 'Customized workout program',
+      basic: true,
+      elite: true,
+      vip: true,
+      nutrition: false
     },
     {
       name: 'Personal nutrition plan',
-      starter: true,
-      commitment: true,
-      elite: true
+      basic: true,
+      elite: true,
+      vip: true,
+      nutrition: true
     },
     {
       name: 'Program updates',
-      starter: 'Monthly',
-      commitment: 'Based on progress',
-      elite: 'Continuous'
+      basic: 'Monthly',
+      elite: 'Weekly adjustments',
+      vip: 'Daily updates',
+      nutrition: 'Monthly'
     },
     {
-      name: 'Follow-up',
-      starter: 'Weekly',
-      commitment: 'Multiple times weekly',
-      elite: 'Daily'
+      name: 'Follow-up frequency',
+      basic: 'Self-guided',
+      elite: 'Weekly check-ins',
+      vip: 'Daily support',
+      nutrition: 'Self-guided'
     },
     {
-      name: 'Chat with coach',
-      starter: 'Private (24hr response)',
-      commitment: 'Private (quick response)',
-      elite: 'Private 24/7'
+      name: 'Chat support',
+      basic: false,
+      elite: 'Standard response time',
+      vip: 'Priority 24/7',
+      nutrition: false
     },
     {
-      name: 'Weight and measurements tracking',
-      starter: false,
-      commitment: true,
-      elite: true
+      name: 'Supplements guidance',
+      basic: false,
+      elite: true,
+      vip: true,
+      nutrition: false
     },
     {
-      name: 'Healthy lifestyle guidance',
-      starter: false,
-      commitment: true,
-      elite: true
+      name: 'Exercise form correction',
+      basic: false,
+      elite: false,
+      vip: 'Video analysis',
+      nutrition: false
     },
     {
-      name: 'Comprehensive body assessment',
-      starter: false,
-      commitment: false,
-      elite: true
+      name: 'Monthly consulting session',
+      basic: false,
+      elite: false,
+      vip: true,
+      nutrition: false
     },
     {
-      name: 'Body shape improvement plan',
-      starter: false,
-      commitment: false,
-      elite: true
+      name: 'Food exchange lists',
+      basic: false,
+      elite: false,
+      vip: false,
+      nutrition: true
     },
     {
-      name: 'Psychological support and motivation',
-      starter: false,
-      commitment: true,
-      elite: true
-    },
-    {
-      name: 'Priority in response and support',
-      starter: false,
-      commitment: false,
-      elite: true
+      name: 'Macros calculation',
+      basic: true,
+      elite: true,
+      vip: true,
+      nutrition: true
     }
   ];
 
@@ -108,9 +112,10 @@ const FeaturesComparison = () => {
               <thead>
                 <tr>
                   <th className="feature-column">Feature</th>
-                  <th className="plan-column starter">Healthy Start</th>
-                  <th className="plan-column commitment">Commitment & Change</th>
-                  <th className="plan-column elite">Complete Transformation</th>
+                  <th className="plan-column basic">Basic Plan</th>
+                  <th className="plan-column elite">Elite Plan</th>
+                  <th className="plan-column vip">VIP Ultimate</th>
+                  <th className="plan-column nutrition">Nutrition Only</th>
                 </tr>
               </thead>
 
@@ -124,9 +129,10 @@ const FeaturesComparison = () => {
                     transition={{ delay: index * 0.05 }}
                   >
                     <td className="feature-name">{feature.name}</td>
-                    <td className="starter">{renderCell(feature.starter)}</td>
-                    <td className="commitment">{renderCell(feature.commitment)}</td>
+                    <td className="basic">{renderCell(feature.basic)}</td>
                     <td className="elite">{renderCell(feature.elite)}</td>
+                    <td className="vip">{renderCell(feature.vip)}</td>
+                    <td className="nutrition">{renderCell(feature.nutrition)}</td>
                   </motion.tr>
                 ))}
               </tbody>

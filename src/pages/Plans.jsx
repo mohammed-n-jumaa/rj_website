@@ -17,59 +17,92 @@ const Plans = () => {
   ======================= */
   const plans = [
     {
-      id: 'starter',
-      name: 'Healthy Start',
-      subtitle: 'For Beginners',
-      price: 149,
+      id: 'basic',
+      name: 'Basic Plan',
+      nameAr: 'الباقة الأساسية',
+      subtitle: 'Self-Guided',
+      subtitleAr: 'الاشتراك الذاتي',
+      price: 49,
       duration: '1 Month',
       popular: false,
       features: [
-        'Customized workout program based on your level',
-        'Personal nutrition plan',
-        'Weekly follow-up',
-        'Private chat with coach (24-hour response)',
-        'Continuous tips and motivation'
+        'Customized workout plan (Gym or Home)',
+        'جدول تمارين مخصص (جيم أو منزل)',
+        'Calculated nutrition plan (Macros/Calories)',
+        'خطة تغذية محسوبة السعرات',
+        'Monthly plan updates',
+        'تحديث الخطة كل شهر'
       ],
       color: 'blue',
       icon: '💪'
     },
     {
-      id: 'commitment',
-      name: 'Commitment & Change',
-      subtitle: 'Most Popular',
-      price: 349,
-      duration: '3 Months',
+      id: 'elite',
+      name: 'Elite Plan',
+      nameAr: 'باقة النخبة',
+      subtitle: 'Weekly Follow-up',
+      subtitleAr: 'متابعة أسبوعية',
+      price: 99,
+      duration: '1 Month',
       popular: true,
+      badge: 'Best Seller',
+      badgeAr: 'الأكثر مبيعاً',
       features: [
-        'Custom workout program updated based on progress',
-        'Personal nutrition plan for each trainee',
-        'Continuous weekly follow-up',
-        'Direct private chat with coach (quick response)',
-        'Weight and measurements tracking',
-        'Healthy lifestyle guidance'
+        'Everything in Basic Plan',
+        'كل ما في الباقة الأساسية',
+        'Weekly progress check-ins and adjustments',
+        'متابعة أسبوعية لتقييم النتائج وتعديل الخطط',
+        'Chat support for your questions',
+        'رد على الاستفسارات عبر الشات',
+        'Supplements guidance',
+        'نصائح للمكملات الغذائية'
       ],
       color: 'pink',
       icon: '🔥'
     },
     {
-      id: 'elite',
-      name: 'Complete Transformation',
-      subtitle: 'For Strong Results',
-      price: 549,
-      duration: '3 Months',
+      id: 'vip',
+      name: 'VIP Ultimate Plan',
+      nameAr: 'الباقة الشاملة',
+      subtitle: 'Ultimate Support',
+      subtitleAr: 'دعم شامل',
+      price: 149,
+      duration: '1 Month',
       popular: false,
       features: [
-        'Advanced professional workout program',
-        'Precise nutrition plan based on goal',
-        'Direct daily follow-up',
-        'Private chat with coach 24/7',
-        'Comprehensive body assessment',
-        'Custom plan for body shape',
-        'Motivation and psychological follow-up',
-        'Top priority in response and support'
+        'Everything in Elite Plan',
+        'كل ما في باقة النخبة',
+        'Daily direct support and priority replies',
+        'دعم يومي مباشر وأولوية في الرد',
+        'Exercise form correction via video',
+        'تصحيح تكنيك التمارين عبر الفيديو',
+        'One-on-one monthly consulting session',
+        'جلسة استشارية شهرياً (أونلاين)'
       ],
       color: 'gold',
       icon: '👑'
+    },
+    {
+      id: 'nutrition',
+      name: 'Nutrition Only Plan',
+      nameAr: 'باقة التغذية فقط',
+      subtitle: 'Food & Diet Focus',
+      subtitleAr: 'تركيز على الأكل',
+      price: 39,
+      duration: '1 Month',
+      popular: false,
+      features: [
+        'Flexible nutrition plan tailored to your goal',
+        'خطة تغذية مرنة تناسب هدفك (تنشيف/تضخيم)',
+        'Food exchange list to prevent boredom',
+        'قائمة بدائل للأطعمة لكسر الملل',
+        'Macros and calories calculation',
+        'حساب السعرات والبروتينات',
+        'Monthly nutrition updates',
+        'تحديث خطة التغذية شهرياً'
+      ],
+      color: 'green',
+      icon: '🥗'
     }
   ];
 

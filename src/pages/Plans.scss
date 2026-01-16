@@ -150,8 +150,6 @@
   }
 }
 
-// Rest of the file continues...
-
 // ===================================
 // Plans Section
 // ===================================
@@ -168,14 +166,14 @@
 
 .plans-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   margin-bottom: 3rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   
-  @media (max-width: $breakpoint-desktop) {
+  @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     max-width: 900px;
@@ -215,8 +213,8 @@
     border-color: $primary-color;
     box-shadow: 0 12px 40px rgba(233, 30, 99, 0.3);
     
-    @media (min-width: $breakpoint-desktop) {
-      transform: scale(1.02);
+    @media (min-width: 1200px) {
+      transform: scale(1.05);
     }
     
     @media (max-width: $breakpoint-tablet) {
@@ -261,6 +259,18 @@
     }
     .plan-button {
       background: linear-gradient(135deg, #FFD700, #FFA500);
+    }
+  }
+  
+  &.green {
+    .plan-icon {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+    }
+    .check-icon {
+      color: #2ecc71;
+    }
+    .plan-button {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
     }
   }
   
@@ -468,7 +478,6 @@
   }
 }
 
-
 // ===================================
 // Trust Section
 // ===================================
@@ -583,10 +592,10 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 600px;
+      min-width: 800px;
       
       @media (max-width: $breakpoint-mobile) {
-        min-width: 500px;
+        min-width: 700px;
       }
       
       thead {
@@ -643,12 +652,16 @@
                 color: #2196F3;
               }
               
-              &.premium {
+              &.elite {
                 color: #E91E63;
               }
               
               &.vip {
                 color: #FFA500;
+              }
+              
+              &.nutrition {
+                color: #2ecc71;
               }
             }
           }
@@ -745,9 +758,8 @@
   }
 }
 
-
 // ===================================
-// Payment Modal
+// Payment Modal (keeping existing styles)
 // ===================================
 .payment-modal-overlay {
   position: fixed;
