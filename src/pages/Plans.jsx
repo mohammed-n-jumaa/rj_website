@@ -17,6 +17,22 @@ const Plans = () => {
   ======================= */
   const plans = [
     {
+      id: 'nutrition',
+      name: 'Nutrition Only Plan',
+      subtitle: 'Food & Diet Focus',
+      price: 39,
+      duration: '1 Month',
+      popular: false,
+      features: [
+        'Flexible nutrition plan tailored to your goal',
+        'Food exchange list to prevent boredom',
+        'Macros and calories calculation',
+        'Monthly nutrition updates'
+      ],
+      color: 'green',
+      icon: '🥗'
+    },
+    {
       id: 'basic',
       name: 'Basic Plan',
       subtitle: 'Self-Guided',
@@ -63,22 +79,6 @@ const Plans = () => {
       ],
       color: 'gold',
       icon: '👑'
-    },
-    {
-      id: 'nutrition',
-      name: 'Nutrition Only Plan',
-      subtitle: 'Food & Diet Focus',
-      price: 39,
-      duration: '1 Month',
-      popular: false,
-      features: [
-        'Flexible nutrition plan tailored to your goal',
-        'Food exchange list to prevent boredom',
-        'Macros and calories calculation',
-        'Monthly nutrition updates'
-      ],
-      color: 'green',
-      icon: '🥗'
     }
   ];
 
