@@ -1,19 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCheckCircle, FaClock, FaChevronDown, FaFilePdf } from 'react-icons/fa';
+import { FaCheckCircle, FaClock, FaChevronDown } from 'react-icons/fa';
 
-const MealCard = ({ meal, index, isSelected, onToggle }) => {
+const MealCard = ({ meal, index, isSelected, onToggle, dayNumber }) => {
   const handleCheckToggle = (e) => {
     e.stopPropagation();
     // Handle meal check toggle
-  };
-
-  const handleDownloadPDF = (e) => {
-    e.stopPropagation();
-    if (meal.pdfUrl) {
-      // In the future, download PDF from Laravel API
-      window.open(meal.pdfUrl, '_blank');
-      console.log('Downloading PDF:', meal.pdfUrl);
-    }
+    console.log(`Toggling meal: ${meal.name} for day ${dayNumber}`);
   };
 
   return (
@@ -40,15 +32,6 @@ const MealCard = ({ meal, index, isSelected, onToggle }) => {
         </div>
         <div className="meal-summary">
           <span className="calories">{meal.calories} kcal</span>
-          {meal.pdfUrl && (
-            <button
-              className="pdf-btn"
-              onClick={handleDownloadPDF}
-              title="Download PDF"
-            >
-              <FaFilePdf />
-            </button>
-          )}
           <FaChevronDown
             className="expand-icon"
             style={{ transform: isSelected ? 'rotate(180deg)' : 'rotate(0deg)' }}
@@ -89,14 +72,11 @@ const MealCard = ({ meal, index, isSelected, onToggle }) => {
               </ul>
             </div>
 
-            {meal.pdfUrl && (
-              <button
-                className="download-full-pdf"
-                onClick={handleDownloadPDF}
-              >
-                <FaFilePdf />
-                Download Full Meal Plan PDF
-              </button>
+            {meal.instructions && (
+              <div className="meal-instructions">
+                <h5>Preparation Instructions:</h5>
+                <p>{meal.instructions}</p>
+              </div>
             )}
           </motion.div>
         )}

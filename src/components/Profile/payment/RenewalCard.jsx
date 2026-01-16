@@ -6,29 +6,28 @@ import BankTransferPayment from './BankTransferPayment';
 
 const RenewalCard = ({ userData, delay }) => {
   const [showPayment, setShowPayment] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState(null); // 'paypal' or 'bank'
+  const [paymentMethod, setPaymentMethod] = useState('paypal'); // Default to 'paypal'
 
   const handleRenewalSuccess = () => {
     setShowPayment(false);
-    setPaymentMethod(null);
+    setPaymentMethod('paypal');
     // In the future: Update user data from Laravel API
     console.log('Renewal successful!');
   };
 
-  const handleSelectPaymentMethod = (method) => {
-    setPaymentMethod(method);
+  const handleContinue = () => {
     setShowPayment(true);
   };
 
   const handleBack = () => {
-    if (showPayment && paymentMethod) {
+    if (showPayment) {
       setShowPayment(false);
-      setPaymentMethod(null);
     }
   };
 
   const daysLeft = userData.daysLeft;
   const isExpiringSoon = daysLeft <= 7;
+  const totalAmount = (userData.price * 0.9).toFixed(2);
 
   return (
     <motion.div 
@@ -67,47 +66,54 @@ const RenewalCard = ({ userData, delay }) => {
                 <span className="original-price">${userData.price}</span>
               </div>
               <div className="price-item discount">
-                <span>Discount:</span>
+                <span>Discount (10%):</span>
                 <span className="discount-amount">-${(userData.price * 0.1).toFixed(2)}</span>
               </div>
               <div className="price-item total">
                 <span>Total:</span>
-                <span className="total-price">${(userData.price * 0.9).toFixed(2)}</span>
+                <span className="total-price">${totalAmount}</span>
               </div>
             </div>
 
-            {/* Payment Method Selection */}
-            <div className="payment-methods">
-              <h4>Choose Payment Method:</h4>
+            {/* Simple Payment Method Toggle Buttons */}
+            <div className="payment-method-section">
+              <label className="section-label">Choose Payment Method:</label>
               
-              <div className="methods-grid">
-                <motion.button
-                  className="method-button paypal"
-                  onClick={() => handleSelectPaymentMethod('paypal')}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+              <div className="payment-toggle-buttons">
+                <button
+                  className={`payment-toggle-btn paypal ${paymentMethod === 'paypal' ? 'active' : ''}`}
+                  onClick={() => setPaymentMethod('paypal')}
                 >
-                  <FaPaypal className="method-icon" />
-                  <div className="method-info">
-                    <span className="method-name">PayPal</span>
-                    <span className="method-desc">Instant & secure payment</span>
+                  <FaPaypal className="btn-icon" />
+                  <div className="btn-content">
+                    <span className="btn-title">PayPal</span>
+                    <span className="btn-subtitle">Instant & secure payment</span>
                   </div>
-                </motion.button>
+                </button>
 
-                <motion.button
-                  className="method-button bank"
-                  onClick={() => handleSelectPaymentMethod('bank')}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                <button
+                  className={`payment-toggle-btn bank ${paymentMethod === 'bank' ? 'active' : ''}`}
+                  onClick={() => setPaymentMethod('bank')}
                 >
-                  <FaUniversity className="method-icon" />
-                  <div className="method-info">
-                    <span className="method-name">Bank Transfer</span>
-                    <span className="method-desc">Within 24 hours</span>
+                  <FaUniversity className="btn-icon" />
+                  <div className="btn-content">
+                    <span className="btn-title">Bank Transfer</span>
+                    <span className="btn-subtitle">Within 24 hours</span>
                   </div>
-                </motion.button>
+                </button>
               </div>
             </div>
+
+            <motion.button
+              className="renew-btn"
+              onClick={handleContinue}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Continue to Payment
+            </motion.button>
+
+          
           </motion.div>
         ) : (
           <motion.div
@@ -119,13 +125,13 @@ const RenewalCard = ({ userData, delay }) => {
           >
             {paymentMethod === 'paypal' ? (
               <PayPalPayment
-                amount={(userData.price * 0.9).toFixed(2)}
+                amount={totalAmount}
                 onSuccess={handleRenewalSuccess}
                 onCancel={handleBack}
               />
             ) : (
               <BankTransferPayment
-                amount={(userData.price * 0.9).toFixed(2)}
+                amount={totalAmount}
                 onSuccess={handleRenewalSuccess}
                 onCancel={handleBack}
               />

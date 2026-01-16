@@ -12,11 +12,24 @@ import './Profile.scss';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('overview');
+  const [currentUserData, setCurrentUserData] = useState({
+    ...userData,
+    // Add new fields with default values
+    waist: 85,
+    hips: 95,
+    workoutPlace: 'home',
+    healthNotes: 'No known allergies. Minor knee injury from 2023.',
+    goal: 'weight-loss'
+  });
+
+  const handleProfileUpdate = (updatedData) => {
+    setCurrentUserData(updatedData);
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
       case 'overview':
-        return <OverviewTab userData={userData} />;
+        return <OverviewTab userData={currentUserData} />;
       case 'nutrition':
         return <NutritionTab nutritionPlan={nutritionPlan} />;
       case 'workout':
@@ -24,15 +37,18 @@ const Profile = () => {
       case 'chat':
         return <ChatTab messages={messages} />;
       case 'payment':
-        return <PaymentTab userData={userData} />;
+        return <PaymentTab userData={currentUserData} />;
       default:
-        return <OverviewTab userData={userData} />;
+        return <OverviewTab userData={currentUserData} />;
     }
   };
 
   return (
     <div className="profile-page">
-      <ProfileHeader userData={userData} />
+      <ProfileHeader 
+        userData={currentUserData} 
+        onProfileUpdate={handleProfileUpdate}
+      />
       
       <ProfileTabs 
         activeTab={activeTab} 

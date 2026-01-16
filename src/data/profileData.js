@@ -1,3 +1,98 @@
+// Helper function to generate meal data
+const generateMeal = (id, name, time, calories, protein, carbs, fats, items, pdfUrl = null) => ({
+  id,
+  name,
+  time,
+  calories,
+  protein,
+  carbs,
+  fats,
+  items,
+  checked: false,
+  pdfUrl,
+  instructions: 'Follow the preparation instructions in the PDF for best results.'
+});
+
+// Helper function to generate day data
+const generateDay = (dayNumber) => {
+  const date = new Date(2024, 0, dayNumber); // January 2024
+  const dateString = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  
+  const meals = [
+    generateMeal(
+      `${dayNumber}-1`,
+      'Breakfast',
+      '07:00 AM',
+      450,
+      30,
+      45,
+      15,
+      ['3 boiled eggs', 'Whole wheat toast (2 slices)', 'Half avocado', 'Black coffee'],
+      `/pdfs/day${dayNumber}-breakfast.pdf`
+    ),
+    generateMeal(
+      `${dayNumber}-2`,
+      'Morning Snack',
+      '10:30 AM',
+      200,
+      15,
+      25,
+      8,
+      ['Low-fat Greek yogurt', 'Handful of almonds (10 pieces)'],
+      `/pdfs/day${dayNumber}-morning-snack.pdf`
+    ),
+    generateMeal(
+      `${dayNumber}-3`,
+      'Lunch',
+      '01:00 PM',
+      600,
+      45,
+      60,
+      20,
+      ['Grilled chicken breast (200g)', 'Basmati rice (1 cup)', 'Green salad', 'Olive oil (1 tablespoon)'],
+      `/pdfs/day${dayNumber}-lunch.pdf`
+    ),
+    generateMeal(
+      `${dayNumber}-4`,
+      'Afternoon Snack',
+      '04:30 PM',
+      250,
+      20,
+      30,
+      8,
+      ['Protein shake', 'Medium banana'],
+      `/pdfs/day${dayNumber}-afternoon-snack.pdf`
+    ),
+    generateMeal(
+      `${dayNumber}-5`,
+      'Dinner',
+      '07:00 PM',
+      300,
+      25,
+      20,
+      9,
+      ['Grilled salmon (150g)', 'Grilled vegetables', 'Salad'],
+      `/pdfs/day${dayNumber}-dinner.pdf`
+    )
+  ];
+
+  // Calculate totals
+  const totalCalories = meals.reduce((sum, meal) => sum + meal.calories, 0);
+  const protein = meals.reduce((sum, meal) => sum + meal.protein, 0);
+  const carbs = meals.reduce((sum, meal) => sum + meal.carbs, 0);
+  const fats = meals.reduce((sum, meal) => sum + meal.fats, 0);
+
+  return {
+    dayNumber,
+    date: dateString,
+    totalCalories,
+    protein,
+    carbs,
+    fats,
+    meals
+  };
+};
+
 export const userData = {
   name: 'Sarah Ahmed',
   avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
@@ -15,73 +110,10 @@ export const userData = {
   daysLeft: 45
 };
 
+// Updated nutrition plan with 10 days
 export const nutritionPlan = {
-  totalCalories: 1800,
-  protein: 135,
-  carbs: 180,
-  fats: 60,
-  meals: [
-    {
-      id: 1,
-      name: 'Breakfast',
-      time: '07:00 AM',
-      calories: 450,
-      protein: 30,
-      carbs: 45,
-      fats: 15,
-      items: ['3 boiled eggs', 'Whole wheat toast (2 slices)', 'Half avocado', 'Black coffee'],
-      checked: true,
-      pdfUrl: '/pdfs/breakfast-meal-plan.pdf' // PDF link from Laravel
-    },
-    {
-      id: 2,
-      name: 'Morning Snack',
-      time: '10:30 AM',
-      calories: 200,
-      protein: 15,
-      carbs: 25,
-      fats: 8,
-      items: ['Low-fat Greek yogurt', 'Handful of almonds (10 pieces)'],
-      checked: true,
-      pdfUrl: '/pdfs/morning-snack.pdf'
-    },
-    {
-      id: 3,
-      name: 'Lunch',
-      time: '01:00 PM',
-      calories: 600,
-      protein: 45,
-      carbs: 60,
-      fats: 20,
-      items: ['Grilled chicken breast (200g)', 'Basmati rice (1 cup)', 'Green salad', 'Olive oil (1 tablespoon)'],
-      checked: false,
-      pdfUrl: '/pdfs/lunch-meal-plan.pdf'
-    },
-    {
-      id: 4,
-      name: 'Afternoon Snack',
-      time: '04:30 PM',
-      calories: 250,
-      protein: 20,
-      carbs: 30,
-      fats: 8,
-      items: ['Protein shake', 'Medium banana'],
-      checked: false,
-      pdfUrl: '/pdfs/afternoon-snack.pdf'
-    },
-    {
-      id: 5,
-      name: 'Dinner',
-      time: '07:00 PM',
-      calories: 300,
-      protein: 25,
-      carbs: 20,
-      fats: 9,
-      items: ['Grilled salmon (150g)', 'Grilled vegetables', 'Salad'],
-      checked: false,
-      pdfUrl: '/pdfs/dinner-meal-plan.pdf'
-    }
-  ]
+  monthlyPdfUrl: '/pdfs/monthly-nutrition-plan-january-2024.pdf',
+  days: Array.from({ length: 10 }, (_, i) => generateDay(i + 1))
 };
 
 export const workoutPlan = [
@@ -94,7 +126,7 @@ export const workoutPlan = [
         sets: 4, 
         reps: '10-12', 
         videoUrl: 'https://example.com/bench.mp4',
-        youtubeUrl: 'https://www.youtube.com/watch?v=rT7DgCr-3pg', // Real YouTube link
+        youtubeUrl: 'https://www.youtube.com/watch?v=rT7DgCr-3pg',
         checked: true 
       },
       { 
