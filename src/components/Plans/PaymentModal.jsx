@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaPaypal, FaUniversity, FaCheckCircle, FaExclamationTriangle, FaArrowLeft } from 'react-icons/fa';
+import { FaTimes, FaPaypal, FaUniversity, FaCheckCircle, FaExclamationTriangle, FaArrowLeft, FaCalendarAlt, FaTag } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import BankTransferPayment from './BankTransferPayment';
 
-const PaymentModal = ({ plan, onClose, onSuccess }) => {
+const PaymentModal = ({ plan, duration, onClose, onSuccess }) => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [step, setStep] = useState('method'); // method, paypal-confirm, bank-transfer, processing, success
+  const [step, setStep] = useState('method');
   const [paymentMethod, setPaymentMethod] = useState(null);
 
   const handleSelectMethod = (method) => {
@@ -26,7 +26,8 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
       // Here PayPal order will be created via Laravel API
       // const response = await axios.post('/api/paypal/create-payment', {
       //   plan_id: plan.id,
-      //   amount: finalPrice,
+      //   duration: duration,
+      //   amount: selectedPricing.price,
       //   currency: 'USD'
       // });
       // window.location.href = response.data.approval_url;
@@ -91,8 +92,12 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
     }
   };
 
-  const discount = plan.id === 'premium' ? 0.1 : plan.id === 'vip' ? 0.15 : 0;
-  const finalPrice = (plan.price * (1 - discount)).toFixed(2);
+  // Get pricing for selected duration
+  const selectedPricing = plan.pricing[duration];
+  const hasDiscount = selectedPricing.discount > 0;
+  const durationLabel = duration === '1month' ? '1 Month' : 
+                        duration === '3months' ? '3 Months' : 
+                        '6 Months';
 
   return (
     <AnimatePresence>
@@ -131,30 +136,47 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                   </div>
 
                   <div className="pricing-details">
-                    <div className="price-row">
-                      <span>Original Price:</span>
-                      <span className={discount > 0 ? 'original-price' : 'price'}>
-                        ${plan.price}
-                      </span>
+                    {/* Duration Display */}
+                    <div className="duration-display">
+                      <FaCalendarAlt />
+                      <span>{durationLabel}</span>
                     </div>
+
+                    {/* Original Price (if discount) */}
+                    {hasDiscount && (
+                      <div className="price-row">
+                        <span>Original Price:</span>
+                        <span className="original-price">
+                          ${selectedPricing.originalPrice}
+                        </span>
+                      </div>
+                    )}
                     
-                    {discount > 0 && (
-                      <>
-                        <div className="price-row discount-row">
-                          <span>Discount ({(discount * 100)}%):</span>
-                          <span className="discount">-${(plan.price * discount).toFixed(2)}</span>
-                        </div>
-                        <div className="price-row total-row">
-                          <span>Total:</span>
-                          <span className="final-price">${finalPrice}</span>
-                        </div>
-                      </>
+                    {/* Discount Row */}
+                    {hasDiscount && (
+                      <div className="price-row discount-row">
+                        <span>
+                          <FaTag className="tag-icon" />
+                          Discount ({selectedPricing.discount}%):
+                        </span>
+                        <span className="discount">
+                          -${(selectedPricing.originalPrice - selectedPricing.price).toFixed(2)}
+                        </span>
+                      </div>
                     )}
 
-                    <div className="duration-info">
-                      <FaCheckCircle />
-                      <span>Valid for {plan.duration}</span>
+                    {/* Total */}
+                    <div className="price-row total-row">
+                      <span>Total:</span>
+                      <span className="final-price">${selectedPricing.price}</span>
                     </div>
+
+                    {hasDiscount && (
+                      <div className="savings-highlight">
+                        <FaCheckCircle />
+                        <span>You save ${(selectedPricing.originalPrice - selectedPricing.price).toFixed(2)} with this plan!</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -213,14 +235,21 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                     <span className="plan-icon">{plan.icon}</span>
                     <div>
                       <h3>{plan.name}</h3>
-                      <p>{plan.subtitle}</p>
+                      <p>{durationLabel}</p>
                     </div>
                   </div>
 
                   <div className="pricing-details">
+                    {hasDiscount && (
+                      <div className="discount-highlight">
+                        <FaTag />
+                        <span>{selectedPricing.discount}% Discount Applied</span>
+                      </div>
+                    )}
+
                     <div className="price-row total-row">
                       <span>Total:</span>
-                      <span className="final-price">${finalPrice}</span>
+                      <span className="final-price">${selectedPricing.price}</span>
                     </div>
                   </div>
                 </div>
@@ -250,7 +279,7 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
                   disabled={isProcessing}
                 >
                   <FaPaypal />
-                  Pay with PayPal
+                  Pay ${selectedPricing.price}
                 </button>
               </div>
             </>
@@ -273,8 +302,10 @@ const PaymentModal = ({ plan, onClose, onSuccess }) => {
 
               <div className="modal-body">
                 <BankTransferPayment
-                  amount={finalPrice}
-                  planName={plan.name}
+                  amount={selectedPricing.price}
+                  planName={`${plan.name} - ${durationLabel}`}
+                  discount={hasDiscount ? selectedPricing.discount : 0}
+                  originalPrice={hasDiscount ? selectedPricing.originalPrice : null}
                   onSuccess={handleBankTransferSuccess}
                   onCancel={handleBack}
                 />

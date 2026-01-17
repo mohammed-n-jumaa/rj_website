@@ -65,10 +65,98 @@ const FAQ = () => {
       answer: 'Yes, you can cancel or modify your subscription easily with one click.',
       icon: '✅',
       category: 'Subscription'
+    },
+    // New Questions - المرونة والوقت
+    {
+      id: 9,
+      question: 'My schedule is busy, can I commit?',
+      answer: 'Yes, our workouts are short and effective (30-45 minutes) and fit any schedule.',
+      icon: '⏰',
+      category: 'Flexibility & Time'
+    },
+    {
+      id: 10,
+      question: 'Can I change the workout time?',
+      answer: 'Of course, workouts and schedules are available to you 24/7.',
+      icon: '🔄',
+      category: 'Flexibility & Time'
+    },
+    // New Questions - الأكل والميزانية
+    {
+      id: 11,
+      question: 'Is the food expensive?',
+      answer: 'Not at all, we rely on available home food and your budget.',
+      icon: '💰',
+      category: 'Nutrition & Budget'
+    },
+    {
+      id: 12,
+      question: 'What if I don\'t like a specific food item?',
+      answer: 'No problem, we provide smart alternatives for every meal you love.',
+      icon: '🍽️',
+      category: 'Nutrition & Budget'
+    },
+    // New Questions - الخصوصية والنتائج
+    {
+      id: 13,
+      question: 'Are the results guaranteed?',
+      answer: 'If you commit to the plan, we guarantee you will see real change, God willing.',
+      icon: '🔒',
+      category: 'Privacy & Results'
+    },
+    {
+      id: 14,
+      question: 'Are my data and photos private?',
+      answer: 'Your privacy is our priority, your data and photos are encrypted and no one can access them except you.',
+      icon: '📱',
+      category: 'Privacy & Results'
+    },
+    // New Questions - الدعم الفني
+    {
+      id: 15,
+      question: 'If I face a problem with the website?',
+      answer: 'The technical support team is ready to help you anytime through the website.',
+      icon: '🛠️',
+      category: 'Technical Support'
+    },
+    {
+      id: 16,
+      question: 'Does the website work from outside my country?',
+      answer: 'Yes, you can access and subscribe from anywhere in the world.',
+      icon: '🌍',
+      category: 'Technical Support'
+    },
+    // New Questions - الباقات والاشتراك
+    {
+      id: 17,
+      question: 'Can I upgrade my plan later?',
+      answer: 'Of course, you can move from the basic plan to "Elite" or "VIP" at any time.',
+      icon: '📊',
+      category: 'Plans & Subscription'
+    },
+    {
+      id: 18,
+      question: 'Is renewal automatic?',
+      answer: 'The choice is yours; you can activate or cancel auto-renewal from your account settings.',
+      icon: '🔄',
+      category: 'Plans & Subscription'
+    },
+    // New Questions - الدعم والمتابعة
+    {
+      id: 19,
+      question: 'How often can I ask the coach?',
+      answer: 'In follow-up plans, you can send your inquiries and the coach will respond during working hours.',
+      icon: '👨‍🏫',
+      category: 'Support & Follow-up'
+    },
+    {
+      id: 20,
+      question: 'Are schedules updated?',
+      answer: 'Yes, your schedule is updated periodically according to your level development to ensure no weight plateau.',
+      icon: '📅',
+      category: 'Support & Follow-up'
     }
   ];
-
-
 
   const categories = [...new Set(faqData.map(q => q.category))];
 
@@ -85,7 +173,7 @@ const FAQ = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-        Swal.fire({
+    Swal.fire({
       title: 'Thank you! 💕',
       text: 'Your question will be answered soon',
       icon: 'success',
@@ -142,7 +230,7 @@ const FAQ = () => {
         </motion.div>
       </motion.div>
 
-      {/* Stats Section */}
+      {/* Stats Section - تحديث الرقم ليشمل الأسئلة الجديدة */}
       <motion.div 
         className="faq-stats"
         initial={{ opacity: 0 }}
@@ -177,7 +265,7 @@ const FAQ = () => {
               className={`faq-item ${activeQuestion === faq.id ? 'active' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.05 }}
             >
               <div 
                 className="faq-question"
@@ -231,7 +319,7 @@ const FAQ = () => {
           <div className="form-header">
             <div className="header-icon">💬</div>
             <h2>Still Have Questions?</h2>
-            <p>Ask us anything! We're here to help you succeed</p>
+            <p>Ask us anything! We\'re here to help you succeed</p>
           </div>
 
           <form onSubmit={handleSubmit} className="question-form">

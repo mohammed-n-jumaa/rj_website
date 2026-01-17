@@ -10,34 +10,22 @@ import './Plans.scss';
 const Plans = () => {
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedDuration, setSelectedDuration] = useState(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   /* =======================
-     Plans Data
+     Plans Data with Multi-Month Options
   ======================= */
   const plans = [
-    {
-      id: 'nutrition',
-      name: 'Nutrition Plan',
-      subtitle: 'Your Diet Under Control',
-      price: 49,
-      duration: '1 Month',
-      popular: false,
-      features: [
-        'Your diet under control',
-        'Accurate calorie and macro calculations',
-        'Food exchange list to prevent boredom',
-        'Monthly nutrition updates'
-      ],
-      color: 'green',
-      icon: '🥗'
-    },
     {
       id: 'basic',
       name: 'Basic Plan',
       subtitle: 'Perfect for Independent Start',
-      price: 39,
-      duration: '1 Month',
+      pricing: {
+        '1month': { price: 39, originalPrice: 39, discount: 0 },
+        '3months': { price: 111, originalPrice: 117, discount: 5 },
+        '6months': { price: 210, originalPrice: 234, discount: 10 }
+      },
       popular: false,
       features: [
         'Ideal choice for independent beginning',
@@ -50,11 +38,33 @@ const Plans = () => {
       icon: '💪'
     },
     {
+      id: 'nutrition',
+      name: 'Nutrition Plan',
+      subtitle: 'Your Diet Under Control',
+      pricing: {
+        '1month': { price: 49, originalPrice: 49, discount: 0 },
+        '3months': { price: 139, originalPrice: 147, discount: 5 },
+        '6months': { price: 264, originalPrice: 294, discount: 10 }
+      },
+      popular: false,
+      features: [
+        'Your diet under control',
+        'Accurate calorie and macro calculations',
+        'Food exchange list to prevent boredom',
+        'Monthly nutrition updates'
+      ],
+      color: 'green',
+      icon: '🥗'
+    },
+    {
       id: 'elite',
       name: 'Elite Plan',
       subtitle: 'Commitment & Follow-up',
-      price: 79,
-      duration: '1 Month',
+      pricing: {
+        '1month': { price: 79, originalPrice: 79, discount: 0 },
+        '3months': { price: 225, originalPrice: 237, discount: 5 },
+        '6months': { price: 426, originalPrice: 474, discount: 10 }
+      },
       popular: true,
       badge: 'Most Popular',
       features: [
@@ -72,8 +82,11 @@ const Plans = () => {
       id: 'vip',
       name: 'VIP Plan',
       subtitle: 'Complete Personal Training Experience',
-      price: 149,
-      duration: '1 Month',
+      pricing: {
+        '1month': { price: 149, originalPrice: 149, discount: 0 },
+        '3months': { price: 424, originalPrice: 447, discount: 5 },
+        '6months': { price: 804, originalPrice: 894, discount: 10 }
+      },
       popular: false,
       features: [
         'Everything in Elite Plan',
@@ -89,8 +102,9 @@ const Plans = () => {
   /* =======================
      Handlers
   ======================= */
-  const handleSelectPlan = (plan) => {
+  const handleSelectPlan = (plan, duration) => {
     setSelectedPlan(plan);
+    setSelectedDuration(duration);
     setShowPaymentModal(true);
   };
 
@@ -120,7 +134,14 @@ const Plans = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="hero-label">Training & Subscription Plans</span>
+            <motion.span 
+              className="hero-label"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+            >
+              Training & Subscription Plans
+            </motion.span>
 
             <h1 className="hero-title">
               Your Path to a Healthy Body
@@ -131,6 +152,20 @@ const Plans = () => {
               Training programs and nutrition plans designed specifically for you,
               with direct private chat with the coach to track your progress step by step
             </p>
+
+            {/* Special Offer Banner */}
+            <motion.div 
+              className="special-offer-banner"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="offer-icon">🎉</div>
+              <div className="offer-text">
+                <strong>Limited Time Offer!</strong>
+                <span>Get up to 10% OFF on 6-month subscriptions</span>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -187,6 +222,7 @@ const Plans = () => {
       {showPaymentModal && (
         <PaymentModal
           plan={selectedPlan}
+          duration={selectedDuration}
           onClose={() => setShowPaymentModal(false)}
           onSuccess={handlePaymentSuccess}
         />
