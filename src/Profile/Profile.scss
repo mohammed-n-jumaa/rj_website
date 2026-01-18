@@ -4189,22 +4189,24 @@
 // COMPACT PROFILE REMINDER MESSAGE
 // ===================================
 .profile-reminder.compact {
-  background: linear-gradient(135deg, rgba(253, 184, 19, 0.1), rgba(255, 193, 7, 0.05));
+  background: linear-gradient(135deg, rgba(255, 248, 225, 0.95), rgba(255, 236, 179, 0.9));
   border-radius: $radius-md;
   margin-bottom: $spacing-sm;
   padding: $spacing-sm;
-  border: 1.5px solid rgba(253, 184, 19, 0.3);
-  box-shadow: $shadow-sm;
+  border: 1.5px solid #FFB300;
+  box-shadow: 0 4px 12px rgba(255, 179, 0, 0.15);
   position: relative;
   overflow: hidden;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-
+  
+  // تقليل الشفافية للهواتف
   @media (max-width: $breakpoint-mobile) {
-    max-width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border: 2px solid #FFB300;
+    box-shadow: 0 3px 10px rgba(255, 179, 0, 0.2);
+    padding: 0.85rem;
   }
 
   .reminder-content {
@@ -4214,7 +4216,7 @@
     position: relative;
 
     @media (max-width: $breakpoint-mobile) {
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
   }
 
@@ -4223,24 +4225,25 @@
     height: 36px;
     min-width: 36px;
     border-radius: $radius-sm;
-    background: linear-gradient(135deg, #FDB813, #F9A825);
+    background: linear-gradient(135deg, #FFB300, #FF8F00);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
     color: white;
-    box-shadow: 0 2px 8px rgba(253, 184, 19, 0.3);
+    box-shadow: 0 3px 8px rgba(255, 179, 0, 0.4);
     flex-shrink: 0;
 
     @media (max-width: $breakpoint-mobile) {
-      width: 32px;
-      height: 32px;
-      min-width: 32px;
-      font-size: 0.9rem;
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 6px rgba(255, 179, 0, 0.5);
     }
 
     svg {
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
     }
   }
 
@@ -4251,25 +4254,33 @@
     gap: 0.5rem;
 
     @media (max-width: $breakpoint-mobile) {
-      gap: 0.4rem;
+      gap: 0.6rem;
     }
   }
 
   .reminder-message {
     font-size: 0.9rem;
     margin: 0;
-    color: #5D4037;
-    line-height: 1.4;
-    font-weight: 500;
-
+    color: #5D4037; // بني غامق
+    line-height: 1.5;
+    font-weight: 600; // وزن أثقل
+    
+    // تحسين التباين للهواتف
     @media (max-width: $breakpoint-mobile) {
-      font-size: 0.85rem;
-      line-height: 1.3;
+      font-size: 0.88rem;
+      color: #4E342E; // بني أغمق للهواتف
+      line-height: 1.4;
+      font-weight: 700;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
     }
 
     strong {
-      color: #E65100;
-      font-weight: 700;
+      color: #E65100; // برتقالي غامق
+      font-weight: 800;
+      
+      @media (max-width: $breakpoint-mobile) {
+        color: #D84315; // برتقالي أغمق للهواتف
+      }
     }
   }
 
@@ -4279,14 +4290,14 @@
     align-items: center;
 
     @media (max-width: $breakpoint-mobile) {
-      gap: 0.5rem;
+      gap: 0.65rem;
     }
 
     button {
-      padding: 0.4rem 0.9rem;
+      padding: 0.45rem 1rem;
       border-radius: $radius-sm;
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.82rem;
+      font-weight: 700; // وزن أثقل
       cursor: pointer;
       transition: all $transition-normal;
       font-family: 'Inter', sans-serif;
@@ -4295,11 +4306,14 @@
       gap: 0.4rem;
       border: 1.5px solid transparent;
       white-space: nowrap;
-
+      
+      // تحسين الوضوح للهواتف
       @media (max-width: $breakpoint-mobile) {
-        padding: 0.35rem 0.75rem;
-        font-size: 0.75rem;
-        gap: 0.3rem;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.8rem;
+        font-weight: 800;
+        gap: 0.35rem;
+        border-width: 2px;
       }
 
       &:hover {
@@ -4311,85 +4325,166 @@
       }
 
       &.review-btn {
-        background: linear-gradient(135deg, #FDB813, #F9A825);
+        background: linear-gradient(135deg, #FFB300, #FF8F00);
         color: white;
-        box-shadow: 0 2px 6px rgba(253, 184, 19, 0.3);
+        box-shadow: 0 3px 6px rgba(255, 179, 0, 0.4);
+        
+        @media (max-width: $breakpoint-mobile) {
+          background: linear-gradient(135deg, #FF8F00, #FF6F00);
+          box-shadow: 0 2px 8px rgba(255, 143, 0, 0.6);
+        }
 
         &:hover {
-          background: linear-gradient(135deg, #F9A825, #F57C00);
-          box-shadow: 0 3px 8px rgba(253, 184, 19, 0.4);
+          background: linear-gradient(135deg, #FF8F00, #FF6F00);
+          box-shadow: 0 4px 8px rgba(255, 143, 0, 0.5);
         }
 
         svg {
           font-size: 0.8rem;
+          
+          @media (max-width: $breakpoint-mobile) {
+            font-size: 0.75rem;
+          }
         }
       }
 
       &.dismiss-btn {
-        background: transparent;
+        background: rgba(255, 255, 255, 0.9);
         color: #5D4037;
-        border-color: rgba(253, 184, 19, 0.4);
-        font-weight: 500;
+        border-color: #FFB300;
+        font-weight: 600;
+        
+        @media (max-width: $breakpoint-mobile) {
+          background: white;
+          color: #4E342E;
+          border-color: #FF8F00;
+          font-weight: 700;
+        }
 
         &:hover {
-          background: rgba(253, 184, 19, 0.1);
-          border-color: #FDB813;
+          background: white;
+          border-color: #FF8F00;
           color: #E65100;
         }
 
         svg {
           font-size: 0.8rem;
           color: #4CAF50;
+          
+          @media (max-width: $breakpoint-mobile) {
+            font-size: 0.75rem;
+          }
         }
       }
     }
   }
 
   .close-reminder {
-    background: transparent;
-    border: none;
-    color: #8D6E63;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1.5px solid #FFB300;
+    color: #5D4037;
     font-size: 1.3rem;
+    font-weight: bold;
     cursor: pointer;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all $transition-normal;
-    opacity: 0.7;
     margin-left: auto;
     flex-shrink: 0;
     padding: 0;
     line-height: 1;
-
-    &:hover {
-      background: rgba(253, 184, 19, 0.1);
-      opacity: 1;
-      color: #E65100;
-      transform: scale(1.1);
+    
+    @media (max-width: $breakpoint-mobile) {
+      background: white;
+      border: 2px solid #FF8F00;
+      color: #4E342E;
+      width: 28px;
+      height: 28px;
+      font-size: 1.2rem;
+      font-weight: 800;
     }
 
-    @media (max-width: $breakpoint-mobile) {
-      width: 20px;
-      height: 20px;
-      font-size: 1.1rem;
+    &:hover {
+      background: #FFB300;
+      color: white;
+      border-color: #FF8F00;
+      transform: scale(1.1);
     }
   }
 }
 
 // ===================================
-// ALTERNATIVE SMALL REMINDER STYLE
+// VERSION WITH BETTER CONTRAST FOR MOBILE
 // ===================================
-.profile-reminder.mini {
-  background: linear-gradient(135deg, rgba(255, 248, 225, 0.9), rgba(255, 236, 179, 0.8));
-  border-radius: $radius-sm;
+.profile-reminder.compact.mobile-optimized {
+  @media (max-width: $breakpoint-mobile) {
+    background: #FFF8E1;
+    border: 2px solid #FF9800;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.25);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #FF9800, #F57C00);
+    }
+    
+    .reminder-message {
+      color: #3E2723;
+      font-weight: 700;
+      text-shadow: none;
+      
+      strong {
+        color: #E65100;
+      }
+    }
+    
+    .reminder-icon {
+      background: linear-gradient(135deg, #FF9800, #F57C00);
+      box-shadow: 0 3px 10px rgba(255, 152, 0, 0.5);
+    }
+    
+    button {
+      &.review-btn {
+        background: linear-gradient(135deg, #FF9800, #F57C00);
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      }
+      
+      &.dismiss-btn {
+        background: white;
+        color: #3E2723;
+        border-color: #FFA726;
+        font-weight: 700;
+      }
+    }
+    
+    .close-reminder {
+      background: white;
+      border-color: #FF9800;
+      color: #3E2723;
+      font-weight: 900;
+    }
+  }
+}
+
+// ===================================
+// SIMPLE VERSION FOR MAXIMUM READABILITY
+// ===================================
+.profile-reminder.simple {
+  background: #FFF8E1;
+  border-radius: $radius-md;
   margin-bottom: $spacing-sm;
-  padding: 0.75rem 1rem;
-  border-left: 3px solid #FDB813;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  max-width: 500px;
+  padding: $spacing-sm;
+  border: 2px solid #FFB300;
+  box-shadow: $shadow-sm;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 
@@ -4400,15 +4495,15 @@
   }
 
   .reminder-icon {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    border-radius: 50%;
-    background: #FDB813;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: $radius-sm;
+    background: #FFB300;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: white;
     flex-shrink: 0;
   }
@@ -4418,158 +4513,128 @@
   }
 
   .reminder-message {
-    font-size: 0.85rem;
-    margin: 0;
-    color: #5D4037;
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+    color: #3E2723;
     line-height: 1.4;
-    font-weight: 500;
+    font-weight: 600;
 
     strong {
-      color: #E65100;
+      color: #D84315;
+      font-weight: 700;
     }
   }
 
   .reminder-actions {
     display: flex;
     gap: 0.5rem;
-    margin-top: 0.5rem;
 
     button {
-      padding: 0.3rem 0.7rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.8rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all $transition-fast;
-      border: 1px solid transparent;
+      border: 2px solid transparent;
 
       &.review-btn {
-        background: #FDB813;
+        background: #FFB300;
         color: white;
         border: none;
 
         &:hover {
-          background: #F9A825;
+          background: #FF8F00;
         }
       }
 
       &.dismiss-btn {
         background: transparent;
-        color: #8D6E63;
-        border-color: #FFE082;
+        color: #5D4037;
+        border-color: #FFB300;
 
         &:hover {
-          background: rgba(253, 184, 19, 0.1);
+          background: rgba(255, 179, 0, 0.1);
         }
       }
     }
   }
 
   .close-reminder {
-    display: none;
+    background: transparent;
+    border: none;
+    color: #8D6E63;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      color: #D84315;
+    }
+  }
+}
+
+// ===================================
+// HIGH CONTRAST VERSION FOR MOBILE
+// ===================================
+@media (max-width: $breakpoint-mobile) {
+  .profile-reminder {
+    &.high-contrast {
+      background: #FFF3E0;
+      border: 3px solid #FF6F00;
+      box-shadow: 0 5px 20px rgba(255, 111, 0, 0.2);
+      
+      .reminder-message {
+        color: #212121;
+        font-weight: 700;
+        font-size: 0.9rem;
+        
+        strong {
+          color: #FF3D00;
+        }
+      }
+      
+      .reminder-icon {
+        background: #FF6F00;
+        box-shadow: 0 3px 10px rgba(255, 111, 0, 0.5);
+      }
+      
+      button {
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+        &.review-btn {
+          background: #FF6F00;
+          color: white;
+        }
+      }
+    }
   }
 }
 
 // ===================================
 // ANIMATIONS FOR COMPACT REMINDER
 // ===================================
-@keyframes subtlePulse {
+@keyframes mobilePulse {
   0% {
-    box-shadow: $shadow-sm;
+    box-shadow: 0 3px 10px rgba(255, 179, 0, 0.2);
   }
   50% {
-    box-shadow: 0 3px 10px rgba(253, 184, 19, 0.15);
+    box-shadow: 0 5px 20px rgba(255, 179, 0, 0.4);
   }
   100% {
-    box-shadow: $shadow-sm;
-  }
-}
-
-@keyframes slideInCompact {
-  from {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.profile-reminder.compact {
-  animation: slideInCompact 0.4s ease-out, subtlePulse 4s infinite;
-}
-
-// ===================================
-// RESPONSIVE ADJUSTMENTS
-// ===================================
-@media (max-width: $breakpoint-tablet) {
-  .profile-reminder.compact {
-    .reminder-content {
-      flex-wrap: wrap;
-    }
-
-    .reminder-actions {
-      width: 100%;
-      justify-content: flex-start;
-    }
-
-    .close-reminder {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      margin-left: 0;
-    }
+    box-shadow: 0 3px 10px rgba(255, 179, 0, 0.2);
   }
 }
 
 @media (max-width: $breakpoint-mobile) {
   .profile-reminder.compact {
-    .reminder-content {
-      gap: 0.5rem;
-    }
-
-    .reminder-actions {
-      button {
-        flex: 1;
-        justify-content: center;
-      }
-    }
-  }
-}
-
-// ===================================
-// DARK MODE SUPPORT (Optional)
-// ===================================
-@media (prefers-color-scheme: dark) {
-  .profile-reminder.compact {
-    background: linear-gradient(135deg, rgba(253, 184, 19, 0.15), rgba(255, 193, 7, 0.1));
-    border-color: rgba(253, 184, 19, 0.4);
-    
-    .reminder-message {
-      color: #ECEFF1;
-      
-      strong {
-        color: #FFD54F;
-      }
-    }
-    
-    .dismiss-btn {
-      color: #B0BEC5;
-      border-color: rgba(253, 184, 19, 0.5);
-      
-      &:hover {
-        color: #FFD54F;
-        background: rgba(253, 184, 19, 0.15);
-      }
-    }
-    
-    .close-reminder {
-      color: #90A4AE;
-      
-      &:hover {
-        color: #FFD54F;
-      }
-    }
+    animation: slideInCompact 0.4s ease-out, mobilePulse 3s infinite;
   }
 }
