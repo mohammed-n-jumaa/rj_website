@@ -713,3 +713,187 @@
     }
   }
 }
+// ===================================
+// GENDER RADIO BUTTONS
+// ===================================
+.gender-radio-group {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  @media (max-width: $breakpoint-mobile) {
+    gap: $spacing-sm;
+    flex-direction: column;
+  }
+
+  .gender-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: $text-dark;
+    padding: 1rem 1.25rem;
+    border: 2px solid $border-color;
+    border-radius: $radius-md;
+    transition: all $transition-normal;
+    flex: 1;
+    min-width: 120px;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 0.85rem 1rem;
+      min-width: auto;
+    }
+
+    &:hover {
+      border-color: $primary-color;
+      background: rgba($primary-color, 0.05);
+      transform: translateY(-2px);
+      box-shadow: $shadow-sm;
+    }
+
+    input[type="radio"] {
+      display: none;
+
+      &:checked + .gender-radio-custom {
+        background: $gradient-primary;
+        border-color: $primary-color;
+        transform: scale(1.1);
+        box-shadow: $shadow-pink;
+
+        svg {
+          color: white;
+        }
+      }
+    }
+
+    .gender-radio-custom {
+      width: 50px;
+      height: 50px;
+      border: 2px solid $border-color;
+      border-radius: $radius-md;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: $text-light;
+      transition: all $transition-normal;
+      background: white;
+
+      @media (max-width: $breakpoint-mobile) {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+      }
+
+      &.male {
+        color: #2196F3;
+        border-color: rgba(33, 150, 243, 0.3);
+      }
+
+      &.female {
+        color: #E91E63;
+        border-color: rgba(233, 30, 99, 0.3);
+      }
+    }
+
+    .gender-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: $text-dark;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 0.95rem;
+      }
+    }
+
+    // Different colors for male/female
+    &:has(input[value="male"]:checked) {
+      border-color: #2196F3;
+      background: rgba(33, 150, 243, 0.1);
+
+      .gender-label {
+        color: #1976D2;
+      }
+    }
+
+    &:has(input[value="female"]:checked) {
+      border-color: #E91E63;
+      background: rgba(233, 30, 99, 0.1);
+
+      .gender-label {
+        color: #C2185B;
+      }
+    }
+  }
+}
+
+// ===================================
+// FIELD NOTES
+// ===================================
+.field-note {
+  display: block;
+  font-size: 0.8rem;
+  color: $text-light;
+  margin-top: 0.25rem;
+  font-style: italic;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 0.75rem;
+  }
+}
+
+// ===================================
+// DISABLED FIELD STYLES
+// ===================================
+input:disabled {
+  background: #f5f5f5;
+  color: #9e9e9e;
+  cursor: not-allowed;
+  border-color: #e0e0e0;
+  
+  &::placeholder {
+    color: #bdbdbd;
+  }
+}
+
+// ===================================
+// REQUIRED FIELD INDICATORS
+// ===================================
+.form-group {
+  position: relative;
+  
+  label {
+    position: relative;
+    
+    &::after {
+      content: attr(data-required);
+      color: #f44336;
+      font-size: 0.8rem;
+      margin-left: 0.25rem;
+      opacity: 0;
+      transition: opacity $transition-normal;
+    }
+    
+    &[data-required]::after {
+      content: '*';
+      color: #f44336;
+      font-size: 1.2rem;
+      margin-left: 0.25rem;
+      opacity: 1;
+    }
+  }
+}
+
+// ===================================
+// FORM SECTION ADJUSTMENTS
+// ===================================
+.form-section {
+  .form-grid {
+    @media (max-width: $breakpoint-mobile) {
+      .form-group:has(.gender-radio-group) {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+}

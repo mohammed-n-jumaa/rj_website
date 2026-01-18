@@ -4638,3 +4638,9 @@
     animation: slideInCompact 0.4s ease-out, mobilePulse 3s infinite;
   }
 }
+// في StatsCard.scss إضافة لون للجنس
+.stat-icon {
+  &.gender {
+    background: linear-gradient(135deg, #E91E63, #9C27B0); // لون بنفسجي للجنس
+  }
+}

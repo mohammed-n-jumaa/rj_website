@@ -23,8 +23,19 @@ const ProfileHeader = ({ userData, onProfileUpdate }) => {
       console.error('Error updating profile:', error);
       throw new Error('Failed to update profile. Please try again.');
     }
+    
   };
-
+const [currentUserData, setCurrentUserData] = useState({
+  ...userData,
+  // البيانات المضافة
+  waist: 85,
+  hips: 95,
+  workoutPlace: 'home',
+  healthNotes: 'No known allergies. Minor knee injury from 2023.',
+  goal: 'weight-loss',
+  email: 'user@example.com',
+  gender: 'male' 
+});
   return (
     <>
       <motion.div 

@@ -8,17 +8,18 @@ import {
   FaUser,
   FaHome,
   FaHeartbeat,
-  FaRunning
+  FaRunning,
+  FaVenusMars // إضافة هذا الاستيراد
 } from 'react-icons/fa';
 
 const StatsCard = ({ userData, delay }) => {
-  // قائمة البيانات المحدثة
   const stats = [
     // القياسات البدنية
     { icon: FaRuler, label: 'Height (cm)', value: `${userData.height} cm`, type: 'height' },
     { icon: FaWeight, label: 'Current Weight (kg)', value: `${userData.weight} kg`, type: 'weight' },
+    { icon: FaVenusMars, label: 'Gender', value: userData.gender === 'female' ? 'Female' : 'Male', type: 'gender' },
     { icon: FaUser, label: 'Waist (at navel)', value: `${userData.waist || '--'} cm`, type: 'waist' },
-    { icon: FaUser, label: 'Hips (for females)', value: `${userData.hips || '--'} cm`, type: 'hips' },
+    { icon: FaUser, label: 'Hips (for females)', value: userData.gender === 'female' ? `${userData.hips || '--'} cm` : '--', type: 'hips' },
     
     // الهدف والنشاط
     { icon: FaBullseye, label: 'Your Goal', value: userData.goal || 'Not set', type: 'goal' },

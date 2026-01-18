@@ -14,7 +14,10 @@ import {
   FaHome,
   FaSave,
   FaExclamationCircle,
-  FaCheckCircle
+  FaCheckCircle,
+  FaVenusMars,
+  FaVenus,
+  FaMars
 } from 'react-icons/fa';
 import './EditProfileModal.scss';
 
@@ -30,6 +33,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
     waist: '',
     hips: '',
     age: '',
+    gender: 'male', // إضافة حقل الجنس
     goal: '',
     workoutPlace: '',
     healthNotes: '',
@@ -56,6 +60,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
         waist: userData.waist?.toString() || '',
         hips: userData.hips?.toString() || '',
         age: userData.age?.toString() || '',
+        gender: userData.gender || 'male', // تعيين الجنس
         goal: userData.goal || 'weight-loss',
         workoutPlace: userData.workoutPlace || 'home',
         healthNotes: userData.healthNotes || '',
@@ -150,11 +155,17 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
       newErrors.weight = 'Weight must be between 30 and 300 kg';
     }
 
-    if (formData.waist && (parseFloat(formData.waist) < 50 || parseFloat(formData.waist) > 200)) {
+    // Waist measurement is required for both genders
+    if (!formData.waist) {
+      newErrors.waist = 'Waist measurement is required';
+    } else if (parseFloat(formData.waist) < 50 || parseFloat(formData.waist) > 200) {
       newErrors.waist = 'Waist measurement must be between 50 and 200 cm';
     }
 
-    if (formData.hips && (parseFloat(formData.hips) < 50 || parseFloat(formData.hips) > 200)) {
+    // Hips measurement is only required for females
+    if (formData.gender === 'female' && !formData.hips) {
+      newErrors.hips = 'Hips measurement is required for females';
+    } else if (formData.hips && (parseFloat(formData.hips) < 50 || parseFloat(formData.hips) > 200)) {
       newErrors.hips = 'Hips measurement must be between 50 and 200 cm';
     }
 
@@ -162,6 +173,10 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
       newErrors.age = 'Age is required';
     } else if (parseInt(formData.age) < 10 || parseInt(formData.age) > 100) {
       newErrors.age = 'Age must be between 10 and 100 years';
+    }
+
+    if (!formData.gender) {
+      newErrors.gender = 'Gender is required';
     }
 
     setErrors(newErrors);
@@ -187,9 +202,10 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
         avatar: formData.avatar,
         height: parseFloat(formData.height),
         weight: parseFloat(formData.weight),
-        waist: formData.waist ? parseFloat(formData.waist) : null,
+        waist: parseFloat(formData.waist),
         hips: formData.hips ? parseFloat(formData.hips) : null,
         age: parseInt(formData.age),
+        gender: formData.gender, // إضافة الجنس
         goal: formData.goal,
         workoutPlace: formData.workoutPlace,
         healthNotes: formData.healthNotes.trim(),
@@ -237,6 +253,11 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
       setIsSubmitting(false);
     }
   };
+
+  const genders = [
+    { value: 'male', label: 'Male', icon: <FaMars /> },
+    { value: 'female', label: 'Female', icon: <FaVenus /> }
+  ];
 
   const goals = [
     { value: 'weight-loss', label: 'Weight Loss' },
@@ -352,6 +373,54 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                     {errors.email && <p className="error-message">{errors.email}</p>}
                   </div>
 
+                  {/* Gender */}
+                  <div className="form-group">
+                    <label>
+                      <FaVenusMars /> Gender
+                    </label>
+                    <div className="gender-radio-group">
+                      {genders.map(gender => (
+                        <label key={gender.value} className="gender-radio-label">
+                          <input
+                            type="radio"
+                            name="gender"
+                            value={gender.value}
+                            checked={formData.gender === gender.value}
+                            onChange={handleInputChange}
+                          />
+                          <span className="gender-radio-custom">
+                            {gender.icon}
+                          </span>
+                          <span className="gender-label">{gender.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {errors.gender && <p className="error-message">{errors.gender}</p>}
+                  </div>
+
+                  {/* Age */}
+                  <div className="form-group">
+                    <label>Age (years)</label>
+                    <input
+                      type="number"
+                      name="age"
+                      value={formData.age}
+                      onChange={handleInputChange}
+                      className={errors.age ? 'error' : ''}
+                      placeholder="e.g., 25"
+                      min="10"
+                      max="100"
+                    />
+                    {errors.age && <p className="error-message">{errors.age}</p>}
+                  </div>
+                </div>
+              </div>
+
+              {/* Password Section */}
+              <div className="form-section">
+                <h3>Password Settings</h3>
+                
+                <div className="form-grid">
                   {/* Password */}
                   <div className="form-group">
                     <label>
@@ -431,7 +500,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
 
                   {/* Waist */}
                   <div className="form-group">
-                    <label>Waist Measurement (cm)</label>
+                    <label>Waist Measurement (cm) *</label>
                     <input
                       type="number"
                       name="waist"
@@ -443,12 +512,15 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                       max="200"
                       step="0.1"
                     />
+                    <small className="field-note">Required for all genders</small>
                     {errors.waist && <p className="error-message">{errors.waist}</p>}
                   </div>
 
-                  {/* Hips */}
+                  {/* Hips - Only for females */}
                   <div className="form-group">
-                    <label>Hips Measurement (for females) (cm)</label>
+                    <label>
+                      Hips Measurement (cm) {formData.gender === 'female' && '*'}
+                    </label>
                     <input
                       type="number"
                       name="hips"
@@ -459,24 +531,14 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                       min="50"
                       max="200"
                       step="0.1"
+                      disabled={formData.gender !== 'female'}
                     />
+                    <small className="field-note">
+                      {formData.gender === 'female' 
+                        ? 'Required for females' 
+                        : 'Only for females'}
+                    </small>
                     {errors.hips && <p className="error-message">{errors.hips}</p>}
-                  </div>
-
-                  {/* Age */}
-                  <div className="form-group">
-                    <label>Age (years)</label>
-                    <input
-                      type="number"
-                      name="age"
-                      value={formData.age}
-                      onChange={handleInputChange}
-                      className={errors.age ? 'error' : ''}
-                      placeholder="e.g., 25"
-                      min="10"
-                      max="100"
-                    />
-                    {errors.age && <p className="error-message">{errors.age}</p>}
                   </div>
                 </div>
               </div>
