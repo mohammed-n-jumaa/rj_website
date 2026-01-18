@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaTrophy, FaFire, FaCalendarAlt, FaEdit, FaBell } from 'react-icons/fa';
+import { 
+  FaTrophy, 
+  FaFire, 
+  FaCalendarAlt, 
+  FaEdit, 
+  FaBell,
+  FaInfoCircle,
+  FaCheck
+} from 'react-icons/fa';
 import EditProfileModal from './EditProfileModal';
 
 const ProfileHeader = ({ userData, onProfileUpdate }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isReminderVisible, setIsReminderVisible] = useState(true);
 
   const handleSaveProfile = async (updatedData) => {
     try {
-      // هنا يمكنك إضافة كود API حقيقي
       console.log('Updated user data:', updatedData);
-      
-      // تحديث البيانات في الـ parent component
       await onProfileUpdate(updatedData);
-      
-      // لا داعي لعرض alert هنا، SweetAlert سيظهر في المودال
     } catch (error) {
       console.error('Error updating profile:', error);
-      throw new Error('حدث خطأ أثناء تحديث البروفايل');
+      throw new Error('Failed to update profile. Please try again.');
     }
   };
 
@@ -29,6 +33,48 @@ const ProfileHeader = ({ userData, onProfileUpdate }) => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
+        {/* Compact Reminder Message */}
+        {isReminderVisible && (
+          <motion.div 
+            className="profile-reminder compact"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
+          >
+            <div className="reminder-content">
+              <div className="reminder-icon">
+                <FaInfoCircle />
+              </div>
+              <div className="reminder-text">
+                <p className="reminder-message">
+                  <strong>Profile Check:</strong> Verify your information is accurate for personalized fitness plans.
+                </p>
+                <div className="reminder-actions">
+                  <button 
+                    className="review-btn"
+                    onClick={() => setIsEditModalOpen(true)}
+                  >
+                    <FaEdit /> Update
+                  </button>
+                  <button 
+                    className="dismiss-btn"
+                    onClick={() => setIsReminderVisible(false)}
+                  >
+                    <FaCheck /> Done
+                  </button>
+                </div>
+              </div>
+              <button 
+                className="close-reminder"
+                onClick={() => setIsReminderVisible(false)}
+                aria-label="Close reminder"
+              >
+                &times;
+              </button>
+            </div>
+          </motion.div>
+        )}
+
         <div className="header-gradient"></div>
         
         <div className="header-content">

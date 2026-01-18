@@ -4185,3 +4185,391 @@
     }
   }
 }
+// ===================================
+// COMPACT PROFILE REMINDER MESSAGE
+// ===================================
+.profile-reminder.compact {
+  background: linear-gradient(135deg, rgba(253, 184, 19, 0.1), rgba(255, 193, 7, 0.05));
+  border-radius: $radius-md;
+  margin-bottom: $spacing-sm;
+  padding: $spacing-sm;
+  border: 1.5px solid rgba(253, 184, 19, 0.3);
+  box-shadow: $shadow-sm;
+  position: relative;
+  overflow: hidden;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: $breakpoint-mobile) {
+    max-width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .reminder-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    position: relative;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.75rem;
+    }
+  }
+
+  .reminder-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: $radius-sm;
+    background: linear-gradient(135deg, #FDB813, #F9A825);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: white;
+    box-shadow: 0 2px 8px rgba(253, 184, 19, 0.3);
+    flex-shrink: 0;
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      font-size: 0.9rem;
+    }
+
+    svg {
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+  }
+
+  .reminder-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.4rem;
+    }
+  }
+
+  .reminder-message {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #5D4037;
+    line-height: 1.4;
+    font-weight: 500;
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+
+    strong {
+      color: #E65100;
+      font-weight: 700;
+    }
+  }
+
+  .reminder-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.5rem;
+    }
+
+    button {
+      padding: 0.4rem 0.9rem;
+      border-radius: $radius-sm;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all $transition-normal;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1.5px solid transparent;
+      white-space: nowrap;
+
+      @media (max-width: $breakpoint-mobile) {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.75rem;
+        gap: 0.3rem;
+      }
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      &.review-btn {
+        background: linear-gradient(135deg, #FDB813, #F9A825);
+        color: white;
+        box-shadow: 0 2px 6px rgba(253, 184, 19, 0.3);
+
+        &:hover {
+          background: linear-gradient(135deg, #F9A825, #F57C00);
+          box-shadow: 0 3px 8px rgba(253, 184, 19, 0.4);
+        }
+
+        svg {
+          font-size: 0.8rem;
+        }
+      }
+
+      &.dismiss-btn {
+        background: transparent;
+        color: #5D4037;
+        border-color: rgba(253, 184, 19, 0.4);
+        font-weight: 500;
+
+        &:hover {
+          background: rgba(253, 184, 19, 0.1);
+          border-color: #FDB813;
+          color: #E65100;
+        }
+
+        svg {
+          font-size: 0.8rem;
+          color: #4CAF50;
+        }
+      }
+    }
+  }
+
+  .close-reminder {
+    background: transparent;
+    border: none;
+    color: #8D6E63;
+    font-size: 1.3rem;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-normal;
+    opacity: 0.7;
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+
+    &:hover {
+      background: rgba(253, 184, 19, 0.1);
+      opacity: 1;
+      color: #E65100;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 20px;
+      height: 20px;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// ===================================
+// ALTERNATIVE SMALL REMINDER STYLE
+// ===================================
+.profile-reminder.mini {
+  background: linear-gradient(135deg, rgba(255, 248, 225, 0.9), rgba(255, 236, 179, 0.8));
+  border-radius: $radius-sm;
+  margin-bottom: $spacing-sm;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid #FDB813;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .reminder-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .reminder-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 50%;
+    background: #FDB813;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .reminder-text {
+    flex: 1;
+  }
+
+  .reminder-message {
+    font-size: 0.85rem;
+    margin: 0;
+    color: #5D4037;
+    line-height: 1.4;
+    font-weight: 500;
+
+    strong {
+      color: #E65100;
+    }
+  }
+
+  .reminder-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    button {
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all $transition-fast;
+      border: 1px solid transparent;
+
+      &.review-btn {
+        background: #FDB813;
+        color: white;
+        border: none;
+
+        &:hover {
+          background: #F9A825;
+        }
+      }
+
+      &.dismiss-btn {
+        background: transparent;
+        color: #8D6E63;
+        border-color: #FFE082;
+
+        &:hover {
+          background: rgba(253, 184, 19, 0.1);
+        }
+      }
+    }
+  }
+
+  .close-reminder {
+    display: none;
+  }
+}
+
+// ===================================
+// ANIMATIONS FOR COMPACT REMINDER
+// ===================================
+@keyframes subtlePulse {
+  0% {
+    box-shadow: $shadow-sm;
+  }
+  50% {
+    box-shadow: 0 3px 10px rgba(253, 184, 19, 0.15);
+  }
+  100% {
+    box-shadow: $shadow-sm;
+  }
+}
+
+@keyframes slideInCompact {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.profile-reminder.compact {
+  animation: slideInCompact 0.4s ease-out, subtlePulse 4s infinite;
+}
+
+// ===================================
+// RESPONSIVE ADJUSTMENTS
+// ===================================
+@media (max-width: $breakpoint-tablet) {
+  .profile-reminder.compact {
+    .reminder-content {
+      flex-wrap: wrap;
+    }
+
+    .reminder-actions {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .close-reminder {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .profile-reminder.compact {
+    .reminder-content {
+      gap: 0.5rem;
+    }
+
+    .reminder-actions {
+      button {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+// ===================================
+// DARK MODE SUPPORT (Optional)
+// ===================================
+@media (prefers-color-scheme: dark) {
+  .profile-reminder.compact {
+    background: linear-gradient(135deg, rgba(253, 184, 19, 0.15), rgba(255, 193, 7, 0.1));
+    border-color: rgba(253, 184, 19, 0.4);
+    
+    .reminder-message {
+      color: #ECEFF1;
+      
+      strong {
+        color: #FFD54F;
+      }
+    }
+    
+    .dismiss-btn {
+      color: #B0BEC5;
+      border-color: rgba(253, 184, 19, 0.5);
+      
+      &:hover {
+        color: #FFD54F;
+        background: rgba(253, 184, 19, 0.15);
+      }
+    }
+    
+    .close-reminder {
+      color: #90A4AE;
+      
+      &:hover {
+        color: #FFD54F;
+      }
+    }
+  }
+}

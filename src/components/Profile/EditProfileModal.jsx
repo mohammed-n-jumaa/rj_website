@@ -42,7 +42,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
   const [serverError, setServerError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // تهيئة البيانات عند فتح المودال
+  // Initialize data when modal opens
   useEffect(() => {
     if (isOpen && userData) {
       setFormData({
@@ -62,7 +62,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
         program: userData.program || ''
       });
       setAvatarPreview(userData.avatar || '');
-      // إعادة تعيين الرسائل
+      // Reset messages
       setErrors({});
       setSuccessMessage('');
       setServerError('');
@@ -75,11 +75,11 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
       ...prev,
       [name]: value
     }));
-    // إزالة الخطأ عند التعديل
+    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
-    // إزالة رسائل النجاح والخطأ
+    // Clear success and server error messages
     setSuccessMessage('');
     setServerError('');
   };
@@ -88,12 +88,12 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        setErrors(prev => ({ ...prev, avatar: 'حجم الصورة يجب أن يكون أقل من 5MB' }));
+        setErrors(prev => ({ ...prev, avatar: 'Image size must be less than 5MB' }));
         return;
       }
 
       if (!file.type.startsWith('image/')) {
-        setErrors(prev => ({ ...prev, avatar: 'الرجاء اختيار صورة صحيحة' }));
+        setErrors(prev => ({ ...prev, avatar: 'Please select a valid image file' }));
         return;
       }
 
@@ -112,56 +112,56 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
   const validateForm = () => {
     const newErrors = {};
 
-    // التحقق من الاسم
+    // Validate name
     if (!formData.name.trim()) {
-      newErrors.name = 'الاسم مطلوب';
+      newErrors.name = 'Name is required';
     } else if (formData.name.length < 2) {
-      newErrors.name = 'الاسم يجب أن يكون على الأقل حرفين';
+      newErrors.name = 'Name must be at least 2 characters';
     }
 
-    // التحقق من البريد الإلكتروني
+    // Validate email
     if (!formData.email.trim()) {
-      newErrors.email = 'البريد الإلكتروني مطلوب';
+      newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'البريد الإلكتروني غير صالح';
+      newErrors.email = 'Please enter a valid email address';
     }
 
-    // التحقق من كلمة المرور
+    // Validate password
     if (formData.password) {
       if (formData.password.length < 6) {
-        newErrors.password = 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
+        newErrors.password = 'Password must be at least 6 characters';
       } else if (!/(?=.*[a-zA-Z])(?=.*\d)/.test(formData.password)) {
-        newErrors.password = 'كلمة المرور يجب أن تحتوي على أحرف وأرقام';
+        newErrors.password = 'Password must contain letters and numbers';
       } else if (formData.password !== formData.confirmPassword) {
-        newErrors.confirmPassword = 'كلمة المرور غير متطابقة';
+        newErrors.confirmPassword = 'Passwords do not match';
       }
     }
 
-    // التحقق من القياسات
+    // Validate measurements
     if (!formData.height) {
-      newErrors.height = 'الطول مطلوب';
+      newErrors.height = 'Height is required';
     } else if (parseFloat(formData.height) < 100 || parseFloat(formData.height) > 250) {
-      newErrors.height = 'الطول يجب أن يكون بين 100 و 250 سم';
+      newErrors.height = 'Height must be between 100 and 250 cm';
     }
 
     if (!formData.weight) {
-      newErrors.weight = 'الوزن مطلوب';
+      newErrors.weight = 'Weight is required';
     } else if (parseFloat(formData.weight) < 30 || parseFloat(formData.weight) > 300) {
-      newErrors.weight = 'الوزن يجب أن يكون بين 30 و 300 كجم';
+      newErrors.weight = 'Weight must be between 30 and 300 kg';
     }
 
     if (formData.waist && (parseFloat(formData.waist) < 50 || parseFloat(formData.waist) > 200)) {
-      newErrors.waist = 'قياس الخصر يجب أن يكون بين 50 و 200 سم';
+      newErrors.waist = 'Waist measurement must be between 50 and 200 cm';
     }
 
     if (formData.hips && (parseFloat(formData.hips) < 50 || parseFloat(formData.hips) > 200)) {
-      newErrors.hips = 'قياس الأرداف يجب أن يكون بين 50 و 200 سم';
+      newErrors.hips = 'Hips measurement must be between 50 and 200 cm';
     }
 
     if (!formData.age) {
-      newErrors.age = 'العمر مطلوب';
+      newErrors.age = 'Age is required';
     } else if (parseInt(formData.age) < 10 || parseInt(formData.age) > 100) {
-      newErrors.age = 'العمر يجب أن يكون بين 10 و 100 سنة';
+      newErrors.age = 'Age must be between 10 and 100 years';
     }
 
     setErrors(newErrors);
@@ -176,10 +176,10 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
     }
 
     setIsSubmitting(true);
-    setServerError(''); // إعادة تعيين أي أخطاء سابقة
+    setServerError(''); // Reset any previous errors
 
     try {
-      // إعداد بيانات المستخدم المحدثة
+      // Prepare updated user data
       const updatedUser = {
         ...userData,
         name: formData.name.trim(),
@@ -196,23 +196,23 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
         program: formData.program.trim()
       };
 
-      // إذا تم تغيير كلمة المرور
+      // If password was changed
       if (formData.password) {
         updatedUser.password = formData.password;
       }
 
-      // محاكاة طلب API
+      // Simulate API request
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // حفظ البيانات
+      // Save data
       await onSave(updatedUser);
 
-      // عرض رسالة النجاح باستخدام SweetAlert
+      // Show success message with SweetAlert
       Swal.fire({
-        title: 'تم بنجاح!',
-        text: 'تم تحديث البروفايل بنجاح',
+        title: 'Success!',
+        text: 'Profile updated successfully',
         icon: 'success',
-        confirmButtonText: 'حسناً',
+        confirmButtonText: 'OK',
         confirmButtonColor: '#FDB813',
         timer: 3000,
         timerProgressBar: true,
@@ -222,15 +222,15 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
       });
 
     } catch (error) {
-      // عرض الخطأ في المودال نفسه
-      setServerError(error.message || 'حدث خطأ أثناء حفظ التغييرات. الرجاء المحاولة مرة أخرى.');
+      // Show error in the modal itself
+      setServerError(error.message || 'Failed to save changes. Please try again.');
       
-      // عرض رسالة SweetAlert للخطأ
+      // Show SweetAlert for error
       Swal.fire({
-        title: 'خطأ!',
-        text: 'فشل في تحديث البروفايل',
+        title: 'Error!',
+        text: 'Failed to update profile',
         icon: 'error',
-        confirmButtonText: 'حاول مرة أخرى',
+        confirmButtonText: 'Try Again',
         confirmButtonColor: '#dc2626'
       });
     } finally {
@@ -239,15 +239,15 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
   };
 
   const goals = [
-    { value: 'weight-loss', label: 'خسارة وزن' },
-    { value: 'muscle-gain', label: 'بناء عضل' },
-    { value: 'toning', label: 'تنشيف' },
-    { value: 'fitness', label: 'لياقة عامة' }
+    { value: 'weight-loss', label: 'Weight Loss' },
+    { value: 'muscle-gain', label: 'Muscle Gain' },
+    { value: 'toning', label: 'Toning' },
+    { value: 'fitness', label: 'General Fitness' }
   ];
 
   const workoutPlaces = [
-    { value: 'home', label: 'بيت' },
-    { value: 'gym', label: 'جيم' }
+    { value: 'home', label: 'Home' },
+    { value: 'gym', label: 'Gym' }
   ];
 
   if (!isOpen) return null;
@@ -263,18 +263,18 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
           transition={{ duration: 0.3 }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* رأس المودال */}
+          {/* Modal Header */}
           <div className="modal-header">
-            <h2>تعديل البروفايل</h2>
+            <h2>Edit Profile</h2>
             <button className="close-btn" onClick={onClose}>
               <FaTimes />
             </button>
           </div>
 
-          {/* محتوى المودال */}
+          {/* Modal Content */}
           <div className="modal-content">
             <form onSubmit={handleSubmit}>
-              {/* رسالة النجاح */}
+              {/* Success Message */}
               {successMessage && (
                 <div className="success-message">
                   <FaCheckCircle />
@@ -282,7 +282,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                 </div>
               )}
 
-              {/* خطأ الخادم */}
+              {/* Server Error */}
               {serverError && (
                 <div className="server-error">
                   <FaExclamationCircle />
@@ -290,7 +290,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                 </div>
               )}
 
-              {/* قسم الصورة الشخصية */}
+              {/* Avatar Section */}
               <div className="avatar-section">
                 <div className="avatar-upload">
                   <div className="avatar-preview">
@@ -314,15 +314,15 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                 {errors.avatar && <p className="error-message">{errors.avatar}</p>}
               </div>
 
-              {/* قسم المعلومات الأساسية */}
+              {/* Basic Information Section */}
               <div className="form-section">
-                <h3>المعلومات الأساسية</h3>
+                <h3>Basic Information</h3>
                 
                 <div className="form-grid">
-                  {/* الاسم */}
+                  {/* Name */}
                   <div className="form-group">
                     <label>
-                      <FaUser /> الاسم الكامل
+                      <FaUser /> Full Name
                     </label>
                     <input
                       type="text"
@@ -330,16 +330,16 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                       value={formData.name}
                       onChange={handleInputChange}
                       className={errors.name ? 'error' : ''}
-                      placeholder="أدخل اسمك الكامل"
+                      placeholder="Enter your full name"
                       maxLength="50"
                     />
                     {errors.name && <p className="error-message">{errors.name}</p>}
                   </div>
 
-                  {/* البريد الإلكتروني */}
+                  {/* Email */}
                   <div className="form-group">
                     <label>
-                      <FaEnvelope /> البريد الإلكتروني
+                      <FaEnvelope /> Email Address
                     </label>
                     <input
                       type="email"
@@ -352,10 +352,10 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                     {errors.email && <p className="error-message">{errors.email}</p>}
                   </div>
 
-                  {/* كلمة المرور */}
+                  {/* Password */}
                   <div className="form-group">
                     <label>
-                      <FaLock /> كلمة المرور الجديدة (اختياري)
+                      <FaLock /> New Password (Optional)
                     </label>
                     <input
                       type="password"
@@ -363,15 +363,15 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                       value={formData.password}
                       onChange={handleInputChange}
                       className={errors.password ? 'error' : ''}
-                      placeholder="أدخل كلمة مرور جديدة (6 أحرف على الأقل)"
+                      placeholder="Enter new password (min 6 characters)"
                     />
                     {errors.password && <p className="error-message">{errors.password}</p>}
                   </div>
 
-                  {/* تأكيد كلمة المرور */}
+                  {/* Confirm Password */}
                   <div className="form-group">
                     <label>
-                      <FaLock /> تأكيد كلمة المرور
+                      <FaLock /> Confirm Password
                     </label>
                     <input
                       type="password"
@@ -379,22 +379,22 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
                       className={errors.confirmPassword ? 'error' : ''}
-                      placeholder="أعد إدخال كلمة المرور"
+                      placeholder="Re-enter password"
                     />
                     {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
                   </div>
                 </div>
               </div>
 
-              {/* قسم القياسات البدنية */}
+              {/* Body Measurements Section */}
               <div className="form-section">
-                <h3>القياسات البدنية</h3>
+                <h3>Body Measurements</h3>
                 
                 <div className="form-grid">
-                  {/* الطول */}
+                  {/* Height */}
                   <div className="form-group">
                     <label>
-                      <FaRuler /> الطول (سم)
+                      <FaRuler /> Height (cm)
                     </label>
                     <input
                       type="number"
@@ -402,7 +402,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                       value={formData.height}
                       onChange={handleInputChange}
                       className={errors.height ? 'error' : ''}
-                      placeholder="مثال: 170"
+                      placeholder="e.g., 170"
                       min="100"
                       max="250"
                       step="0.1"
@@ -410,10 +410,10 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                     {errors.height && <p className="error-message">{errors.height}</p>}
                   </div>
 
-                  {/* الوزن */}
+                  {/* Weight */}
                   <div className="form-group">
                     <label>
-                      <FaWeight /> الوزن الحالي (كجم)
+                      <FaWeight /> Current Weight (kg)
                     </label>
                     <input
                       type="number"
@@ -421,7 +421,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                       value={formData.weight}
                       onChange={handleInputChange}
                       className={errors.weight ? 'error' : ''}
-                      placeholder="مثال: 75"
+                      placeholder="e.g., 75"
                       min="30"
                       max="300"
                       step="0.1"
@@ -429,16 +429,16 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                     {errors.weight && <p className="error-message">{errors.weight}</p>}
                   </div>
 
-                  {/* قياس الخصر */}
+                  {/* Waist */}
                   <div className="form-group">
-                    <label>قياس الخصر (سم)</label>
+                    <label>Waist Measurement (cm)</label>
                     <input
                       type="number"
                       name="waist"
                       value={formData.waist}
                       onChange={handleInputChange}
                       className={errors.waist ? 'error' : ''}
-                      placeholder="قياس من عند السرة"
+                      placeholder="Measurement at navel"
                       min="50"
                       max="200"
                       step="0.1"
@@ -446,16 +446,16 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                     {errors.waist && <p className="error-message">{errors.waist}</p>}
                   </div>
 
-                  {/* قياس الأرداف */}
+                  {/* Hips */}
                   <div className="form-group">
-                    <label>قياس الأرداف (للسيدات)</label>
+                    <label>Hips Measurement (for females) (cm)</label>
                     <input
                       type="number"
                       name="hips"
                       value={formData.hips}
                       onChange={handleInputChange}
                       className={errors.hips ? 'error' : ''}
-                      placeholder="قياس الأرداف"
+                      placeholder="Hips measurement"
                       min="50"
                       max="200"
                       step="0.1"
@@ -463,16 +463,16 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                     {errors.hips && <p className="error-message">{errors.hips}</p>}
                   </div>
 
-                  {/* العمر */}
+                  {/* Age */}
                   <div className="form-group">
-                    <label>العمر (سنوات)</label>
+                    <label>Age (years)</label>
                     <input
                       type="number"
                       name="age"
                       value={formData.age}
                       onChange={handleInputChange}
                       className={errors.age ? 'error' : ''}
-                      placeholder="مثال: 25"
+                      placeholder="e.g., 25"
                       min="10"
                       max="100"
                     />
@@ -481,15 +481,15 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                 </div>
               </div>
 
-              {/* قسم الهدف والنشاط */}
+              {/* Goal & Activity Section */}
               <div className="form-section">
-                <h3>الهدف والنشاط</h3>
+                <h3>Goal & Activity</h3>
                 
                 <div className="form-grid">
-                  {/* الهدف */}
+                  {/* Goal */}
                   <div className="form-group">
                     <label>
-                      <FaBullseye /> هدفك؟
+                      <FaBullseye /> Your Goal?
                     </label>
                     <select
                       name="goal"
@@ -505,10 +505,10 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                     </select>
                   </div>
 
-                  {/* مكان التمرين */}
+                  {/* Workout Place */}
                   <div className="form-group">
                     <label>
-                      <FaHome /> مكان التمرين؟
+                      <FaHome /> Workout Place?
                     </label>
                     <div className="radio-group">
                       {workoutPlaces.map(place => (
@@ -527,45 +527,45 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                     </div>
                   </div>
 
-                  {/* البرنامج */}
+                  {/* Program */}
                   <div className="form-group">
-                    <label>البرنامج المختار</label>
+                    <label>Selected Program</label>
                     <input
                       type="text"
                       name="program"
                       value={formData.program}
                       onChange={handleInputChange}
-                      placeholder="اسم البرنامج"
+                      placeholder="Program name"
                       maxLength="100"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* قسم الحالة الصحية */}
+              {/* Health Status Section */}
               <div className="form-section">
-                <h3>الحالة الصحية</h3>
+                <h3>Health Status</h3>
                 
                 <div className="form-group">
                   <label>
-                    <FaHeartbeat /> هل توجد إصابات أو حساسية طعام؟
+                    <FaHeartbeat /> Any injuries or food allergies?
                   </label>
                   <textarea
                     name="healthNotes"
                     value={formData.healthNotes}
                     onChange={handleInputChange}
-                    placeholder="أدخل أي ملاحظات صحية (إصابات، حساسية، أدوية، إلخ...)"
+                    placeholder="Enter any health notes (injuries, allergies, medications, etc...)"
                     rows="3"
                     className="textarea-input"
                     maxLength="500"
                   />
                   <div className="char-count">
-                    {formData.healthNotes.length}/500 حرف
+                    {formData.healthNotes.length}/500 characters
                   </div>
                 </div>
               </div>
 
-              {/* أزرار الإجراءات */}
+              {/* Action Buttons */}
               <div className="modal-actions">
                 <button 
                   type="button" 
@@ -573,7 +573,7 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                   onClick={onClose}
                   disabled={isSubmitting}
                 >
-                  إلغاء
+                  Cancel
                 </button>
                 <button 
                   type="submit" 
@@ -583,12 +583,12 @@ const EditProfileModal = ({ isOpen, onClose, userData, onSave }) => {
                   {isSubmitting ? (
                     <>
                       <span className="spinner"></span>
-                      جاري الحفظ...
+                      Saving...
                     </>
                   ) : (
                     <>
                       <FaSave />
-                      حفظ التغييرات
+                      Save Changes
                     </>
                   )}
                 </button>
